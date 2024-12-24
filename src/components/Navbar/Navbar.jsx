@@ -3,7 +3,7 @@ import { InputText } from "primereact/inputtext";
 import { Badge } from "primereact/badge";
 import { Avatar } from "primereact/avatar";
 
-export default function TemplateDemo() {
+export default function Navbar() {
   const itemRenderer = (item) => (
     <a className="flex align-items-center p-menuitem-link">
       <span className={item.icon} />
@@ -83,8 +83,10 @@ export default function TemplateDemo() {
   );
 
   return (
-    <div className="card">
-      <Menubar model={items} start={start} end={end} />
-    </div>
+    <>
+      <div className="card">
+        <Menubar model={items} start={start} end={end} />
+      </div>
+    </>
   );
 }

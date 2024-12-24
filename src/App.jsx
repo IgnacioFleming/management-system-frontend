@@ -1,9 +1,20 @@
-import AButton from "./components/Button/Button";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primeflex/primeflex.css";
+import "primeicons/primeicons.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import ItemList from "./components/ItemList/ItemList";
 
 function App() {
   return (
     <>
-      <AButton />
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/products" element={<ItemList />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </>
   );
 }
