@@ -3,7 +3,7 @@ import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import ItemList from "./components/ItemList/ItemList";
+import ItemListContainer from "./components/ItemList/ItemListContainer";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/products" element={<ItemList />} />
+            <Route path="/products" element={<ItemListContainer />} />
           </Routes>
         </Layout>
       </BrowserRouter>
