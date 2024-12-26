@@ -1,10 +1,16 @@
+import { useEffect, useState } from "react";
+import mockProducts from "../../assets/mockProducts";
 import { Tag } from "primereact/tag";
 import { Button } from "primereact/button";
-import ItemList from "./ItemList";
-import { useGetProducts } from "../../hooks/useGetProducts";
+import Sales from "./Sales";
 
 function ItemListContainer() {
-  const { products, refreshProducts } = useGetProducts();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    setProducts(mockProducts);
+  }, []);
+
   const formatCurrency = (value) => {
     return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
   };
@@ -47,14 +53,14 @@ function ItemListContainer() {
   const header = (
     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
       <span className="text-xl text-900 font-bold">Productos</span>
-      <Button onClick={refreshProducts} icon="pi pi-refresh" rounded raised />
+      <Button icon="pi pi-refresh" rounded raised />
     </div>
   );
   const footer = `In total there are ${products ? products.length : 0} products.`;
 
   const data = { imageBodyTemplate, priceBodyTemplate, statusBodyTemplate, header, footer, products };
 
-  return <ItemList {...data} />;
+  return <Sales {...data} />;
 }
 
 export default ItemListContainer;
