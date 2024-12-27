@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 function Layout({ children }) {
   const [drawerConfig, setDrawerVisible] = useState({ drawerVisible: true, navbarWidth: "narrow" });
   const handleDrawerVisibility = () => {
+    console.log("ejecuto handleDrawerVisibility");
     if (drawerConfig.drawerVisible) return setDrawerVisible({ drawerVisible: false, navbarWidth: "wide" });
     return setDrawerVisible({ drawerVisible: true, navbarWidth: "narrow" });
   };

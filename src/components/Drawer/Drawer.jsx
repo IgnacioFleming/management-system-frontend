@@ -6,7 +6,7 @@ import { Ripple } from "primereact/ripple";
 import { StyleClass } from "primereact/styleclass";
 import { Link } from "react-router-dom";
 
-export default function Drawer({ drawerConfig, setDrawerConfig, handleDrawerVisibility }) {
+export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
   const btnRef1 = useRef(null);
   const btnRef2 = useRef(null);
   const btnRef3 = useRef(null);
@@ -17,7 +17,8 @@ export default function Drawer({ drawerConfig, setDrawerConfig, handleDrawerVisi
       <Sidebar
         modal={false}
         visible={drawerConfig.drawerVisible}
-        onHide={() => setDrawerConfig({ drawerVisible: false, navbarWidth: "wide" })}
+        // onHide={handleDrawerVisibility}
+        dismissable={false}
         content={({ closeIconRef }) => (
           <div className="min-h-screen flex relative lg:static surface-ground">
             <div id="app-sidebar-2" className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none" style={{ width: "280px" }}>

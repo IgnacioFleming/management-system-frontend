@@ -2,11 +2,23 @@ import { Tag } from "primereact/tag";
 import { Button } from "primereact/button";
 import ItemList from "./ItemList";
 import { useGetProducts } from "../../hooks/useGetProducts";
+import { useState } from "react";
+import { InputText } from "primereact/inputtext";
 
 function ItemListContainer() {
   const { products, refreshProducts } = useGetProducts();
+  const [editeProducts, setEditProducts] = useState();
+  const handleChange = (e) => e.target.value;
   const formatCurrency = (value) => {
     return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
+  };
+
+  const nameBodyTemplate = (product) => {
+    if (editeProducts === product.id) {
+      return <InputText onChange={handleChange} />;
+    } else {
+      return product.name;
+    }
   };
 
   const imageBodyTemplate = (product) => {
@@ -14,15 +26,48 @@ function ItemListContainer() {
   };
 
   const priceBodyTemplate = (product) => {
-    return formatCurrency(product.price);
+    if (editeProducts === product.id) {
+      return <InputText keyfilter="int" />;
+    } else {
+      return formatCurrency(product.price);
+    }
+  };
+  const categoryBodyTemplate = (product) => {
+    if (editeProducts === product.id) {
+      return <InputText />;
+    } else {
+      return product.category;
+    }
   };
 
-  // const ratingBodyTemplate = (product) => {
-  //   return <Rating value={product.rating} readOnly cancel={false} />;
-  // };
+  const stockBodyTemplate = (product) => {
+    if (editeProducts === product.id) {
+      return <InputText keyfilter="int" />;
+    } else {
+      return product.stock;
+    }
+  };
 
   const statusBodyTemplate = (product) => {
     return <Tag style={{ width: 100 }} value={product.status} severity={getSeverity(product)}></Tag>;
+  };
+  const actionsBodyTemplate = ({ id }) => {
+    if (editeProducts === id)
+      return (
+        <Button severity="warning" onClick={() => setEditProducts(null)}>
+          Guardar
+        </Button>
+      );
+    return (
+      <div style={{ display: "flex", gap: 10 }}>
+        <Button severity="info" onClick={() => updateProduct(id)}>
+          <i className="pi pi-pen-to-square"></i>
+        </Button>
+        <Button severity="danger" onClick={() => deleteProduct(id)}>
+          <i className="pi pi-trash"></i>
+        </Button>
+      </div>
+    );
   };
 
   const getSeverity = (product) => {
@@ -52,7 +97,18 @@ function ItemListContainer() {
   );
   const footer = `In total there are ${products ? products.length : 0} products.`;
 
-  const data = { imageBodyTemplate, priceBodyTemplate, statusBodyTemplate, header, footer, products };
+  const deleteProduct = (id) => {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+  };
+
+  const updateProduct = (id) => {
+    setEditProducts(id);
+  };
+  const data = { imageBodyTemplate, priceBodyTemplate, statusBodyTemplate, header, footer, products, deleteProduct, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate };
 
   return <ItemList {...data} />;
 }
