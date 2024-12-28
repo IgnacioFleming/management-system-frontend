@@ -10,5 +10,5 @@ export const useGetProducts = () => {
     const retrievedProducts = await ProductsApiCall.getAll();
     setProducts(retrievedProducts);
   };
-  return { products, refreshProducts };
+  return { products, refreshProducts, setProducts };
 };
