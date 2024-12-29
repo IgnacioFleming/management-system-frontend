@@ -50,11 +50,11 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
                           </Link>
                         </li>
                         <li>
-                          <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
+                          <Link style={{ textDecoration: "none" }} to="/addProducts" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                             <i className="pi pi-bookmark mr-2"></i>
-                            <span className="font-medium">Bookmarks</span>
+                            <span className="font-medium">Alta de Productos</span>
                             <Ripple />
-                          </a>
+                          </Link>
                         </li>
                         <li>
                           <StyleClass nodeRef={btnRef2} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">

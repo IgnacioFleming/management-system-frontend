@@ -4,6 +4,7 @@ import "primeicons/primeicons.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import ItemListContainer from "./components/ItemList/ItemListContainer";
+import AddProducts from "./components/AddProducts/AddProducts";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/products" element={<ItemListContainer />} />
+            <Route path="/addProducts" element={<AddProducts />} />
           </Routes>
         </Layout>
       </BrowserRouter>
