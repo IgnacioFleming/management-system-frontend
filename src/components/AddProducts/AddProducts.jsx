@@ -1,4 +1,5 @@
 import { Card } from "primereact/card";
+import { Button } from "primereact/button";
 import "./AddProducts.css";
 import AddProductInput from "./AddProductInput";
 
@@ -6,13 +7,18 @@ function AddProducts() {
   return (
     <div className="card-container">
       <div className="card">
-        <Card pt={{ content: { className: "flex flex-column row-gap-3 gap-3" } }} title="Alta de Productos" className="flex justify-content-center">
-          <AddProductInput label={"Nombre"} input={"name"} />
-          <AddProductInput label={"Precio"} input={"price"} />
-          <AddProductInput label={"Stock"} input={"stock"} />
-          <AddProductInput label={"Categoría"} input={"category"} />
-          <AddProductInput label={"Descripción"} input={"description"} />
-          <AddProductInput label={"Imagen"} input={"thumbnail"} />
+        <Card pt={{ title: { className: "m-4" } }} title="Alta de Productos" className="flex justify-content-center">
+          <form className="flex flex-column row-gap-5">
+            <AddProductInput label={"Nombre"} input={"name"} />
+            <AddProductInput label={"Precio"} input={"price"} />
+            <AddProductInput label={"Stock"} input={"stock"} />
+            <AddProductInput label={"Categoría"} input={"category"} />
+            <AddProductInput label={"Descripción"} input={"description"} />
+            <AddProductInput label={"Imagen"} input={"thumbnail"} />
+            <div className="flex justify-content-center">
+              <Button label="Crear" type="submit" />
+            </div>
+          </form>
         </Card>
       </div>
     </div>
