@@ -6,3 +6,7 @@
 .card {
   width: 50%;
 }
+.helperText {
+  color: var(--red-600);
+  margin-left: 10px;
+}
