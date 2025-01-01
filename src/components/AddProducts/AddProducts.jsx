@@ -1,9 +1,10 @@
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import "./AddProducts.css";
 import AddProductInput from "./AddProductInput";
 import { Formik } from "formik";
 import { addProductSchema } from "../../schemas/addProduct";
+import ProductsApiCall from "../../services/products";
+import styles from "./AddProducts.module.css";
 
 const initialValues = {
   name: "",
@@ -15,15 +16,14 @@ const initialValues = {
 };
 
 function AddProducts() {
-  const handleSubmit = (data) => console.log(data);
+  const handleSubmit = (data) => ProductsApiCall.create(data);
   return (
-    <div className="card-container">
-      <div className="card">
+    <div className={styles.cardContainer}>
+      <div className={`card ${styles.card}`}>
         <Card pt={{ title: { className: "m-4" } }} title="Alta de Productos" className="flex justify-content-center">
           <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={addProductSchema}>
             {(props) => (
               <form className="flex flex-column row-gap-5" onSubmit={props.handleSubmit}>
-                {console.log("valores ", props.values, "errores ", props.errors)}
                 <AddProductInput label={"Nombre"} input={"name"} onChange={props.handleChange} value={props.values.name} invalid={props.errors.name && true} helperText={props.errors.name} />
                 <AddProductInput label={"Precio"} input={"price"} onChange={props.handleChange} value={props.values.price} invalid={props.errors.price && true} helperText={props.errors.price} />
                 <AddProductInput label={"Stock"} input={"stock"} onChange={props.handleChange} value={props.values.stock} invalid={props.errors.stock && true} helperText={props.errors.stock} />
@@ -43,12 +43,3 @@ function AddProducts() {
 }
 
 export default AddProducts;
-
-// name: "Paracetamol 500mg",
-// price: 120.0,
-// stock: 150,
-// category: "analgesicos",
-// description: "Alivio temporal del dolor y reducción de fiebre.",
-// costumer: "Farmacia Saludable",
-// thumbnail: "https://www.farmaciasdrahorro.com.ar/wp-content/uploads/2020/11/PARACETAMOL_ISA_5___X_1__COMP_BLISTER.png",
-// status: "PAYED",

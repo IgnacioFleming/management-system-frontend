@@ -1,5 +1,5 @@
 import { InputText } from "primereact/inputtext";
-import "./AddProducts.css";
+import styles from "./AddProducts.module.css";
 
 function AddProductInput({ input, label, onChange, value, invalid, helperText }) {
   return (
@@ -8,7 +8,7 @@ function AddProductInput({ input, label, onChange, value, invalid, helperText })
         <InputText className="w-full" name={input} type="text" invalid={invalid} value={value} onChange={onChange} />
         <label htmlFor={input}>{label}</label>
       </span>
-      {helperText && <div className="helperText">{helperText}</div>}
+      {helperText && <div className={styles.helperText}>{helperText}</div>}
     </div>
   );
 }
