@@ -43,14 +43,14 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
                       </StyleClass>
                       <ul className="list-none p-0 m-0 overflow-hidden">
                         <li>
-                          <Link style={{ textDecoration: "none" }} to="/products" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
+                          <Link to="/products" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
                             <i className="pi pi-home mr-2"></i>
                             <span className="font-medium">Inventario</span>
                             <Ripple />
                           </Link>
                         </li>
                         <li>
-                          <Link style={{ textDecoration: "none" }} to="/addProducts" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
+                          <Link to="/addProducts" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
                             <i className="pi pi-bookmark mr-2"></i>
                             <span className="font-medium">Alta de Productos</span>
                             <Ripple />
@@ -139,18 +139,18 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
                     <li>
                       <StyleClass nodeRef={btnRef4} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                         <div ref={btnRef4} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
-                          <span className="font-medium">APPLICATION</span>
+                          <span className="font-medium">CLIENTES</span>
                           <i className="pi pi-chevron-down"></i>
                           <Ripple />
                         </div>
                       </StyleClass>
                       <ul className="list-none p-0 m-0 overflow-hidden">
                         <li>
-                          <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
+                          <Link to="/costumers" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
                             <i className="pi pi-folder mr-2"></i>
-                            <span className="font-medium">Projects</span>
+                            <span className="font-medium">Clientes Registrados</span>
                             <Ripple />
-                          </a>
+                          </Link>
                         </li>
                         <li>
                           <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">

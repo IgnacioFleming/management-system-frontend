@@ -2,10 +2,10 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 
-export default function ItemList({ products, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate }) {
+export default function ItemList({ data, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate }) {
   return (
     <div className="card">
-      <DataTable value={products} header={header} footer={footer} tableStyle={{ minWidth: "60rem" }}>
+      <DataTable value={data} header={header} footer={footer} tableStyle={{ minWidth: "60rem" }}>
         <Column field="name" header="Name" body={nameBodyTemplate}></Column>
         <Column header="Image" body={imageBodyTemplate}></Column>
         <Column field="price" header="Price" body={priceBodyTemplate}></Column>

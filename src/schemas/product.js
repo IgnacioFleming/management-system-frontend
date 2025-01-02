@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-export const addProductSchema = Yup.object().shape({
+export const productSchema = Yup.object().shape({
   name: Yup.string().max(50).required(),
   price: Yup.number().positive().required(),
   stock: Yup.number().integer().positive().required(),

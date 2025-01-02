@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import ItemListContainer from "./components/ItemList/ItemListContainer";
 import AddProducts from "./components/AddProducts/AddProducts";
+import CostumerList from "./CostumerList/CostumerList";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/products" element={<ItemListContainer />} />
             <Route path="/addProducts" element={<AddProducts />} />
+            <Route path="/costumers" element={<CostumerList />} />
           </Routes>
         </Layout>
       </BrowserRouter>

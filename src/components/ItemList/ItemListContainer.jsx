@@ -1,12 +1,13 @@
 import { Button } from "primereact/button";
 import ItemList from "./ItemList";
-import { useGetProducts } from "../../hooks/useGetProducts";
+import { useGetData } from "../../hooks/useGetData";
 import { useState } from "react";
 import { InputField } from "./InputField";
 import { formatCurrency } from "../../utils/utils";
+import ProductsApiCall from "../../services/products";
 
 function ItemListContainer() {
-  const { products, setProducts, refreshProducts } = useGetProducts();
+  const { data, setData, refreshData } = useGetData(ProductsApiCall);
   const [editProducts, setEditProducts] = useState();
   const handleUpdateProduct = (id) => {
     const name = document.getElementsByName("name")[0].value;
@@ -21,11 +22,11 @@ function ItemListContainer() {
     })
       .then((res) => res.json())
       .then((json) => {
-        const productIndex = products.findIndex((e) => e.id === id);
-        const newProducts = [...products];
+        const productIndex = data.findIndex((e) => e.id === id);
+        const newProducts = [...data];
         newProducts.splice(productIndex, 1, json.payload);
         console.log(newProducts);
-        setProducts(newProducts);
+        setData(newProducts);
       });
     setEditProducts(null);
   };
@@ -72,25 +73,25 @@ function ItemListContainer() {
   const header = (
     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
       <span className="text-xl text-900 font-bold">Productos</span>
-      <Button onClick={refreshProducts} icon="pi pi-refresh" rounded raised />
+      <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
     </div>
   );
-  const footer = `In total there are ${products ? products.length : 0} products.`;
+  const footer = `In total there are ${data ? data.length : 0} products.`;
 
   const deleteProduct = (id) => {
     fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then((json) => setProducts(json.payload));
+      .then((json) => setData(json.payload));
   };
 
   const updateProduct = (id) => {
     setEditProducts(id);
   };
-  const data = { imageBodyTemplate, priceBodyTemplate, header, footer, products, deleteProduct, actionsBodyTemplate, categoryBodyTemplate, stockBodyTemplate, nameBodyTemplate };
+  const props = { imageBodyTemplate, priceBodyTemplate, header, footer, data, deleteProduct, actionsBodyTemplate, categoryBodyTemplate, stockBodyTemplate, nameBodyTemplate };
 
-  return <ItemList {...data} />;
+  return <ItemList {...props} />;
 }
 
 export default ItemListContainer;

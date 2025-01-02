@@ -2,7 +2,7 @@ import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import AddProductInput from "./AddProductInput";
 import { Formik } from "formik";
-import { addProductSchema } from "../../schemas/addProduct";
+import { productSchema } from "../../schemas/product";
 import ProductsApiCall from "../../services/products";
 import styles from "./AddProducts.module.css";
 
@@ -21,7 +21,7 @@ function AddProducts() {
     <div className={styles.cardContainer}>
       <div className={`card ${styles.card}`}>
         <Card pt={{ title: { className: "m-4" } }} title="Alta de Productos" className="flex justify-content-center">
-          <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={addProductSchema}>
+          <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={productSchema} validateOnChange={false}>
             {(props) => (
               <form className="flex flex-column row-gap-5" onSubmit={props.handleSubmit}>
                 <AddProductInput label={"Nombre"} input={"name"} onChange={props.handleChange} value={props.values.name} invalid={props.errors.name && true} helperText={props.errors.name} />
