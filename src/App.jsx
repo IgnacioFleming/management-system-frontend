@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import ItemListContainer from "./components/ItemList/ItemListContainer";
 import AddProducts from "./components/AddProducts/AddProducts";
-import CostumerList from "./CostumerList/CostumerList";
+import CostumerList from "./components/CostumerList/CostumerList";
 
 function App() {
   return (

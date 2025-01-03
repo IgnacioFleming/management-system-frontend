@@ -2,37 +2,31 @@ import { Button } from "primereact/button";
 import ItemList from "./ItemList";
 import { useGetData } from "../../hooks/useGetData";
 import { useState } from "react";
-import { InputField } from "./InputField";
+import { InputField } from "../InputField/InputField";
 import { formatCurrency } from "../../utils/utils";
 import ProductsApiCall from "../../services/products";
+import ActionsDataTable from "../Actions/ActionsDataTable";
 
 function ItemListContainer() {
   const { data, setData, refreshData } = useGetData(ProductsApiCall);
   const [editProducts, setEditProducts] = useState();
-  const handleUpdateProduct = (id) => {
+  const handleUpdateProduct = async (id) => {
     const name = document.getElementsByName("name")[0].value;
     const price = document.getElementsByName("price")[0].value;
     const category = document.getElementsByName("category")[0].value;
     const stock = document.getElementsByName("stock")[0].value;
-    const data = { name, category, price: parseFloat(price.slice(1)), stock: parseInt(stock) };
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        const productIndex = data.findIndex((e) => e.id === id);
-        const newProducts = [...data];
-        newProducts.splice(productIndex, 1, json.payload);
-        console.log(newProducts);
-        setData(newProducts);
-      });
+    const productData = { name, category, price: parseFloat(price.slice(1)), stock: parseInt(stock) };
+    const updateProduct = await ProductsApiCall.update(id, productData);
+
+    const productIndex = data.findIndex((e) => e.id === id);
+    const newProducts = [...data];
+    newProducts.splice(productIndex, 1, updateProduct);
+    setData(newProducts);
     setEditProducts(null);
   };
 
   const nameBodyTemplate = (product) => {
-    return editProducts === product.id ? <InputField inputName="name" product={product} /> : product.name;
+    return editProducts === product.id ? <InputField inputName="name" input={product} /> : product.name;
   };
 
   const imageBodyTemplate = (product) => {
@@ -40,34 +34,19 @@ function ItemListContainer() {
   };
 
   const priceBodyTemplate = (product) => {
-    return editProducts === product.id ? <InputField inputName="price" product={product} isNumber /> : formatCurrency(product.price);
+    return editProducts === product.id ? <InputField inputName="price" input={product} isNumber /> : formatCurrency(product.price);
   };
   const categoryBodyTemplate = (product) => {
-    return editProducts === product.id ? <InputField inputName="category" product={product} /> : formatCurrency(product.category);
+    return editProducts === product.id ? <InputField inputName="category" input={product} /> : formatCurrency(product.category);
   };
 
   const stockBodyTemplate = (product) => {
-    return editProducts === product.id ? <InputField inputName="stock" product={product} isNumber /> : product.stock;
+    return editProducts === product.id ? <InputField inputName="stock" input={product} isNumber /> : product.stock;
   };
 
   const actionsBodyTemplate = ({ id }) => {
-    if (editProducts === id) {
-      return (
-        <Button severity="warning" onClick={() => handleUpdateProduct(id)}>
-          Guardar
-        </Button>
-      );
-    }
-    return (
-      <div style={{ display: "flex", gap: 10 }}>
-        <Button severity="info" onClick={() => updateProduct(id)}>
-          <i className="pi pi-pen-to-square"></i>
-        </Button>
-        <Button severity="danger" onClick={() => deleteProduct(id)}>
-          <i className="pi pi-trash"></i>
-        </Button>
-      </div>
-    );
+    const actionsProps = { editingId: editProducts, id, handleUpdateRegister: handleUpdateProduct, updateRegister: updateProduct, deteleRegister: deleteProduct };
+    return <ActionsDataTable {...actionsProps} />;
   };
 
   const header = (
