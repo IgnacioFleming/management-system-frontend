@@ -6,7 +6,7 @@ export default class CostumersApiCall {
       if (status !== "success") return { status, error };
       return payload;
     } catch (error) {
-      throw new Error(error);
+      console.log("Exception throwed ", error);
     }
   }
   static async create(body) {
@@ -22,7 +22,7 @@ export default class CostumersApiCall {
       if (status !== "success") return { status, error };
       return payload;
     } catch (error) {
-      throw new Error(error);
+      console.log("Exception throwed ", error);
     }
   }
   static async update(id, body) {
@@ -37,7 +37,19 @@ export default class CostumersApiCall {
       console.log(json.payload);
       return json.payload;
     } catch (error) {
-      throw new Error(error);
+      console.log("Exception throwed ", error);
+    }
+  }
+
+  static async delete(id) {
+    try {
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/costumers/${id}`, {
+        method: "DELETE",
+      });
+      const json = await result.json();
+      return json.payload;
+    } catch (error) {
+      console.log("Exception throwed ", error);
     }
   }
 }

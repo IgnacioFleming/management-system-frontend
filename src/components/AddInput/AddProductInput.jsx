@@ -1,7 +1,7 @@
 import { InputText } from "primereact/inputtext";
-import styles from "./AddProducts.module.css";
+import styles from "./Addinput.module.css";
 
-function AddProductInput({ input, label, onChange, value, invalid, helperText }) {
+function AddInput({ input, label, onChange, value, invalid, helperText }) {
   return (
     <div>
       <span className="p-float-label" style={{ minWidth: 400 }}>
@@ -13,4 +13,4 @@ function AddProductInput({ input, label, onChange, value, invalid, helperText })
   );
 }
 
-export default AddProductInput;
+export default AddInput;
