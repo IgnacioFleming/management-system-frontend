@@ -19,10 +19,9 @@ export default class ProductsApiCall {
         body: JSON.stringify(body),
       });
       const { status, payload, error } = await result.json();
-      console.log(status);
+
       if (status !== "success") return { status, error };
-      console.log("entre en el service");
-      console.log(payload, "payload");
+
       return payload;
     } catch (error) {
       throw new Error(error);

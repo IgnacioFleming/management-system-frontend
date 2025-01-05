@@ -17,7 +17,7 @@ const initialValues = {
 };
 
 function AddProducts() {
-  const handleSubmit = (data) => ProductsApiCall.create(data);
+  const handleSubmit = async (data) => await ProductsApiCall.create(data);
   return (
     <div className={styles.cardContainer}>
       <div className={`card ${styles.card}`}>

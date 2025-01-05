@@ -153,11 +153,11 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
                           </Link>
                         </li>
                         <li>
-                          <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
+                          <Link to={"/addCostumer"} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
                             <i className="pi pi-chart-bar mr-2"></i>
-                            <span className="font-medium">Performance</span>
+                            <span className="font-medium">Alta de Clientes</span>
                             <Ripple />
-                          </a>
+                          </Link>
                         </li>
                         <li>
                           <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">

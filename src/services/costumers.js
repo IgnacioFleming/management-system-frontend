@@ -11,8 +11,7 @@ export default class CostumersApiCall {
   }
   static async create(body) {
     try {
-      body.price = parseFloat(body.price);
-      body.stock = parseInt(body.stock);
+      body.account_number = parseInt(body.account_number);
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/costumers`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -20,6 +19,7 @@ export default class CostumersApiCall {
       });
       const { status, payload, error } = await result.json();
       if (status !== "success") return { status, error };
+      console.log(status, payload);
       return payload;
     } catch (error) {
       console.log("Exception throwed ", error);

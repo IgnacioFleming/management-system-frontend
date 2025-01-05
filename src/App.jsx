@@ -6,6 +6,7 @@ import Layout from "./components/Layout/Layout";
 import ItemListContainer from "./components/ItemList/ItemListContainer";
 import AddProducts from "./components/AddProducts/AddProducts";
 import CostumerListContainer from "./components/CostumerList/ConstumerListContainer";
+import AddCostumer from "./components/AddCostumer/AddCostumer";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/products" element={<ItemListContainer />} />
             <Route path="/addProducts" element={<AddProducts />} />
             <Route path="/costumers" element={<CostumerListContainer />} />
+            <Route path="/addCostumer" element={<AddCostumer />} />
           </Routes>
         </Layout>
       </BrowserRouter>

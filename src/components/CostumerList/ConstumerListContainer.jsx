@@ -9,8 +9,7 @@ function CostumerListContainer() {
   const [editCostumer, setEditCostumer] = useState(null);
 
   const deleteCostumer = async (id) => {
-    const deletion = await CostumersApiCall.delete(id);
-    console.log(deletion);
+    await CostumersApiCall.delete(id);
     const newData = data.filter((client) => client.id !== id);
     setData(newData);
   };
