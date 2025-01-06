@@ -45,7 +45,7 @@ function ItemListContainer() {
   };
 
   const actionsBodyTemplate = ({ id }) => {
-    const actionsProps = { editingId: editProducts, id, handleUpdateRegister: handleUpdateProduct, updateRegister: updateProduct, deteleRegister: deleteProduct };
+    const actionsProps = { editingId: editProducts, id, handleUpdateRegister: handleUpdateProduct, updateRegister: updateProduct, deleteRegister: deleteProduct };
     return <ActionsDataTable {...actionsProps} />;
   };
 

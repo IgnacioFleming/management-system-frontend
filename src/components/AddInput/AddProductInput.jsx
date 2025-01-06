@@ -1,5 +1,5 @@
 import { InputText } from "primereact/inputtext";
-import styles from "./Addinput.module.css";
+import styles from "./AddInput.module.css";
 
 function AddInput({ input, label, onChange, value, invalid, helperText }) {
   return (
