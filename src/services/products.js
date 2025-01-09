@@ -41,4 +41,17 @@ export default class ProductsApiCall {
       throw new Error(error);
     }
   }
+  static async delete(id) {
+    try {
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`, {
+        method: "DELETE",
+      });
+      const json = await result.json();
+      if (json.status === "error") return console.log(json.error);
+
+      return json;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

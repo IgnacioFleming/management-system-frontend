@@ -37,7 +37,7 @@ function ItemListContainer() {
     return editProducts === product.id ? <InputField inputName="price" input={product} isNumber /> : formatCurrency(product.price);
   };
   const categoryBodyTemplate = (product) => {
-    return editProducts === product.id ? <InputField inputName="category" input={product} /> : formatCurrency(product.category);
+    return editProducts === product.id ? <InputField inputName="category" input={product} /> : product.category;
   };
 
   const stockBodyTemplate = (product) => {
@@ -57,12 +57,14 @@ function ItemListContainer() {
   );
   const footer = `In total there are ${data ? data.length : 0} products.`;
 
-  const deleteProduct = (id) => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((json) => setData(json.payload));
+  const deleteProduct = async (id) => {
+    const deletedProduct = await ProductsApiCall.delete(id);
+    if (deletedProduct.status === "success") {
+      const newData = data.filter((e) => e.id !== id);
+      setData(newData);
+    } else {
+      console.log("error al eliminar el producto");
+    }
   };
 
   const updateProduct = (id) => {
