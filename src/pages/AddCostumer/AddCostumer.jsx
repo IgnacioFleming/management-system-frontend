@@ -3,9 +3,9 @@ import { Button } from "primereact/button";
 
 import { Formik } from "formik";
 import styles from "./AddCostumer.module.css";
-import AddInput from "../AddInput/AddInput";
 import CostumersApiCall from "../../services/costumers";
 import { costumerSchema } from "../../schemas/costumer";
+import AddInput from "../../components/AddInput/AddInput";
 
 const initialValues = {
   name: "",

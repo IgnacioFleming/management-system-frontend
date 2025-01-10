@@ -1,9 +1,9 @@
 import { useGetData } from "../../hooks/useGetData";
 import CostumersApiCall from "../../services/costumers";
 import { useState } from "react";
-import ActionsDataTable from "../Actions/ActionsDataTable";
-import { InputField } from "../InputField/InputField";
 import CostumerList from "./CostumerList";
+import ActionsDataTable from "../../components/Actions/ActionsDataTable";
+import { InputField } from "../../components/InputField/InputField";
 function CostumerListContainer() {
   const { data, setData } = useGetData(CostumersApiCall);
   const [editCostumer, setEditCostumer] = useState(null);

@@ -2,11 +2,11 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import ItemListContainer from "./components/ItemList/ItemListContainer";
-import AddProducts from "./components/AddProducts/AddProducts";
-import CostumerListContainer from "./components/CostumerList/ConstumerListContainer";
-import AddCostumer from "./components/AddCostumer/AddCostumer";
+import Layout from "./layouts/Layout/Layout";
+import ItemListContainer from "./pages/ItemList/ItemListContainer";
+import AddProducts from "./pages/AddProducts/AddProducts";
+import AddCostumer from "./pages/AddCostumer/AddCostumer";
+import CostumerListContainer from "./pages/CostumerList/ConstumerListContainer";
 
 function App() {
   return (

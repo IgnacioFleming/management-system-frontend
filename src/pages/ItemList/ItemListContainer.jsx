@@ -2,10 +2,10 @@ import { Button } from "primereact/button";
 import ItemList from "./ItemList";
 import { useGetData } from "../../hooks/useGetData";
 import { useState } from "react";
-import { InputField } from "../InputField/InputField";
 import { formatCurrency } from "../../utils/utils";
 import ProductsApiCall from "../../services/products";
-import ActionsDataTable from "../Actions/ActionsDataTable";
+import ActionsDataTable from "../../components/Actions/ActionsDataTable";
+import { InputField } from "../../components/InputField/InputField";
 
 function ItemListContainer() {
   const { data, setData, refreshData } = useGetData(ProductsApiCall);

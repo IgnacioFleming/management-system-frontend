@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import { productSchema } from "../../schemas/product";
 import ProductsApiCall from "../../services/products";
 import styles from "./AddProducts.module.css";
-import AddInput from "../AddInput/AddInput";
+import AddInput from "../../components/AddInput/AddInput";
 
 const initialValues = {
   name: "",
