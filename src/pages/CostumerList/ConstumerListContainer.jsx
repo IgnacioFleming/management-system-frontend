@@ -30,7 +30,7 @@ function CostumerListContainer() {
   };
 
   const logoBodyTemplate = (client) => {
-    return <img src={client.logo} alt={client.logo} className="w-6rem shadow-2 border-round" />;
+    return <img src={client.logo} alt={client.logo} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />;
   };
 
   const actionsBodyTemplate = ({ id }) => {

@@ -30,7 +30,7 @@ function ItemListContainer() {
   };
 
   const imageBodyTemplate = (product) => {
-    return <img src={product.thumbnail} alt={`Foto de ${product.name}`} className="w-6rem shadow-2 border-round" />;
+    return <img src={product.thumbnail} alt={`Foto de ${product.name}`} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />;
   };
 
   const priceBodyTemplate = (product) => {

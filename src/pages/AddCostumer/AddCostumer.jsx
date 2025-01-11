@@ -15,8 +15,7 @@ const initialValues = {
 
 function AddCostumer() {
   const handleSubmit = async (data) => {
-    const costumer = await CostumersApiCall.create(data);
-    console.log(costumer);
+    await CostumersApiCall.create(data);
   };
   return (
     <div className={styles.cardContainer}>

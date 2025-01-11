@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Drawer from "../Drawer/Drawer";
 import Navbar from "../Navbar/Navbar";
+import { Outlet } from "react-router-dom";
 
-function Layout({ children }) {
+function Layout() {
   const [drawerConfig, setDrawerVisible] = useState({ drawerVisible: true, navbarWidth: "narrow" });
   const handleDrawerVisibility = () => {
     console.log("ejecuto handleDrawerVisibility");
@@ -18,7 +19,9 @@ function Layout({ children }) {
       <div>
         <Drawer drawerConfig={drawerConfig} setDrawerVisible={setDrawerVisible} handleDrawerVisibility={handleDrawerVisibility} />
       </div>
-      <div style={margin}>{children}</div>
+      <div style={margin}>
+        <Outlet />
+      </div>
     </>
   );
 }

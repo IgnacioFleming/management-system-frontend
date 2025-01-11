@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;500;600;700&display=swap");
+
+.container {
+  background-image: url(https://res.cloudinary.com/dah7yxmc5/image/upload/v1728043821/Business-manager/background-404.jpg);
+  height: 100vh;
+  width: 100vw;
+  margin: -8px;
+  display: flex;
+  justify-content: center;
+}
+.mainTitle {
+  font-size: 7.5rem;
+  letter-spacing: normal;
+  line-height: 0.8;
+  text-transform: none;
+  font-family: "Palanquin Dark";
+  font-weight: 700;
+  margin: 0;
+  color: #503bc4;
+  width: 80%;
+  text-align: center;
+}
+
+p {
+  color: #503bc4;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 45px 0 0;
+  width: 80%;
+  text-align: center;
+}
+
+.button {
+  color: #503bc4;
+  width: 80%;
+  text-decoration: none;
+  text-align: center;
+  background-image: none;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1rem;
+  border-style: none;
+  font-weight: 700;
+  margin: 44px auto 0;
+  padding: 14px 52px 15px 51px;
+  background-color: #32cfd8;
+  font-family: "Open Sans", sans-serif !important;
+}
+
+.button:hover {
+  background-color: #503bc4;
+  color: white;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 30%;
+}
+.imageContainer {
+  display: flex;
+  width: 30%;
+}
+.image404 {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
