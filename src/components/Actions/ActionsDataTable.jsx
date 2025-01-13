@@ -2,6 +2,7 @@ import { Button } from "primereact/button";
 
 const ActionsDataTable = ({ editingId, id, handleUpdateRegister, updateRegister, deleteRegister }) => {
   if (editingId === id) {
+    console.log(editingId, id);
     return (
       <Button severity="warning" onClick={() => handleUpdateRegister(id)}>
         Guardar

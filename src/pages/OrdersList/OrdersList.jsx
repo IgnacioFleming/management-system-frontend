@@ -1,16 +1,16 @@
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { Button } from "primereact/button";
 
-export default function OrderList({ data, header, footer, actionsBodyTemplate }) {
+export default function OrderList({ data, header, footer, priceBodyTemplate, actionsBodyTemplate, amountBodyTemplate, quantityBodyTemplate }) {
   return (
     <div className="card">
       <DataTable value={data} header={header} footer={footer} tableStyle={{ minWidth: "60rem" }}>
-        <Column field="order_number" header="Name"></Column>
-        <Column field="product_id" header="Image"></Column>
-        <Column field="quantity" header="Price"></Column>
-        <Column field="amount" header="Category"></Column>
-        <Column body={<Button>Ver Detalle</Button>}></Column>
+        <Column name="order_number" field="order_number" header="Número de Orden"></Column>
+        <Column name="product_name" field="name" header="Producto"></Column>
+        <Column name="product_category" field=" category" header="Categoría"></Column>
+        <Column name="quantity" field="quantity" header="Cantidad" body={quantityBodyTemplate}></Column>
+        <Column name="price" field="price" header="Precio" body={priceBodyTemplate}></Column>
+        <Column name="amount" field="amount" header="Total" body={amountBodyTemplate}></Column>
         <Column body={actionsBodyTemplate}></Column>
       </DataTable>
     </div>
