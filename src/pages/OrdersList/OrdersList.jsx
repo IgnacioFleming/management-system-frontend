@@ -7,7 +7,7 @@ export default function OrderList({ data, header, footer, priceBodyTemplate, act
       <DataTable value={data} header={header} footer={footer} tableStyle={{ minWidth: "60rem" }}>
         <Column name="order_number" field="order_number" header="Número de Orden"></Column>
         <Column name="product_name" field="name" header="Producto"></Column>
-        <Column name="product_category" field=" category" header="Categoría"></Column>
+        <Column name="product_category" field="category" header="Categoría"></Column>
         <Column name="quantity" field="quantity" header="Cantidad" body={quantityBodyTemplate}></Column>
         <Column name="price" field="price" header="Precio" body={priceBodyTemplate}></Column>
         <Column name="amount" field="amount" header="Total" body={amountBodyTemplate}></Column>

@@ -1,18 +1,7 @@
-export default class OrdersApiCall {
+export default class SalesApiCall {
   static async getAll() {
     try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/orders`);
-      const { status, payload, error } = await result.json();
-      if (status !== "success") return { status, error };
-      return payload;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  static async getOrdersByOrderNumber(order_number) {
-    try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/orders/order_number/${order_number}`);
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sales`);
       const { status, payload, error } = await result.json();
       if (status !== "success") return { status, error };
       return payload;
