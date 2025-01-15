@@ -1,20 +1,20 @@
 import { Button } from "primereact/button";
-import { useGetData } from "../../hooks/useGetData";
 import { useState } from "react";
 import { formatCurrency } from "../../utils/utils";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import OrdersApiCall from "../../services/orders";
 import OrderList from "./OrdersList";
 import { InputField } from "../../components/InputField/InputField";
+import { useGetOrdersByOrderNumber } from "../../hooks/useGetOrdersByOrderNumber";
 
-function OrdersListContainer() {
-  const { data, setData, refreshData } = useGetData(OrdersApiCall);
+function OrdersListContainer({ order_number }) {
+  const { orders, setOrders } = useGetOrdersByOrderNumber(order_number);
   const [editOrders, setEditOrders] = useState();
   const handleUpdateOrder = async (id) => {
     const quantity = document.getElementsByName("quantity")[0].value;
     await OrdersApiCall.update(id, { quantity: parseInt(quantity) });
     const newOrders = await OrdersApiCall.getAll();
-    setData(newOrders);
+    setOrders(newOrders);
     setEditOrders(null);
   };
 
@@ -33,16 +33,16 @@ function OrdersListContainer() {
   const header = (
     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
       <span className="text-xl text-900 font-bold">Órdenes</span>
-      <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
+      <Button icon="pi pi-refresh" rounded raised />
     </div>
   );
-  const footer = `In total there are ${data ? data.length : 0} Orders.`;
+  const footer = `In total there are ${orders ? orders.length : 0} Orders.`;
 
   const deleteOrder = async (id) => {
     const deletedOrder = await OrdersApiCall.delete(id);
     if (deletedOrder.status === "success") {
-      const newData = data.filter((e) => e.id !== id);
-      setData(newData);
+      const newData = orders.filter((e) => e.id !== id);
+      setOrders(newData);
     } else {
       console.log("error al eliminar el Ordero");
     }
@@ -51,7 +51,7 @@ function OrdersListContainer() {
   const updateOrder = (id) => {
     setEditOrders(id);
   };
-  const props = { header, footer, data, deleteOrder, actionsBodyTemplate, priceBodyTemplate, amountBodyTemplate, quantityBodyTemplate };
+  const props = { header, footer, orders, deleteOrder, actionsBodyTemplate, priceBodyTemplate, amountBodyTemplate, quantityBodyTemplate };
 
   return <OrderList {...props} />;
 }

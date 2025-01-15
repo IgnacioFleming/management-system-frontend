@@ -9,7 +9,6 @@ import AddCostumer from "./pages/AddCostumer/AddCostumer";
 import CostumerListContainer from "./pages/CostumerList/ConstumerListContainer";
 import Home from "./pages/Home/Home";
 import Page404 from "./pages/Page404/Page404";
-import OrdersListContainer from "./pages/OrdersList/OrdersListContainer";
 import SalesListContainer from "./pages/SalesList/SalesListContainer";
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
             <Route path="/addProducts" element={<AddProducts />} />
             <Route path="/costumers" element={<CostumerListContainer />} />
             <Route path="/addCostumer" element={<AddCostumer />} />
-            <Route path="/orders" element={<OrdersListContainer />} />
             <Route path="/sales" element={<SalesListContainer />} />
           </Route>
           <Route path="/*" element={<Page404 />} />

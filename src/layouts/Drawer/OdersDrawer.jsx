@@ -18,7 +18,7 @@ function OrdersDrawer() {
           </StyleClass>
           <ul className="list-none p-0 m-0 overflow-hidden">
             <li>
-              <Link to="/orders" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
+              <Link to="/sales" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
                 <i className="pi pi-folder mr-2"></i>
                 <span className="font-medium">Lista de Ordenes</span>
                 <Ripple />

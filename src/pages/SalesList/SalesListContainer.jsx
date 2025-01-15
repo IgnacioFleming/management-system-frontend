@@ -5,16 +5,37 @@ import { formatCurrency } from "../../utils/utils";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import SalesApiCall from "../../services/sales";
 import SalesList from "./SalesList";
-import { useGetOrdersByOrderNumber } from "../../hooks/useGetOrdersByOrderNumber";
+import OrdersListContainer from "../../sections/OrdersList/OrdersListContainer";
 
 function SalesListContainer() {
   const { data, setData, refreshData } = useGetData(SalesApiCall);
   const [orderNumber, setOrderNumber] = useState();
   const [editSales, setEditSales] = useState();
-  const orders = useGetOrdersByOrderNumber(orderNumber);
-  console.log(orders);
-  const showSaleData = async (order_number) => {
+  const [expandedRows, setExpandedRows] = useState(null);
+
+  const showSaleDetail = (order_number) => {
+    if (orderNumber === order_number) {
+      setOrderNumber(null);
+      setExpandedRows(null);
+      return;
+    }
     setOrderNumber(order_number);
+    setExpandedRows({ [order_number]: true });
+  };
+
+  const rowExpansionTemplate = () => {
+    return (
+      // <div className="card">
+      <OrdersListContainer order_number={orderNumber} />
+      // </div>
+    );
+  };
+  const showDateBodyTemplate = (sale) => {
+    return (
+      <Button severity={orderNumber === sale.order_number && "danger"} onClick={() => showSaleDetail(sale.order_number)}>
+        {orderNumber === sale.order_number ? "Ocultar Detalle" : "Ver Detalle"}
+      </Button>
+    );
   };
 
   const amountBodyTemplate = (sale) => formatCurrency(sale.total_amount);
@@ -26,7 +47,7 @@ function SalesListContainer() {
 
   const header = (
     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-      <span className="text-xl text-900 font-bold">Órdenes</span>
+      <span className="text-xl text-900 font-bold">Ventas</span>
       <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
     </div>
   );
@@ -45,7 +66,7 @@ function SalesListContainer() {
   const updateSale = (id) => {
     setEditSales(id);
   };
-  const props = { header, footer, data, deleteSale, actionsBodyTemplate, amountBodyTemplate, showSaleData };
+  const props = { header, footer, data, deleteSale, actionsBodyTemplate, amountBodyTemplate, orderNumber, showDateBodyTemplate, rowExpansionTemplate, expandedRows };
 
   return <SalesList {...props} />;
 }
