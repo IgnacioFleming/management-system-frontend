@@ -1,11 +1,10 @@
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
-export default function OrderList({ orders, header, footer, priceBodyTemplate, actionsBodyTemplate, amountBodyTemplate, quantityBodyTemplate }) {
+export default function OrderList({ orders, footer, priceBodyTemplate, actionsBodyTemplate, amountBodyTemplate, quantityBodyTemplate }) {
   return (
     <div className="card">
-      <DataTable value={orders} header={header} footer={footer} tableStyle={{ minWidth: "60rem" }}>
-        <Column name="order_number" field="order_number" header="Número de Orden"></Column>
+      <DataTable value={orders} footer={footer} tableStyle={{ minWidth: "60rem" }}>
         <Column name="product_name" field="name" header="Producto"></Column>
         <Column name="product_category" field="category" header="Categoría"></Column>
         <Column name="quantity" field="quantity" header="Cantidad" body={quantityBodyTemplate}></Column>

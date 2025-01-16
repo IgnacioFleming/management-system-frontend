@@ -30,12 +30,6 @@ function OrdersListContainer({ order_number }) {
     return <ActionsDataTable {...actionsProps} />;
   };
 
-  const header = (
-    <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-      <span className="text-xl text-900 font-bold">Órdenes</span>
-      <Button icon="pi pi-refresh" rounded raised />
-    </div>
-  );
   const footer = `In total there are ${orders ? orders.length : 0} Orders.`;
 
   const deleteOrder = async (id) => {
@@ -51,7 +45,7 @@ function OrdersListContainer({ order_number }) {
   const updateOrder = (id) => {
     setEditOrders(id);
   };
-  const props = { header, footer, orders, deleteOrder, actionsBodyTemplate, priceBodyTemplate, amountBodyTemplate, quantityBodyTemplate };
+  const props = { footer, orders, deleteOrder, actionsBodyTemplate, priceBodyTemplate, amountBodyTemplate, quantityBodyTemplate };
 
   return <OrderList {...props} />;
 }
