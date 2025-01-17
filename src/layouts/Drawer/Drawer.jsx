@@ -2,8 +2,8 @@ import { Sidebar } from "primereact/sidebar";
 import { Button } from "primereact/button";
 import { Avatar } from "primereact/avatar";
 import ProductsDrawer from "./ProductsDrawer";
-import OrdersDrawer from "./OdersDrawer";
 import CostumersDrawer from "./CosutmersDrawer";
+import SalesDrawer from "./SalesDrawer";
 
 export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
   return (
@@ -28,7 +28,7 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
                 <div className="overflow-y-auto">
                   <ProductsDrawer />
                   <CostumersDrawer />
-                  <OrdersDrawer />
+                  <SalesDrawer />
                 </div>
                 <div className="mt-auto">
                   <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />

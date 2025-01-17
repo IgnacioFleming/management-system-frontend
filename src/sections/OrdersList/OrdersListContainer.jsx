@@ -1,4 +1,3 @@
-import { Button } from "primereact/button";
 import { useState } from "react";
 import { formatCurrency } from "../../utils/utils";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
@@ -13,7 +12,7 @@ function OrdersListContainer({ order_number }) {
   const handleUpdateOrder = async (id) => {
     const quantity = document.getElementsByName("quantity")[0].value;
     await OrdersApiCall.update(id, { quantity: parseInt(quantity) });
-    const newOrders = await OrdersApiCall.getAll();
+    const newOrders = await OrdersApiCall.getOrdersByOrderNumber(order_number);
     setOrders(newOrders);
     setEditOrders(null);
   };
@@ -30,7 +29,7 @@ function OrdersListContainer({ order_number }) {
     return <ActionsDataTable {...actionsProps} />;
   };
 
-  const footer = `In total there are ${orders ? orders.length : 0} Orders.`;
+  const footer = `Cantidad de Productos: ${orders ? orders.length : 0}`;
 
   const deleteOrder = async (id) => {
     const deletedOrder = await OrdersApiCall.delete(id);
