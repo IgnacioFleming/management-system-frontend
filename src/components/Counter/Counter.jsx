@@ -1,17 +1,7 @@
-import { useState } from "react";
+import { useCounter } from "../../hooks/useCounter";
 
 function Counter() {
-  const [counter, setCounter] = useState(1);
-  const addToCount = () => {
-    setCounter(counter + 1);
-  };
-  const substractFromCount = () => {
-    setCounter(counter - 1);
-  };
-
-  const refreshCount = () => {
-    setCounter(1);
-  };
+  const { counter, substractFromCount, addToCount, refreshCount } = useCounter(1);
   return (
     <div className="flex align-items-center gap-2">
       <i onClick={substractFromCount} className="pi pi-minus-circle"></i>

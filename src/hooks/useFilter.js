@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-export const useFilter = (data) => {
-  const [filteredItems, setFilteredItems] = useState([]);
+export const useFilter = (data, initialFilteredItems) => {
+  const [filteredItems, setFilteredItems] = useState(initialFilteredItems || []);
   const [restItems, setRestItems] = useState([]);
 
   useEffect(() => {
@@ -11,12 +11,20 @@ export const useFilter = (data) => {
   }, [filteredItems, data]);
 
   const filterItem = (item) => {
+    item.quantity = 1;
     const newFilteredItems = [...filteredItems, item];
     setFilteredItems(newFilteredItems);
+    localStorage.setItem("filteredItems", JSON.stringify(newFilteredItems));
   };
   const removeFilteredItem = (item) => {
     const newFilteredItems = filteredItems.filter((e) => e.id !== item.id);
     setFilteredItems(newFilteredItems);
+    localStorage.setItem("filteredItems", JSON.stringify(newFilteredItems));
   };
-  return { filteredItems, restItems, filterItem, removeFilteredItem };
+
+  const refreshFilteredItems = () => {
+    setFilteredItems([]);
+    localStorage.removeItem("filteredItems");
+  };
+  return { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems };
 };

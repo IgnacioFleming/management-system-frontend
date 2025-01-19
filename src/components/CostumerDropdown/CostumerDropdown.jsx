@@ -1,6 +1,6 @@
 import { Dropdown } from "primereact/dropdown";
 
-function CostumerDropdown({ data, selectedCostumer, setSelectedCostumer }) {
+function CostumerDropdown({ data, selectedCostumer, handleSelectCostumer }) {
   const selectedCostumerTemplate = (option, props) => {
     if (option)
       return (
@@ -25,7 +25,7 @@ function CostumerDropdown({ data, selectedCostumer, setSelectedCostumer }) {
       <label htmlFor="costumer" className="text-lg">
         Cliente
       </label>
-      <Dropdown name="costumer" value={selectedCostumer} onChange={(e) => setSelectedCostumer(e.target.value)} showClear options={data} optionLabel="name" valueTemplate={selectedCostumerTemplate} filter itemTemplate={costumerOptionTemplate} placeholder="Selecciona un Cliente" />
+      <Dropdown name="costumer" value={selectedCostumer} onChange={(e) => handleSelectCostumer(e.target.value)} showClear options={data} optionLabel="name" valueTemplate={selectedCostumerTemplate} filter itemTemplate={costumerOptionTemplate} placeholder="Selecciona un Cliente" />
     </div>
   );
 }
