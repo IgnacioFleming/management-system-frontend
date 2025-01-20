@@ -25,7 +25,7 @@ function CostumerDropdown({ data, selectedCostumer, handleSelectCostumer }) {
       <label htmlFor="costumer" className="text-lg">
         Cliente
       </label>
-      <Dropdown name="costumer" value={selectedCostumer} onChange={(e) => handleSelectCostumer(e.target.value)} showClear options={data} optionLabel="name" valueTemplate={selectedCostumerTemplate} filter itemTemplate={costumerOptionTemplate} placeholder="Selecciona un Cliente" />
+      <Dropdown id="costumer" name="costumer" value={selectedCostumer} onChange={(e) => handleSelectCostumer(e.target.value)} showClear options={data} optionLabel="name" valueTemplate={selectedCostumerTemplate} filter itemTemplate={costumerOptionTemplate} placeholder="Selecciona un Cliente" />
     </div>
   );
 }

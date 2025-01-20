@@ -11,6 +11,7 @@ import Home from "./pages/Home/Home";
 import Page404 from "./pages/Page404/Page404";
 import SalesListContainer from "./pages/SalesList/SalesListContainer";
 import AddSalesContainer from "./pages/AddSale/AddSalesContainer";
+import SalesContextProvider from "./contexts/orders";
 
 function App() {
   return (
@@ -24,7 +25,14 @@ function App() {
             <Route path="/costumers" element={<CostumerListContainer />} />
             <Route path="/addCostumer" element={<AddCostumer />} />
             <Route path="/sales" element={<SalesListContainer />} />
-            <Route path="/addSale" element={<AddSalesContainer />} />
+            <Route
+              path="/addSale"
+              element={
+                <SalesContextProvider>
+                  <AddSalesContainer />
+                </SalesContextProvider>
+              }
+            />
           </Route>
           <Route path="/*" element={<Page404 />} />
         </Routes>

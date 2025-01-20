@@ -20,7 +20,7 @@ function ProductsPicked({ filteredItems, removeFilteredItem }) {
                 </span>
               </div>
               <div>
-                <Counter />
+                <Counter product={product} />
                 <Button className="m-2" onClick={() => removeFilteredItem(product)}>
                   <i className="pi pi-trash"></i>
                 </Button>

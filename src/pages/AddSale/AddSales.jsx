@@ -4,11 +4,8 @@ import styles from "./AddSales.module.css";
 import ProductPicker from "../../components/ProductPicker/ProductPicker";
 import ProductsPicked from "../../components/ProductsPicked/ProductsPicked";
 import CostumerDropdown from "../../components/CostumerDropdown/CostumerDropDown";
-import { useContext } from "react";
-import { OrderContext } from "../../contexts/orders";
 
-function AddSales({ handleSelectCostumer, handleSubmit, selectedCostumer }) {
-  const { data, filteredItems, removeFilteredItem, restItems, filterItem } = useContext(OrderContext);
+function AddSales({ data, filteredItems, removeFilteredItem, restItems, filterItem, handleSelectCostumer, handleSubmit, selectedCostumer }) {
   return (
     <>
       <div className={styles.cardContainer}>
@@ -17,7 +14,7 @@ function AddSales({ handleSelectCostumer, handleSubmit, selectedCostumer }) {
             <form className="flex flex-column row-gap-5" onSubmit={handleSubmit}>
               <CostumerDropdown handleSelectCostumer={handleSelectCostumer} selectedCostumer={selectedCostumer} data={data} />
               <div className="flex justify-content-center">
-                <Button label="Crear" type="submit" />
+                <Button label="Crear Nueva Venta" type="submit" disabled={filteredItems.length > 0 ? false : true} />
               </div>
             </form>
 
