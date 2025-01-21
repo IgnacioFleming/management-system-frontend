@@ -26,11 +26,6 @@ export const useFilter = (data, initialFilteredItems) => {
     setFilteredItems([]);
     localStorage.removeItem("filteredItems");
   };
-  const setQuantity = (item, newQuantity) => {
-    const itemIndex = filteredItems.findIndex((e) => e.id === item.id);
-    const newFilteredItems = [...filteredItems];
-    newFilteredItems[itemIndex].quantity = newQuantity;
-    setFilteredItems(newFilteredItems);
-  };
-  return { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems, setQuantity };
+
+  return { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems };
 };
