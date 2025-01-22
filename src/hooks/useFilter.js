@@ -11,7 +11,6 @@ export const useFilter = (data, initialFilteredItems) => {
   }, [filteredItems, data]);
 
   const filterItem = (item) => {
-    item.quantity = 1;
     const newFilteredItems = [...filteredItems, item];
     setFilteredItems(newFilteredItems);
     localStorage.setItem("filteredItems", JSON.stringify(newFilteredItems));

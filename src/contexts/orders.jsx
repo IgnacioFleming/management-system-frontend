@@ -16,26 +16,21 @@ function SalesContextProvider({ children }) {
   const [selectedCostumer, setSelectedCostumer] = useState(JSON.parse(localStorage.getItem("costumer")) || null);
 
   useEffect(() => {
-    if (!selectedCostumer) {
-      const newSale = { ...sale };
-      delete newSale.costumer_id;
-      setSale(newSale);
-      return;
-    }
+    if (!selectedCostumer) return setSale({});
     const newSale = { ...sale, costumer_id: selectedCostumer.id };
     setSale(newSale);
   }, [selectedCostumer]);
 
   useEffect(() => {
-    const newSale = { ...sale, products: productsIds };
-    newSale.items_quantity = getItemsQuantity(productsIds);
-    newSale.total_amount = getTotalAmount(productsIds);
+    const newSale = { costumer_id: sale.costumer_id, products: productsIds, items_quantity: getItemsQuantity(productsIds), total_amount: getTotalAmount(productsIds) };
     setSale(newSale);
   }, [productsIds]);
 
   useEffect(() => {
     const product_ids = filteredItems.map((item) => {
-      return { id: item.id, quantity: item.quantity, amount: item.quantity * item.price };
+      const previusProduct = productsIds.find((e) => e.id === item.id);
+      const quantity = previusProduct ? previusProduct.quantity : 1;
+      return { id: item.id, quantity, amount: item.price * quantity };
     });
 
     setProductsIds(product_ids);
@@ -53,6 +48,7 @@ function SalesContextProvider({ children }) {
   const setQuantity = (item, newQuantity) => {
     if (sale.products) {
       const itemIndex = productsIds.findIndex((e) => e.id === item.id);
+      if (itemIndex === -1) return;
       const newProductsIds = [...productsIds];
       newProductsIds[itemIndex].quantity = newQuantity;
       const price = filteredItems.find((e) => e.id === item.id).price;
