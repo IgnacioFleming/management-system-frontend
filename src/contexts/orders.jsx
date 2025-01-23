@@ -10,10 +10,9 @@ function SalesContextProvider({ children }) {
   const { data } = useGetData(CostumersApiCall);
   const { data: products } = useGetData(ProductsApiCall);
   const { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems } = useFilter(products, JSON.parse(localStorage.getItem("filteredItems")));
-
-  const [sale, setSale] = useState({});
   const [productsIds, setProductsIds] = useState([]);
   const [selectedCostumer, setSelectedCostumer] = useState(JSON.parse(localStorage.getItem("costumer")) || null);
+  const [sale, setSale] = useState(selectedCostumer.id ? { costumer_id: selectedCostumer.id } : {});
 
   useEffect(() => {
     if (!selectedCostumer) return setSale({});

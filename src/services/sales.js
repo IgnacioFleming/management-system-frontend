@@ -11,7 +11,7 @@ export default class SalesApiCall {
   }
   static async create(body) {
     try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/orders`, {
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sales`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -19,7 +19,7 @@ export default class SalesApiCall {
       const { status, payload, error } = await result.json();
 
       if (status !== "success") return { status, error };
-
+      console.log(payload);
       return payload;
     } catch (error) {
       throw new Error(error);
