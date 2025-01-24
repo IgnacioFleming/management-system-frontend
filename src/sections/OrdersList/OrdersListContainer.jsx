@@ -6,7 +6,7 @@ import OrderList from "./OrdersList";
 import { InputField } from "../../components/InputField/InputField";
 import { useGetOrdersByOrderNumber } from "../../hooks/useGetOrdersByOrderNumber";
 
-function OrdersListContainer({ order_number }) {
+function OrdersListContainer({ order_number, refreshData }) {
   const { orders, setOrders } = useGetOrdersByOrderNumber(order_number);
   const [editOrders, setEditOrders] = useState();
   const handleUpdateOrder = async (id) => {
@@ -15,6 +15,7 @@ function OrdersListContainer({ order_number }) {
     const newOrders = await OrdersApiCall.getOrdersByOrderNumber(order_number);
     setOrders(newOrders);
     setEditOrders(null);
+    refreshData();
   };
 
   const quantityBodyTemplate = (order) => {
@@ -26,7 +27,7 @@ function OrdersListContainer({ order_number }) {
 
   const actionsBodyTemplate = ({ id }) => {
     const actionsProps = { editingId: editOrders, id, handleUpdateRegister: handleUpdateOrder, updateRegister: updateOrder, deleteRegister: deleteOrder };
-    return <ActionsDataTable {...actionsProps} />;
+    return <ActionsDataTable {...actionsProps} deletion updating />;
   };
 
   const footer = `Cantidad de Productos: ${orders ? orders.length : 0}`;

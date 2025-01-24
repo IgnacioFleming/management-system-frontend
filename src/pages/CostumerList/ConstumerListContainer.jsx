@@ -35,7 +35,7 @@ function CostumerListContainer() {
 
   const actionsBodyTemplate = ({ id }) => {
     const actionsProps = { editingId: editCostumer, id, handleUpdateRegister: handleUpdateCostumer, updateRegister: updateCostumer, deleteRegister: deleteCostumer };
-    return <ActionsDataTable {...actionsProps} />;
+    return <ActionsDataTable {...actionsProps} deletion updating />;
   };
 
   const updateCostumer = (id) => {

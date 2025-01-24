@@ -13,36 +13,36 @@ function SalesListContainer() {
   const [editSales, setEditSales] = useState();
   const [expandedRows, setExpandedRows] = useState(null);
 
-  const showSaleDetail = (order_number) => {
-    if (orderNumber === order_number) {
+  const showSaleDetail = (salesId) => {
+    if (orderNumber === salesId) {
       setOrderNumber(null);
       setExpandedRows(null);
       return;
     }
-    setOrderNumber(order_number);
-    setExpandedRows({ [order_number]: true });
+    setOrderNumber(salesId);
+    setExpandedRows({ [salesId]: true });
   };
 
   const rowExpansionTemplate = () => {
     return (
       // <div className="card">
-      <OrdersListContainer order_number={orderNumber} />
+      <OrdersListContainer order_number={orderNumber} refreshData={refreshData} />
       // </div>
     );
   };
-  const showDateBodyTemplate = (sale) => {
+  const showDataBodyTemplate = (sale) => {
     return (
-      <Button severity={orderNumber === sale.order_number && "danger"} onClick={() => showSaleDetail(sale.order_number)}>
-        {orderNumber === sale.order_number ? "Ocultar Detalle" : "Ver Detalle"}
+      <Button severity={orderNumber === sale.salesId && "danger"} onClick={() => showSaleDetail(sale.salesId)}>
+        {orderNumber === sale.salesId ? "Ocultar Detalle" : "Ver Detalle"}
       </Button>
     );
   };
 
   const amountBodyTemplate = (sale) => formatCurrency(sale.total_amount);
 
-  const actionsBodyTemplate = ({ id }) => {
-    const actionsProps = { editingId: editSales, id, updateRegister: updateSale, deleteRegister: deleteSale };
-    return <ActionsDataTable {...actionsProps} />;
+  const actionsBodyTemplate = ({ salesId }) => {
+    const actionsProps = { editingId: editSales, id: salesId, updateRegister: updateSale, deleteRegister: deleteSale };
+    return <ActionsDataTable {...actionsProps} deletion />;
   };
 
   const header = (
@@ -56,7 +56,7 @@ function SalesListContainer() {
   const deleteSale = async (id) => {
     const deletedSale = await SalesApiCall.delete(id);
     if (deletedSale.status === "success") {
-      const newData = data.filter((e) => e.id !== id);
+      const newData = data.filter((e) => e.salesId !== id);
       setData(newData);
     } else {
       console.log("error al eliminar el Saleo");
@@ -66,7 +66,7 @@ function SalesListContainer() {
   const updateSale = (id) => {
     setEditSales(id);
   };
-  const props = { header, footer, data, deleteSale, actionsBodyTemplate, amountBodyTemplate, orderNumber, showDateBodyTemplate, rowExpansionTemplate, expandedRows };
+  const props = { header, footer, data, actionsBodyTemplate, amountBodyTemplate, orderNumber, showDataBodyTemplate, rowExpansionTemplate, expandedRows };
 
   return <SalesList {...props} />;
 }

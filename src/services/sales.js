@@ -41,7 +41,7 @@ export default class SalesApiCall {
   }
   static async delete(id) {
     try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/orders/${id}`, {
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sales/${id}`, {
         method: "DELETE",
       });
       const json = await result.json();
