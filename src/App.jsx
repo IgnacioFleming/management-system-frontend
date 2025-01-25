@@ -12,6 +12,7 @@ import Page404 from "./pages/Page404/Page404";
 import SalesListContainer from "./pages/SalesList/SalesListContainer";
 import AddSalesContainer from "./pages/AddSale/AddSalesContainer";
 import SalesContextProvider from "./contexts/orders";
+import RegisterContainer from "./pages/Register/RegisterContainer";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               }
             />
           </Route>
+          <Route path="/register" element={<RegisterContainer />} />
           <Route path="/*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
