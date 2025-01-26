@@ -4,6 +4,7 @@ import Register from "./Register";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import swal from "sweetalert2";
+import SessionsApiCall from "../../services/sessions";
 
 function RegisterContainer() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function RegisterContainer() {
 
   const { handleChange, handleSubmit, values, errors, resetForm } = useFormik({
     initialValues: {
+      username: "",
       first_name: "",
       last_name: "",
       email: "",
@@ -19,6 +21,7 @@ function RegisterContainer() {
     },
     onSubmit: registerUser,
     validationSchema: Yup.object().shape({
+      username: Yup.string().required("Username is required"),
       first_name: Yup.string().required("First Name is required"),
       last_name: Yup.string().required("Last Name is required"),
       email: Yup.string().required("Email field is required").email("This field must be an email"),
@@ -40,37 +43,30 @@ function RegisterContainer() {
     }
   }, [errors]);
 
-  async function registerUser(data) {
-    fetch(`${import.meta.env.VITE_APP_BASE_URL}/api/sessions/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status === "error") {
-          swal
-            .fire({
-              title: "We're sorry",
-              text: "User email already exists. Please Login or try registering with another email",
-              icon: "error",
-            })
-            .then(() => resetForm());
-          return;
+  async function registerUser({ username, first_name, last_name, email, password }) {
+    const register = await SessionsApiCall.register({ username, first_name, last_name, email, password });
+    console.log(register);
+    if (register.status === "error") {
+      swal
+        .fire({
+          title: "We're sorry",
+          text: "User email already exists. Please Login or try registering with another email",
+          icon: "error",
+        })
+        .then(() => resetForm());
+      return;
+    }
+    swal
+      .fire({
+        title: "Registration completed!",
+        text: "You have been registered successfully. Please Login to start purchasing",
+        icon: "success",
+        confirmButtonText: "Go to Login",
+      })
+      .then((res) => {
+        if (res.isConfirmed) {
+          navigate("/login");
         }
-        swal
-          .fire({
-            title: "Registration completed!",
-            text: "You have been registered successfully. Please Login to start purchasing",
-            icon: "success",
-            confirmButtonText: "Go to Login",
-          })
-          .then((res) => {
-            if (res.isConfirmed) {
-              navigate("/login");
-            }
-          });
       })
       .catch((err) => {
         swal
@@ -82,7 +78,6 @@ function RegisterContainer() {
           .then(() => resetForm());
       });
   }
-
   return <Register handleChange={handleChange} handleSubmit={handleSubmit} values={values} errors={errors} />;
 }
 

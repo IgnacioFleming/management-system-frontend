@@ -11,7 +11,7 @@ function Page404() {
         </Link>
       </div>
       <div className={styles.imageContainer}>
-        <img className={styles.image404} src="https://res.cloudinary.com/dah7yxmc5/image/upload/v1728043860/Business-manager/image-404.png" alt="Image-404" />
+        <img className={styles.image404} src="https://res.cloudinary.com/dah7yxmc5/image/upload/v1729167407/Business-manager/image-404_t65cxz.webp" alt="Image-404" />
       </div>
     </div>
   );

@@ -1,33 +1,33 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .background {
   position: absolute;
-  background-image: url(https://res.cloudinary.com/dah7yxmc5/image/upload/v1712364288/Eccomerce/Authentication/register-background-img.jpg);
+  background-image: url(https://res.cloudinary.com/dah7yxmc5/image/upload/v1729167407/Business-manager/Dise%C3%B1o-sin-t%C3%ADtulo-_7__yn72jj.webp);
   height: 100vh;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  filter: blur(2px);
+  filter: blur(1px);
+  opacity: 0.6;
   z-index: -1;
+  margin: -8px;
 }
 
 .logo {
   object-fit: contain;
-  width: 25%;
+  max-width: 150px;
+  height: auto;
   margin-bottom: 10px;
 }
 
 .form {
   display: flex;
-  gap: 10px;
-  width: 80%;
+  flex-direction: column;
+  gap: 25px;
+  width: 50%;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 40px;
 }
 
 .shortInput {
-  width: 50%;
+  width: 60%;
 }

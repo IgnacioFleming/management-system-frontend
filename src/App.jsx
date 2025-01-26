@@ -13,12 +13,15 @@ import SalesListContainer from "./pages/SalesList/SalesListContainer";
 import AddSalesContainer from "./pages/AddSale/AddSalesContainer";
 import SalesContextProvider from "./contexts/orders";
 import RegisterContainer from "./pages/Register/RegisterContainer";
+import LoginContainer from "./pages/Login/LoginContainer";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/register" element={<RegisterContainer />} />
+          <Route path="/login" element={<LoginContainer />} />
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ItemListContainer />} />
@@ -35,7 +38,6 @@ function App() {
               }
             />
           </Route>
-          <Route path="/register" element={<RegisterContainer />} />
           <Route path="/*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

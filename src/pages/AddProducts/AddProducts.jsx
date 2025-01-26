@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import { productSchema } from "../../schemas/product";
 import ProductsApiCall from "../../services/products";
 import styles from "./AddProducts.module.css";
-import AddInput from "../../components/AddInput/AddInput";
+import TextField from "../../components/TextField/TextField";
 
 const initialValues = {
   name: "",
@@ -25,12 +25,12 @@ function AddProducts() {
           <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={productSchema} validateOnChange={false}>
             {(props) => (
               <form className="flex flex-column row-gap-5" onSubmit={props.handleSubmit}>
-                <AddInput label={"Nombre"} input={"name"} onChange={props.handleChange} value={props.values.name} invalid={props.errors.name && true} helperText={props.errors.name} />
-                <AddInput label={"Precio"} input={"price"} onChange={props.handleChange} value={props.values.price} invalid={props.errors.price && true} helperText={props.errors.price} />
-                <AddInput label={"Stock"} input={"stock"} onChange={props.handleChange} value={props.values.stock} invalid={props.errors.stock && true} helperText={props.errors.stock} />
-                <AddInput label={"Categoría"} input={"category"} onChange={props.handleChange} value={props.values.category} invalid={props.errors.category && true} helperText={props.errors.category} />
-                <AddInput label={"Descripción"} input={"description"} onChange={props.handleChange} value={props.values.description} invalid={props.errors.description && true} helperText={props.errors.description} />
-                <AddInput label={"Imagen"} input={"thumbnail"} onChange={props.handleChange} value={props.values.thumbnail} invalid={props.errors.thumbnail && true} helperText={props.errors.thumbnail} />
+                <TextField label={"Nombre"} input={"name"} onChange={props.handleChange} value={props.values.name} invalid={props.errors.name && true} helperText={props.errors.name} />
+                <TextField label={"Precio"} input={"price"} onChange={props.handleChange} value={props.values.price} invalid={props.errors.price && true} helperText={props.errors.price} />
+                <TextField label={"Stock"} input={"stock"} onChange={props.handleChange} value={props.values.stock} invalid={props.errors.stock && true} helperText={props.errors.stock} />
+                <TextField label={"Categoría"} input={"category"} onChange={props.handleChange} value={props.values.category} invalid={props.errors.category && true} helperText={props.errors.category} />
+                <TextField label={"Descripción"} input={"description"} onChange={props.handleChange} value={props.values.description} invalid={props.errors.description && true} helperText={props.errors.description} />
+                <TextField label={"Imagen"} input={"thumbnail"} onChange={props.handleChange} value={props.values.thumbnail} invalid={props.errors.thumbnail && true} helperText={props.errors.thumbnail} />
                 <div className="flex justify-content-center">
                   <Button label="Crear" type="submit" />
                 </div>

@@ -1,0 +1,30 @@
+.container {
+  height: 100vh;
+  margin: -8px;
+}
+.mainImage {
+  object-fit: contain;
+}
+
+.logo {
+  object-fit: contain;
+  width: 25%;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 60%;
+}
+.line {
+  height: 0px;
+  width: 20%;
+  border: solid black 1pt;
+}
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+}
