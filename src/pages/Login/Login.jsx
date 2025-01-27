@@ -2,6 +2,7 @@ import { Button } from "primereact/button";
 import TextField from "../../components/TextField/TextField";
 import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
 
 const Login = ({ handleChange, handleSubmit, values, errors }) => {
   return (
@@ -17,7 +18,7 @@ const Login = ({ handleChange, handleSubmit, values, errors }) => {
             <h3 className="text-center text-color-secondary m-5">Por favor ingresá tus credenciales para acceder:</h3>
             <div className="flex flex-column gap-5 align-items-center ">
               <TextField label="Nombre de Usuario" input="username" className="w-5" onChange={handleChange} value={values.username} invalid={errors.username} helperText={errors.username} />
-              <TextField label="Contraseña" input="password" className="w-5" onChange={handleChange} value={values.password} invalid={errors.password} helperText={errors.password} />
+              <PasswordInput name="password" handleChange={handleChange} className="w-5" value={values.password} invalid={errors.password} helperText={errors.password} />
               <div className="">
                 <Button type="submit" label="Ingresar" severity="info" className="w-10rem" />
               </div>
