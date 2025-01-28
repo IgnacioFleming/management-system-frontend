@@ -1,9 +1,12 @@
+import { API_Status_List, authRedirection } from "../utils/utils";
+
 export default class ProductsApiCall {
   static async getAll() {
     try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products`);
-      const { status, payload, error } = await result.json();
-      if (status !== "success") return { status, error };
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products`, { credentials: "include" });
+      const { status, payload, error, redirectURL } = await result.json();
+      if (status === API_Status_List.ERROR) return { status, error };
+      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
       return payload;
     } catch (error) {
       throw new Error(error);
@@ -17,10 +20,12 @@ export default class ProductsApiCall {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
+        credentials: "include",
       });
-      const { status, payload, error } = await result.json();
+      const { status, payload, error, redirectURL } = await result.json();
 
-      if (status !== "success") return { status, error };
+      if (status === API_Status_List.ERROR) return { status, error };
+      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
 
       return payload;
     } catch (error) {
@@ -33,9 +38,12 @@ export default class ProductsApiCall {
         method: "PUT",
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
       });
       const json = await result.json();
-      if (json.status === "error") return console.log(json.error);
+      if (json.status === API_Status_List.ERROR) return console.log(json.error);
+      if (json.status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL: json.redirectURL });
+
       return json.payload;
     } catch (error) {
       throw new Error(error);
@@ -45,10 +53,11 @@ export default class ProductsApiCall {
     try {
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`, {
         method: "DELETE",
+        credentials: "include",
       });
       const json = await result.json();
-      if (json.status === "error") return console.log(json.error);
-
+      if (json.status === API_Status_List.ERROR) return console.log(json.error);
+      if (json.status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL: json.redirectURL });
       return json;
     } catch (error) {
       console.log(error);

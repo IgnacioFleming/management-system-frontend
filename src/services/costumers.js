@@ -1,9 +1,13 @@
+import { API_Status_List, authRedirection } from "../utils/utils";
+
 export default class CostumersApiCall {
   static async getAll() {
     try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/costumers`);
-      const { status, payload, error } = await result.json();
-      if (status !== "success") return { status, error };
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/costumers`, { credentials: "include" });
+      const { status, payload, error, redirectURL } = await result.json();
+      if (status === API_Status_List.ERROR) return { status, error };
+      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
+
       return payload;
     } catch (error) {
       console.log("Exception throwed ", error);
@@ -16,10 +20,11 @@ export default class CostumersApiCall {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
+        credentials: "include",
       });
-      const { status, payload, error } = await result.json();
-      if (status !== "success") return { status, error };
-      console.log(status, payload);
+      const { status, payload, error, redirectURL } = await result.json();
+      if (status === API_Status_List.ERROR) return { status, error };
+      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
       return payload;
     } catch (error) {
       console.log("Exception throwed ", error);
@@ -31,10 +36,11 @@ export default class CostumersApiCall {
         method: "PUT",
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
       });
       const json = await result.json();
-      if (json.status === "error") return console.log(json.error);
-      console.log(json.payload);
+      if (json.status === API_Status_List.ERROR) return console.log(json.error);
+      if (json.status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL: json.redirectURL });
       return json.payload;
     } catch (error) {
       console.log("Exception throwed ", error);
@@ -45,9 +51,12 @@ export default class CostumersApiCall {
     try {
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/costumers/${id}`, {
         method: "DELETE",
+        credentials: "include",
       });
-      const json = await result.json();
-      return json.payload;
+      const { status, payload, error, redirectURL } = await result.json();
+      if (status === API_Status_List.ERROR) return { status, error };
+      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
+      return payload;
     } catch (error) {
       console.log("Exception throwed ", error);
     }

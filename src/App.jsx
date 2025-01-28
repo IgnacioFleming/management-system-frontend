@@ -14,6 +14,7 @@ import AddSalesContainer from "./pages/AddSale/AddSalesContainer";
 import SalesContextProvider from "./contexts/orders";
 import RegisterContainer from "./pages/Register/RegisterContainer";
 import LoginContainer from "./pages/Login/LoginContainer";
+import Balances from "./pages/Balances/Balances";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/costumers" element={<CostumerListContainer />} />
             <Route path="/addCostumer" element={<AddCostumer />} />
             <Route path="/sales" element={<SalesListContainer />} />
+            <Route path="/balances" element={<Balances />} />
             <Route
               path="/addSale"
               element={

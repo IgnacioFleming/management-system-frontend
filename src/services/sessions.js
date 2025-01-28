@@ -24,9 +24,23 @@ export default class SessionsApiCall {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(credentials),
       });
-      console.log(result);
+      if (result.ok) {
+        const response = result.json();
+        return response;
+      }
+    } catch (error) {
+      return new Error(error);
+    }
+  }
+  static async logout() {
+    try {
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sessions/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
       if (result.ok) {
         const response = result.json();
         return response;

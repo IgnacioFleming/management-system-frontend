@@ -2,6 +2,7 @@ import styles from "./Register.module.css";
 import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
 import TextField from "../../components/TextField/TextField";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
 
 const container = {
   height: "100vh",
@@ -43,10 +44,14 @@ function Register({ handleChange, handleSubmit, errors, values }) {
             </div>
             <TextField fullWidth input="email" label="Email" onChange={handleChange} helperText={errors.email} error={errors.email && true} value={values.email} />
             <div className="flex justify-content-center gap-5 w-full">
+              <PasswordInput name="password" handleChange={handleChange} invalid={errors.password} helperText={errors.password} value={values.password} />
+              <PasswordInput name="confirm_password" label="Confirmar Contraseña" handleChange={handleChange} invalid={errors.confirm_password} helperText={errors.confirm_password} value={values.confirm_password} />
+            </div>
+            {/* <div className="flex justify-content-center gap-5 w-full">
               <TextField fullWidth input="password" label="Contraseña" type="password" onChange={handleChange} helperText={errors.password} error={errors.password && true} value={values.password} />
 
               <TextField fullWidth input="confirm_password" label="Confirmar Contraseña" type="password" onChange={handleChange} helperText={errors.confirm_password} error={errors.confirm_password && true} value={values.confirm_password} />
-            </div>
+            </div> */}
 
             <Button type="submit" label="Crear Cuenta" className="w-4 align-self-center" />
           </form>

@@ -1,10 +1,10 @@
 import { Sidebar } from "primereact/sidebar";
 import { Button } from "primereact/button";
 import { Avatar } from "primereact/avatar";
-import ProductsDrawer from "./ProductsDrawer";
-import CostumersDrawer from "./CosutmersDrawer";
-import SalesDrawer from "./SalesDrawer";
-
+import ProductsDrawer from "./DrawerSections/ProductsDrawer";
+import CostumersDrawer from "./DrawerSections/CosutmersDrawer";
+import SalesDrawer from "./DrawerSections/SalesDrawer";
+import FinancesDrawer from "./DrawerSections/FinancesDrawer";
 export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
   return (
     <div className="card flex justify-content-center">
@@ -29,6 +29,7 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
                   <ProductsDrawer />
                   <CostumersDrawer />
                   <SalesDrawer />
+                  <FinancesDrawer />
                 </div>
                 <div className="mt-auto">
                   <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
