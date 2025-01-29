@@ -3,7 +3,7 @@ import { StyleClass } from "primereact/styleclass";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 
-function FinancesDrawer() {
+function UsersMenu() {
   const btnRef1 = useRef(null);
   return (
     <>
@@ -11,23 +11,16 @@ function FinancesDrawer() {
         <li>
           <StyleClass nodeRef={btnRef1} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
             <div ref={btnRef1} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
-              <span className="font-medium">FINANZAS</span>
+              <span className="font-medium">USUARIOS</span>
               <i className="pi pi-chevron-down"></i>
               <Ripple />
             </div>
           </StyleClass>
           <ul className="list-none p-0 m-0 overflow-hidden">
             <li>
-              <Link to="/balances" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
+              <Link to="/users" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
                 <i className="pi pi-home mr-2"></i>
-                <span className="font-medium">Cuentas Corrientes</span>
-                <Ripple />
-              </Link>
-            </li>
-            <li>
-              <Link to="/payments" className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
-                <i className="pi pi-bookmark mr-2"></i>
-                <span className="font-medium">Pagos</span>
+                <span className="font-medium">Usuarios Registrados</span>
                 <Ripple />
               </Link>
             </li>
@@ -38,4 +31,4 @@ function FinancesDrawer() {
   );
 }
 
-export default FinancesDrawer;
+export default UsersMenu;

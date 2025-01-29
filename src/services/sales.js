@@ -6,7 +6,7 @@ export default class SalesApiCall {
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sales`, { credentials: "include" });
       const { status, payload, error, redirectURL } = await result.json();
       if (status === API_Status_List.ERROR) return { status, error };
-      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
+      authRedirection(status, redirectURL);
       return payload;
     } catch (error) {
       throw new Error(error);
@@ -23,7 +23,7 @@ export default class SalesApiCall {
       const { status, payload, error, redirectURL } = await result.json();
 
       if (status === API_Status_List.ERROR) return { status, error };
-      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
+      authRedirection(status, redirectURL);
       return payload;
     } catch (error) {
       throw new Error(error);
@@ -39,7 +39,7 @@ export default class SalesApiCall {
       });
       const { status, payload, error, redirectURL } = await result.json();
       if (status === API_Status_List.ERROR) return { status, error };
-      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
+      authRedirection(status, redirectURL);
       return payload;
     } catch (error) {
       throw new Error(error);
@@ -53,7 +53,7 @@ export default class SalesApiCall {
       });
       const { status, payload, error, redirectURL } = await result.json();
       if (status === API_Status_List.ERROR) return { status, error };
-      if (status === API_Status_List.UNAUTHORIZED) return authRedirection({ redirectURL });
+      authRedirection(status, redirectURL);
       return payload;
     } catch (error) {
       console.log(error);

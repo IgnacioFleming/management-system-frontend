@@ -3,7 +3,7 @@ import { StyleClass } from "primereact/styleclass";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 
-function ProductsDrawer() {
+function ProductsMenu() {
   const btnRef1 = useRef(null);
   return (
     <>
@@ -38,4 +38,4 @@ function ProductsDrawer() {
   );
 }
 
-export default ProductsDrawer;
+export default ProductsMenu;

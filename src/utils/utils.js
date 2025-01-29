@@ -3,12 +3,26 @@ export const formatCurrency = (value) => {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
 };
 
-export const authRedirection = ({ redirectURL }) => {
-  window.location.pathname = redirectURL;
-};
-
 export const API_Status_List = {
   UNAUTHORIZED: "unauthorized",
   SUCCESS: "success",
   ERROR: "error",
+};
+export const authRedirection = (status, redirectURL) => {
+  if (status === API_Status_List.UNAUTHORIZED) {
+    window.history.pushState({}, "", redirectURL);
+    return window.dispatchEvent(new PopStateEvent("popstate"));
+  }
+  return;
+};
+
+export const formatDate = (timestamp) => {
+  const date = new Date(timestamp);
+  const day = String(date.getDate()).padStart(2, 0);
+  const month = String(date.getMonth()).padStart(2, 0);
+  const year = String(date.getFullYear()).padStart(2, 0);
+  const hours = String(date.getHours()).padStart(2, 0);
+  const minutes = String(date.getMinutes()).padStart(2, 0);
+  const seconds = String(date.getSeconds()).padStart(2, 0);
+  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 };

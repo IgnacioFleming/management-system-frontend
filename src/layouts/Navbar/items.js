@@ -4,6 +4,7 @@ export const items = [
   {
     label: "Home",
     icon: "pi pi-home",
+    command: () => (window.location.pathname = "/"),
   },
   {
     label: "Features",

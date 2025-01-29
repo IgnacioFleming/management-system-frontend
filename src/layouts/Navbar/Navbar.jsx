@@ -1,7 +1,7 @@
 import { Menubar } from "primereact/menubar";
-import { items } from "./items";
 import StartNavbar from "./StartNavbar";
 import ProfileButton from "./ProfileButton/ProfileButton";
+import { items } from "./items";
 
 export default function Navbar() {
   return (
