@@ -6,7 +6,10 @@ import CostumersMenu from "./DrawerSections/CosutmersMenu";
 import SalesMenu from "./DrawerSections/SalesMenu";
 import FinancesMenu from "./DrawerSections/FinancesMenu";
 import UsersMenu from "./DrawerSections/UsersMenu";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user";
 export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
+  const { user } = useContext(UserContext);
   return (
     <div className="card flex justify-content-center">
       <Sidebar
@@ -31,7 +34,7 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
                   <CostumersMenu />
                   <SalesMenu />
                   <FinancesMenu />
-                  <UsersMenu />
+                  {user.role === "super_admin" && <UsersMenu />}
                 </div>
                 <div className="mt-auto">
                   <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />

@@ -2,10 +2,8 @@ import { useState } from "react";
 import Drawer from "../Drawer/Drawer";
 import Navbar from "../Navbar/Navbar";
 import { Outlet } from "react-router-dom";
-import { useCheckSession } from "../../hooks/useCheckSession";
 
 function Layout() {
-  useCheckSession();
   const [drawerConfig, setDrawerVisible] = useState({ drawerVisible: true, navbarWidth: "narrow" });
   const handleDrawerVisibility = () => {
     if (drawerConfig.drawerVisible) return setDrawerVisible({ drawerVisible: false, navbarWidth: "wide" });

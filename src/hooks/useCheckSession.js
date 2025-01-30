@@ -6,6 +6,6 @@ export const useCheckSession = () => {
   const location = useLocation();
   const checkSession = async () => await SessionsApiCall.checkSession();
   useEffect(() => {
-    checkSession().then((res) => console.log(res));
+    checkSession();
   }, [location.pathname]);
 };

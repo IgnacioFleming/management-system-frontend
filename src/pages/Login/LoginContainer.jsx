@@ -1,15 +1,16 @@
 import { useFormik } from "formik";
 import Login from "./Login";
 import * as Yup from "yup";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import SessionsApiCall from "../../services/sessions";
+import { UserContext } from "../../contexts/user";
 
 function LoginContainer() {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
-
+  const { setUserData } = useContext(UserContext);
   const { handleChange, handleSubmit, values, errors, resetForm } = useFormik({
     initialValues: {
       username: "",
@@ -34,6 +35,8 @@ function LoginContainer() {
         .then(() => resetForm());
       return;
     }
+    console.log(login.payload);
+    setUserData(login.payload);
     navigate("/");
   }
 

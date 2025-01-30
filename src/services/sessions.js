@@ -55,6 +55,7 @@ export default class SessionsApiCall {
   static async checkSession() {
     try {
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sessions/checkSession`, { credentials: "include" });
+      console.log(result);
       if (result.ok) {
         const { status, error, payload, redirectURL } = await result.json();
         if (status === API_Status_List.ERROR) return { status, error };
@@ -62,6 +63,8 @@ export default class SessionsApiCall {
         return payload;
       }
     } catch (error) {
+      window.history.pushState({}, "", "/login");
+      window.dispatchEvent(new PopStateEvent("popstate"));
       return new Error(error);
     }
   }

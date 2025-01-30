@@ -1,24 +1,28 @@
-import { DataTable } from "primereact/datatable";
 import { useGetData } from "../../hooks/useGetData";
 import UsersApiCall from "../../services/users";
-import { Column } from "primereact/column";
 import { DataView } from "primereact/dataview";
 import { Button } from "primereact/button";
-import { Tag } from "primereact/tag";
-import { Rating } from "primereact/rating";
 import { classNames } from "primereact/utils";
 import { formatDate } from "../../utils/utils";
+import { useEffect, useState } from "react";
 
 function Users() {
-  const { data } = useGetData(UsersApiCall);
-  console.log(data);
+  const { data, refreshData } = useGetData(UsersApiCall);
+  const [enabledUsers, setEnabledUsers] = useState([]);
+  const [notEnabledUsers, setNotEnabledUsers] = useState([]);
+  useEffect(() => {
+    const newEnabledUsers = data?.filter((user) => user.is_enabled === 1);
+    const newNotEnabledUsers = data?.filter((user) => user.is_enabled !== 1);
+    setEnabledUsers(newEnabledUsers);
+    setNotEnabledUsers(newNotEnabledUsers);
+  }, [data]);
   const itemTemplate = (user, index) => {
     return (
       <div className="col-12" key={user.id}>
         <div className={classNames("flex p-4 gap-4", { "border-top-1 surface-border": index !== 0 })}>
           <div className="flex flex-column  justify-content-between w-5 align-items-center xl:align-items-start  gap-4">
             <h2 className="m-0">
-              <span className="w-15rem inline-block">Usuario:</span> <span className={`text-900  ${user.is_enabled ? "text-green-500" : "text-red-500"} `}>{user.username}</span>
+              <span className="w-15rem inline-block">Usuario:</span> <span className={`text-900  ${user.is_enabled === 1 ? "text-green-500" : "text-red-500"} `}>{user.username}</span>
             </h2>
             <h2 className="m-0">
               <span className="w-15rem inline-block">Nombre:</span>
@@ -35,7 +39,7 @@ function Users() {
             </h2>
           </div>
           <div className="flex align-items-center">
-            <Button className="w-10rem" severity="info" label={user.is_enabled ? "Deshabilitar" : "Habilitar"} />
+            <Button className="w-10rem" severity="info" label={user.is_enabled === 1 ? "Deshabilitar" : "Habilitar"} onClick={() => handleUserState(user.id)} />
           </div>
         </div>
       </div>
@@ -51,19 +55,21 @@ function Users() {
     return <div className="grid grid-nogutter">{list}</div>;
   };
 
-  const enabledUsers = data?.filter((user) => user.is_enabled);
-  const notEnabledUsers = data?.filter((user) => !user.is_enabled);
+  const handleUserState = async (id) => {
+    await UsersApiCall.handleUserState(id);
+    refreshData();
+  };
 
   return (
     <>
       <div className="card">
         <h1>Usuarios habilitados</h1>
-        <DataView value={enabledUsers} listTemplate={listTemplate} />
+        {enabledUsers.length === 0 ? <h3>No existen Usuarion habilitados.</h3> : <DataView value={enabledUsers} listTemplate={listTemplate} />}
       </div>
 
       <div className="card">
         <h1>Usuarios No Habilitados</h1>
-        <DataView value={notEnabledUsers} listTemplate={listTemplate} />
+        {notEnabledUsers.length === 0 ? <h3>No existen Usuarion no habilitados.</h3> : <DataView value={notEnabledUsers} listTemplate={listTemplate} />}
       </div>
     </>
   );

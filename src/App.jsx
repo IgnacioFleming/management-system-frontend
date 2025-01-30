@@ -17,35 +17,38 @@ import LoginContainer from "./pages/Login/LoginContainer";
 import Balances from "./pages/Balances/Balances";
 import CostumerMovements from "./pages/CostumerMovements/CostumerMovements";
 import Users from "./pages/Users/Users";
+import UserContextProvider from "./contexts/user";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/register" element={<RegisterContainer />} />
-          <Route path="/login" element={<LoginContainer />} />
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<ItemListContainer />} />
-            <Route path="/addProducts" element={<AddProducts />} />
-            <Route path="/costumers" element={<CostumerListContainer />} />
-            <Route path="/addCostumer" element={<AddCostumer />} />
-            <Route path="/sales" element={<SalesListContainer />} />
-            <Route path="/balances" element={<Balances />} />
-            <Route path="/balances/:id" element={<CostumerMovements />} />
-            <Route path="/users" element={<Users />} />
-            <Route
-              path="/addSale"
-              element={
-                <SalesContextProvider>
-                  <AddSalesContainer />
-                </SalesContextProvider>
-              }
-            />
-          </Route>
-          <Route path="/*" element={<Page404 />} />
-        </Routes>
+        <UserContextProvider>
+          <Routes>
+            <Route path="/register" element={<RegisterContainer />} />
+            <Route path="/login" element={<LoginContainer />} />
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<ItemListContainer />} />
+              <Route path="/addProducts" element={<AddProducts />} />
+              <Route path="/costumers" element={<CostumerListContainer />} />
+              <Route path="/addCostumer" element={<AddCostumer />} />
+              <Route path="/sales" element={<SalesListContainer />} />
+              <Route path="/balances" element={<Balances />} />
+              <Route path="/balances/:id" element={<CostumerMovements />} />
+              <Route path="/users" element={<Users />} />
+              <Route
+                path="/addSale"
+                element={
+                  <SalesContextProvider>
+                    <AddSalesContainer />
+                  </SalesContextProvider>
+                }
+              />
+            </Route>
+            <Route path="/*" element={<Page404 />} />
+          </Routes>
+        </UserContextProvider>
       </BrowserRouter>
     </>
   );
