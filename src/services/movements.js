@@ -6,7 +6,6 @@ export default class MovementsApiCall {
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/movements/${costumer_id}`, { credentials: "include" });
       if (result.ok) {
         const { status, payload, error, redirectURL } = await result.json();
-        console.log(status);
         if (status === API_Status_List.ERROR) return { status, error };
         authRedirection(status, redirectURL);
         return payload;

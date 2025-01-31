@@ -6,10 +6,15 @@ import { formatCurrency } from "../../utils/utils";
 import ProductsApiCall from "../../services/products";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import { InputField } from "../../components/InputField/InputField";
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
+import { InputText } from "primereact/inputtext";
 
 function ItemListContainer() {
   const { data, setData, refreshData } = useGetData(ProductsApiCall);
   const [editProducts, setEditProducts] = useState();
+  const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
   const handleUpdateProduct = async (id) => {
     const name = document.getElementsByName("name")[0].value;
     const price = document.getElementsByName("price")[0].value;
@@ -70,8 +75,18 @@ function ItemListContainer() {
   const updateProduct = (id) => {
     setEditProducts(id);
   };
-  const props = { imageBodyTemplate, priceBodyTemplate, header, footer, data, deleteProduct, actionsBodyTemplate, categoryBodyTemplate, stockBodyTemplate, nameBodyTemplate };
 
+  const renderHeader = () => {
+    return (
+      <div className="flex justify-content-end">
+        <IconField iconPosition="left">
+          <InputIcon className="pi pi-search" />
+          <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
+        </IconField>
+      </div>
+    );
+  };
+  const props = { imageBodyTemplate, priceBodyTemplate, header, footer, data, deleteProduct, actionsBodyTemplate, categoryBodyTemplate, stockBodyTemplate, nameBodyTemplate, filters };
   return <ItemList {...props} />;
 }
 

@@ -15,7 +15,6 @@ function ProfileButton() {
       icon: "pi pi-sign-out",
       command: async () => {
         const logout = await SessionsApiCall.logout();
-        console.log(logout);
         if (logout.status === API_Status_List.SUCCESS) return (window.location.pathname = "/login");
       },
     },

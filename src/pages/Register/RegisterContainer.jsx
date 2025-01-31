@@ -45,7 +45,6 @@ function RegisterContainer() {
 
   async function registerUser({ username, first_name, last_name, email, password }) {
     const register = await SessionsApiCall.register({ username, first_name, last_name, email, password });
-    console.log(register);
     if (register.status === "error") {
       swal
         .fire({

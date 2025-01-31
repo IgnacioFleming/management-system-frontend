@@ -5,13 +5,20 @@ import { useCheckSession } from "../hooks/useCheckSession";
 export const UserContext = createContext();
 
 function UserContextProvider({ children }) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) ?? {});
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") ?? "{}"));
   const location = useLocation();
-  useCheckSession();
   const setUserData = (data) => {
-    setUser(data);
-    localStorage.setItem("user", JSON.stringify(data));
+    if (data) {
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
+    }
   };
+  const session = useCheckSession();
+  console.log(session);
+
+  useEffect(() => {
+    setUserData(session);
+  }, [session]);
 
   useEffect(() => {
     if (Object.keys(user).length !== 0) return;

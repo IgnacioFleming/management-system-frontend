@@ -35,7 +35,6 @@ function LoginContainer() {
         .then(() => resetForm());
       return;
     }
-    console.log(login.payload);
     setUserData(login.payload);
     navigate("/");
   }

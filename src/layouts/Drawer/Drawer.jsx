@@ -15,7 +15,6 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
       <Sidebar
         modal={false}
         visible={drawerConfig.drawerVisible}
-        // onHide={handleDrawerVisibility}
         dismissable={false}
         content={({ closeIconRef }) => (
           <div className="min-h-screen flex relative lg:static surface-ground">

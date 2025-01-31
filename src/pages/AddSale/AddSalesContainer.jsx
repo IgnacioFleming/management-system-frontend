@@ -8,9 +8,7 @@ function AddSalesContainer() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(sale);
-    const addNewSale = await SalesApiCall.create(sale);
-    console.log(addNewSale);
+    await SalesApiCall.create(sale);
   };
   const props = { data, filteredItems, removeFilteredItem, restItems, filterItem, handleSubmit, handleSelectCostumer, selectedCostumer };
   return <AddSales {...props} />;
