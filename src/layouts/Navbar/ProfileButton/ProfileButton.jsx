@@ -1,6 +1,5 @@
 import { Avatar } from "primereact/avatar";
 import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
 import { Menu } from "primereact/menu";
 import { useRef } from "react";
 import styles from "./ProfileButton.module.css";
@@ -22,7 +21,6 @@ function ProfileButton() {
 
   return (
     <div className="flex align-items-center gap-2">
-      <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" />
       <Menu model={items} ref={signOutRef} id="popup-sign-out" popup></Menu>
       <Button className={styles.button} aria-controls="popup-sign-out" onClick={(e) => signOutRef.current.toggle(e)} aria-haspopup>
         <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />

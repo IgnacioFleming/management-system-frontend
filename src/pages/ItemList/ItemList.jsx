@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 export default function ItemList({ data, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate, filters }) {
   return (
     <div className="card">
-      <DataTable value={data} removableSort header={header} filters={filters} footer={footer} tableStyle={{ minWidth: "60rem" }}>
+      <DataTable value={data} removableSort paginator rows={5} header={header} filters={filters} footer={footer} tableStyle={{ minWidth: "60rem" }}>
         <Column field="name" header="Name" body={nameBodyTemplate} sortable></Column>
         <Column header="Image" body={imageBodyTemplate}></Column>
         <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>

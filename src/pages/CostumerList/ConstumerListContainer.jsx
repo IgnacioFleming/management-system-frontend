@@ -4,9 +4,16 @@ import { useState } from "react";
 import CostumerList from "./CostumerList";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import { InputField } from "../../components/InputField/InputField";
+import { FilterMatchMode } from "primereact/api";
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 function CostumerListContainer() {
-  const { data, setData } = useGetData(CostumersApiCall);
+  const { data, setData, refreshData } = useGetData(CostumersApiCall);
   const [editCostumer, setEditCostumer] = useState(null);
+  const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
 
   const deleteCostumer = async (id) => {
     await CostumersApiCall.delete(id);
@@ -42,7 +49,38 @@ function CostumerListContainer() {
     setEditCostumer(id);
   };
 
-  const props = { logoBodyTemplate, actionsBodyTemplate, nameBodyTemplate, data };
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let inputValue = value;
+    if (inputValue.startsWith("$")) inputValue = value.slice(1);
+    inputValue = inputValue.replace(/(\.0{0,2})$/, "");
+    console.log(inputValue, "after replace");
+    let _filters = { ...filters };
+    _filters["global"].value = inputValue;
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
+
+  const renderHeader = () => {
+    return (
+      <>
+        <div className="flex flex-wrap align-items-center justify-content-between gap-2">
+          <span className="text-xl text-900 font-bold">Clientes</span>
+          <div className="flex justify-content-end gap-2">
+            <IconField iconPosition="left">
+              <InputIcon className="pi pi-search" />
+              <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar Cliente" />
+            </IconField>
+            <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
+          </div>
+        </div>
+      </>
+    );
+  };
+  const header = renderHeader();
+
+  const footer = `En total hay ${data ? data.length : 0} clientes.`;
+  const props = { logoBodyTemplate, actionsBodyTemplate, nameBodyTemplate, data, footer, header, filters };
 
   return <CostumerList {...props} />;
 }

@@ -45,6 +45,7 @@ function OrdersListContainer({ order_number, refreshData }) {
   const updateOrder = (id) => {
     setEditOrders(id);
   };
+
   const props = { footer, orders, deleteOrder, actionsBodyTemplate, priceBodyTemplate, amountBodyTemplate, quantityBodyTemplate };
 
   return <OrderList {...props} />;

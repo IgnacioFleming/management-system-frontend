@@ -9,6 +9,7 @@ import { InputField } from "../../components/InputField/InputField";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
+import { FilterMatchMode } from "primereact/api";
 
 function ItemListContainer() {
   const { data, setData, refreshData } = useGetData(ProductsApiCall);
@@ -54,13 +55,7 @@ function ItemListContainer() {
     return <ActionsDataTable {...actionsProps} deletion updating />;
   };
 
-  const header = (
-    <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-      <span className="text-xl text-900 font-bold">Productos</span>
-      <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
-    </div>
-  );
-  const footer = `In total there are ${data ? data.length : 0} products.`;
+  const footer = `En total hay ${data ? data.length : 0} productos.`;
 
   const deleteProduct = async (id) => {
     const deletedProduct = await ProductsApiCall.delete(id);
@@ -76,16 +71,35 @@ function ItemListContainer() {
     setEditProducts(id);
   };
 
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let inputValue = value;
+    if (inputValue.startsWith("$")) inputValue = value.slice(1);
+    inputValue = inputValue.replace(/(\.0{0,2})$/, "");
+    console.log(inputValue, "after replace");
+    let _filters = { ...filters };
+    _filters["global"].value = inputValue;
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
+
   const renderHeader = () => {
     return (
-      <div className="flex justify-content-end">
-        <IconField iconPosition="left">
-          <InputIcon className="pi pi-search" />
-          <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-        </IconField>
-      </div>
+      <>
+        <div className="flex flex-wrap align-items-center justify-content-between gap-2">
+          <span className="text-xl text-900 font-bold">Productos</span>
+          <div className="flex justify-content-end gap-2">
+            <IconField iconPosition="left">
+              <InputIcon className="pi pi-search" />
+              <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar Producto" />
+            </IconField>
+            <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
+          </div>
+        </div>
+      </>
     );
   };
+  const header = renderHeader();
   const props = { imageBodyTemplate, priceBodyTemplate, header, footer, data, deleteProduct, actionsBodyTemplate, categoryBodyTemplate, stockBodyTemplate, nameBodyTemplate, filters };
   return <ItemList {...props} />;
 }
