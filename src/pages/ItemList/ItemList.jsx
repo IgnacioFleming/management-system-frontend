@@ -1,6 +1,7 @@
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
+import { Link } from "react-router-dom";
 
 export default function ItemList({ data, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate, filters }) {
   return (
@@ -11,7 +12,13 @@ export default function ItemList({ data, header, footer, imageBodyTemplate, pric
         <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
         <Column field="category" header="Category" body={categoryBodyTemplate} sortable></Column>
         <Column field="stock" header="Stock" body={stockBodyTemplate} sortable></Column>
-        <Column body={<Button>Ver Detalle</Button>}></Column>
+        <Column
+          body={(prod) => (
+            <Link to={`/products/${prod.id}`}>
+              <Button label="Ver Detalle" />
+            </Link>
+          )}
+        ></Column>
         <Column body={actionsBodyTemplate}></Column>
       </DataTable>
     </div>

@@ -18,6 +18,7 @@ import Balances from "./pages/Balances/Balances";
 import CostumerMovements from "./pages/CostumerMovements/CostumerMovements";
 import Users from "./pages/Users/Users";
 import UserContextProvider from "./contexts/user";
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<ItemListContainer />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/addProducts" element={<AddProducts />} />
               <Route path="/costumers" element={<CostumerListContainer />} />
               <Route path="/addCostumer" element={<AddCostumer />} />

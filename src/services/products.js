@@ -12,6 +12,19 @@ export default class ProductsApiCall {
       throw new Error(error);
     }
   }
+
+  static async getById(id) {
+    try {
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`, { credentials: "include" });
+      const { status, payload, error, redirectURL } = await result.json();
+      if (status === API_Status_List.ERROR) return { status, error };
+      authRedirection(status, redirectURL);
+      return payload;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   static async create(body) {
     try {
       body.price = parseFloat(body.price);
