@@ -13,13 +13,11 @@ export default class CostumersApiCall {
       console.log("Exception throwed ", error);
     }
   }
-  static async create(body) {
+  static async create(formData) {
     try {
-      body.account_number = parseInt(body.account_number);
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/costumers`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: formData,
         credentials: "include",
       });
       const { status, payload, error, redirectURL } = await result.json();

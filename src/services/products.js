@@ -25,14 +25,11 @@ export default class ProductsApiCall {
     }
   }
 
-  static async create(body) {
+  static async create(formData) {
     try {
-      body.price = parseFloat(body.price);
-      body.stock = parseInt(body.stock);
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: formData,
         credentials: "include",
       });
       const { status, payload, error, redirectURL } = await result.json();

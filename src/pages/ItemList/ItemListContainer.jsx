@@ -76,7 +76,6 @@ function ItemListContainer() {
     let inputValue = value;
     if (inputValue.startsWith("$")) inputValue = value.slice(1);
     inputValue = inputValue.replace(/(\.0{0,2})$/, "");
-    console.log(inputValue, "after replace");
     let _filters = { ...filters };
     _filters["global"].value = inputValue;
     setFilters(_filters);

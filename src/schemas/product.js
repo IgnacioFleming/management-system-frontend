@@ -6,5 +6,4 @@ export const productSchema = Yup.object().shape({
   stock: Yup.number().integer().positive().required(),
   category: Yup.string().max(50).required(),
   description: Yup.string().required(),
-  thumbnail: Yup.string().url().required(),
 });
