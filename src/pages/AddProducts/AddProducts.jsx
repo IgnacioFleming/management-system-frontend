@@ -40,6 +40,8 @@ function AddProducts() {
 
   const cancelOptions = { style: { display: !file && "none" } };
 
+  const chooseOptions = { className: "bg-green-500 border-green-500" };
+
   const pt = { badge: { root: { style: { display: "none" } } } };
 
   return (
@@ -55,7 +57,7 @@ function AddProducts() {
                 <TextField label={"Categoría"} input={"category"} onChange={props.handleChange} value={props.values.category} invalid={props.errors.category && true} helperText={props.errors.category} />
                 <TextField label={"Descripción"} input={"description"} onChange={props.handleChange} value={props.values.description} invalid={props.errors.description && true} helperText={props.errors.description} />
                 {/* <TextField label={"Imagen"} input={"thumbnail"} onChange={props.handleChange} value={props.values.thumbnail} invalid={props.errors.thumbnail && true} helperText={props.errors.thumbnail} /> */}
-                <FileUpload ref={fileRef} name="file" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />
+                <FileUpload chooseLabel="Subir Imagen" ref={fileRef} name="file" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} chooseOptions={chooseOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />
                 <div className="flex justify-content-center">
                   <Button label="Crear" type="submit" />
                 </div>

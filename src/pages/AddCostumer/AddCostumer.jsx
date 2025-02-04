@@ -37,6 +37,8 @@ function AddCostumer() {
 
   const cancelOptions = { style: { display: !file && "none" } };
 
+  const chooseOptions = { className: "bg-green-500 border-green-500" };
+
   const pt = { badge: { root: { style: { display: "none" } } } };
 
   return (
@@ -49,7 +51,7 @@ function AddCostumer() {
                 <TextField label={"Nombre"} input={"name"} onChange={props.handleChange} value={props.values.name} invalid={props.errors.name && true} helperText={props.errors.name} />
 
                 <TextField label={"Número de Cuenta"} input={"account_number"} onChange={props.handleChange} value={props.values.account_number} invalid={props.errors.account_number && true} helperText={props.errors.account_number} />
-                <FileUpload chooseLabel="Logo" ref={fileRef} name="thumbnail" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />
+                <FileUpload chooseLabel="Logo" chooseOptions={chooseOptions} ref={fileRef} name="thumbnail" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />
                 <div className="flex justify-content-center">
                   <Button label="Crear" type="submit" />
                 </div>

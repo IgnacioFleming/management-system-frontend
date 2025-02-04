@@ -2,8 +2,17 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
+import ExportButton from "../../components/ExportButton/ExportButton";
 
 export default function ItemList({ data, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate, filters }) {
+  const exportHeaders = [
+    { label: "Id de producto", key: "id" },
+    { label: "Nombre", key: "name" },
+    { label: "Url de imagen", key: "thumbnail" },
+    { label: "Precio", key: "price" },
+    { label: "Stock", key: "stock" },
+    { label: "Categoría", key: "category" },
+  ];
   return (
     <div className="card">
       <DataTable value={data} removableSort paginator rows={5} header={header} filters={filters} footer={footer} tableStyle={{ minWidth: "60rem" }}>
@@ -19,7 +28,7 @@ export default function ItemList({ data, header, footer, imageBodyTemplate, pric
             </Link>
           )}
         ></Column>
-        <Column body={actionsBodyTemplate}></Column>
+        <Column header={<ExportButton data={data} filename="products.csv" headers={exportHeaders} />} body={actionsBodyTemplate}></Column>
       </DataTable>
     </div>
   );
