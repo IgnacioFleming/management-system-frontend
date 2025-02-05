@@ -1,12 +1,16 @@
 import { Button } from "primereact/button";
-import { CSVLink } from "react-csv";
+import { exportToXlsx } from "../../helpers/exportXlsx";
 
-function ExportButton({ data, filename, headers }) {
-  return (
-    <CSVLink data={data} filename={filename} headers={headers || false}>
-      <Button label="Exportar" severity="success" />
-    </CSVLink>
-  );
+function ExportButton({ data = [], filename }) {
+  const newData = data.map((item) => {
+    const newItem = { ...item };
+    delete newItem.id;
+    return newItem;
+  });
+  const handleExport = () => {
+    exportToXlsx(newData, filename);
+  };
+  return <Button label="Exportar" severity="success" onClick={handleExport} />;
 }
 
 export default ExportButton;

@@ -1,69 +1,28 @@
 import { Card } from "primereact/card";
-import { Button } from "primereact/button";
-
-import { Formik } from "formik";
-import { productSchema } from "../../schemas/product";
 import ProductsApiCall from "../../services/products";
 import styles from "./AddProducts.module.css";
-import TextField from "../../components/TextField/TextField";
-import { FileUpload } from "primereact/fileupload";
-import { useRef, useState } from "react";
-
-const initialValues = {
-  name: "",
-  price: "",
-  stock: "",
-  category: "",
-  description: "",
-};
+import { useState } from "react";
+import { SelectButton } from "primereact/selectbutton";
+import { addModes } from "../../utils/utils";
+import ImportButton from "../../components/ImportButton/ImportButton";
+import AddProductManualFrom from "../../components/AddProductManualFrom/AddProductManualFrom";
 
 function AddProducts() {
-  const [file, setFile] = useState("");
-  const fileRef = useRef(null);
-  const handleSubmit = async (data) => {
-    const formData = new FormData();
-    for (const key in data) {
-      formData.append(key, data[key]);
-    }
-    formData.append("file", fileRef.current.getFiles()[0]);
-    await ProductsApiCall.create(formData);
+  const addModeOptions = [addModes.manual, addModes.import];
+  const [addMode, setAddMode] = useState(addModeOptions[0]);
+
+  const handleSelectChange = (e) => {
+    setAddMode(e.value);
   };
-  const handleSelect = (filename) => {
-    setFile(filename);
-  };
-  const handleRemove = () => {
-    setFile("");
-  };
-  const emptyTemplate = () => <div>No se ha seleccionado un archivo.</div>;
-
-  const uploadOptions = { style: { display: "none" } };
-
-  const cancelOptions = { style: { display: !file && "none" } };
-
-  const chooseOptions = { className: "bg-green-500 border-green-500" };
-
-  const pt = { badge: { root: { style: { display: "none" } } } };
 
   return (
     <div className={styles.cardContainer}>
       <div className={`card ${styles.card}`}>
+        <div className="flex justify-content-end mb-5">
+          <SelectButton value={addMode} onChange={handleSelectChange} options={addModeOptions} />
+        </div>
         <Card pt={{ title: { className: "m-4" } }} title="Alta de Productos" className="flex justify-content-center">
-          <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={productSchema} validateOnChange={false}>
-            {(props) => (
-              <form id="form" className="flex flex-column row-gap-5" onSubmit={props.handleSubmit} encType="multipart/form-data">
-                <TextField label={"Nombre"} input={"name"} onChange={props.handleChange} value={props.values.name} invalid={props.errors.name && true} helperText={props.errors.name} />
-                <TextField label={"Precio"} input={"price"} onChange={props.handleChange} value={props.values.price} invalid={props.errors.price && true} helperText={props.errors.price} />
-                <TextField label={"Stock"} input={"stock"} onChange={props.handleChange} value={props.values.stock} invalid={props.errors.stock && true} helperText={props.errors.stock} />
-                <TextField label={"Categoría"} input={"category"} onChange={props.handleChange} value={props.values.category} invalid={props.errors.category && true} helperText={props.errors.category} />
-                <TextField label={"Descripción"} input={"description"} onChange={props.handleChange} value={props.values.description} invalid={props.errors.description && true} helperText={props.errors.description} />
-                {/* <TextField label={"Imagen"} input={"thumbnail"} onChange={props.handleChange} value={props.values.thumbnail} invalid={props.errors.thumbnail && true} helperText={props.errors.thumbnail} /> */}
-                <FileUpload chooseLabel="Subir Imagen" ref={fileRef} name="file" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} chooseOptions={chooseOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />
-                <div className="flex justify-content-center">
-                  <Button label="Crear" type="submit" />
-                </div>
-              </form>
-            )}
-          </Formik>
+          {addMode === addModes.manual ? <AddProductManualFrom /> : <ImportButton service={ProductsApiCall} />}
         </Card>
       </div>
     </div>

@@ -20,7 +20,7 @@ export default function SalesList({ data, header, footer, actionsBodyTemplate, a
       <Column name="costumer_account_number" field="account_number" header="Número de Cuenta" sortable></Column>
       <Column name="total_amount" field="total_amount" header="Monto" body={amountBodyTemplate} sortable></Column>
       <Column body={showDataBodyTemplate}></Column>
-      <Column header={<ExportButton data={data} filename="sales.csv" headers={exportHeaders} />} body={actionsBodyTemplate}></Column>
+      <Column header={<ExportButton data={data} filename="sales.xlsx" headers={exportHeaders} />} body={actionsBodyTemplate}></Column>
     </DataTable>
   );
 }
