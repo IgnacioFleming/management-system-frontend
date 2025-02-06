@@ -4,7 +4,10 @@ export const items = [
   {
     label: "Home",
     icon: "pi pi-home",
-    command: () => (window.location.pathname = "/"),
+    command: () => {
+      window.history.pushState({}, "", "/");
+      return window.dispatchEvent(new PopStateEvent("popstate"));
+    },
   },
   {
     label: "Features",
