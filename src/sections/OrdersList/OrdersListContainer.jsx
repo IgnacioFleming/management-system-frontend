@@ -4,15 +4,15 @@ import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import OrdersApiCall from "../../services/orders";
 import OrderList from "./OrdersList";
 import { InputField } from "../../components/InputField/InputField";
-import { useGetOrdersByOrderNumber } from "../../hooks/useGetOrdersByOrderNumber";
+import { useGetOrdersBySaleId } from "../../hooks/useGetOrdersBySaleId";
 
-function OrdersListContainer({ order_number, refreshData }) {
-  const { orders, setOrders } = useGetOrdersByOrderNumber(order_number);
+function OrdersListContainer({ sale_id, refreshData }) {
+  const { orders, setOrders } = useGetOrdersBySaleId(sale_id);
   const [editOrders, setEditOrders] = useState();
   const handleUpdateOrder = async (id) => {
     const quantity = document.getElementsByName("quantity")[0].value;
     await OrdersApiCall.update(id, { quantity: parseInt(quantity) });
-    const newOrders = await OrdersApiCall.getOrdersByOrderNumber(order_number);
+    const newOrders = await OrdersApiCall.getOrdersBySaleId(sale_id);
     setOrders(newOrders);
     setEditOrders(null);
     refreshData();

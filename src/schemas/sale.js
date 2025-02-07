@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const saleSchema = Yup.object().shape({
-  order_number: Yup.number().integer().positive().required(),
+  sale_id: Yup.number().integer().positive().required(),
   customer_id: Yup.number().integer().positive().required(),
   items_quantity: Yup.number().integer().positive().required(),
   total_amount: Yup.number().positive().required(),

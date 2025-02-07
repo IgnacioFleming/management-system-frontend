@@ -9,20 +9,18 @@ import AddProductManualFrom from "../../components/AddProductManualFrom/AddProdu
 
 function AddProducts() {
   const addModeOptions = [addModes.manual, addModes.import];
-  const [addMode, setAddMode] = useState(addModeOptions[0]);
-
+  const [selection, setSelection] = useState(addModeOptions[0]);
   const handleSelectChange = (e) => {
-    setAddMode(e.value);
+    setSelection(e.value);
   };
-
   return (
     <div className={styles.cardContainer}>
       <div className={`card ${styles.card}`}>
         <div className="flex justify-content-end mb-5">
-          <SelectButton value={addMode} onChange={handleSelectChange} options={addModeOptions} />
+          <SelectButton value={selection} onChange={handleSelectChange} options={addModeOptions} />;
         </div>
         <Card pt={{ title: { className: "m-4" } }} title="Alta de Productos" className="flex justify-content-center">
-          {addMode === addModes.manual ? <AddProductManualFrom /> : <ImportButton service={ProductsApiCall} />}
+          {selection === addModes.manual ? <AddProductManualFrom /> : <ImportButton service={ProductsApiCall} />}
         </Card>
       </div>
     </div>

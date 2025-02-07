@@ -13,9 +13,9 @@ export default class OrdersApiCall {
     }
   }
 
-  static async getOrdersByOrderNumber(order_number) {
+  static async getOrdersBySaleId(sale_id) {
     try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/orders/order_number/${order_number}`, { credentials: "include" });
+      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/orders/sale_id/${sale_id}`, { credentials: "include" });
       const { status, payload, error, redirectURL } = await result.json();
       if (status === API_Status_List.ERROR) return { status, error };
       authRedirection(status, redirectURL);

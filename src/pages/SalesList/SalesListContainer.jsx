@@ -32,7 +32,7 @@ function SalesListContainer() {
   const rowExpansionTemplate = () => {
     return (
       // <div className="card">
-      <OrdersListContainer order_number={orderNumber} refreshData={refreshData} />
+      <OrdersListContainer sale_id={orderNumber} refreshData={refreshData} />
       // </div>
     );
   };
