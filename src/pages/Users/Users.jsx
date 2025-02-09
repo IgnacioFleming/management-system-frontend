@@ -5,9 +5,10 @@ import { Button } from "primereact/button";
 import { classNames } from "primereact/utils";
 import { formatDate } from "../../utils/utils";
 import { useEffect, useState } from "react";
+import { usersService } from "../../services";
 
 function Users() {
-  const { data, refreshData } = useGetData(UsersApiCall);
+  const { data, refreshData } = useGetData(usersService);
   const [enabledUsers, setEnabledUsers] = useState([]);
   const [notEnabledUsers, setNotEnabledUsers] = useState([]);
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import ItemList from "./ItemList";
 import { useGetData } from "../../hooks/useGetData";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { formatCurrency } from "../../utils/utils";
 import ProductsApiCall from "../../services/products";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
@@ -10,25 +10,49 @@ import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
 import { FilterMatchMode } from "primereact/api";
+import { FileUpload } from "primereact/fileupload";
+import { productsService } from "../../services";
 
 function ItemListContainer() {
-  const { data, setData, refreshData } = useGetData(ProductsApiCall);
+  const { data, setData, refreshData } = useGetData(productsService);
   const [editProducts, setEditProducts] = useState();
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
+
+  const [file, setFile] = useState("");
+  const fileRef = useRef(null);
+
+  const handleSelect = (filename) => {
+    setFile(filename);
+  };
+  const handleRemove = () => {
+    setFile("");
+  };
+  const emptyTemplate = () => <div>No se ha seleccionado un archivo.</div>;
+
+  const uploadOptions = { style: { display: "none" } };
+
+  const cancelOptions = { style: { display: !file && "none" } };
+
+  const chooseOptions = { className: "bg-green-500 border-green-500" };
+
+  const pt = { badge: { root: { style: { display: "none" } } } };
+
   const handleUpdateProduct = async (id) => {
     const name = document.getElementsByName("name")[0].value;
-    const price = document.getElementsByName("price")[0].value;
+    const price = document.getElementsByName("price")[0].value.split("$")[1];
     const category = document.getElementsByName("category")[0].value;
     const stock = document.getElementsByName("stock")[0].value;
-    const productData = { name, category, price: parseFloat(price.slice(1)), stock: parseInt(stock) };
-    const updateProduct = await ProductsApiCall.update(id, productData);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("category", category);
+    formData.append("stock", stock);
+    formData.append("file", fileRef.current.getFiles()[0]);
+    await ProductsApiCall.update(id, formData);
 
-    const productIndex = data.findIndex((e) => e.id === id);
-    const newProducts = [...data];
-    newProducts.splice(productIndex, 1, updateProduct);
-    setData(newProducts);
     setEditProducts(null);
+    refreshData();
   };
 
   const nameBodyTemplate = (product) => {
@@ -36,7 +60,12 @@ function ItemListContainer() {
   };
 
   const imageBodyTemplate = (product) => {
-    return <img src={product.thumbnail} alt={`Foto de ${product.name}`} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />;
+    return (
+      <div className="flex flex-column gap-2 align-items-center">
+        <img src={product?.thumbnail} alt={`Foto de ${product?.name}`} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />
+        {editProducts === product?.id && <FileUpload chooseLabel="Subir Imagen" chooseOptions={chooseOptions} ref={fileRef} name="thumbnail" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} onClear={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />}
+      </div>
+    );
   };
 
   const priceBodyTemplate = (product) => {

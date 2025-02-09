@@ -1,17 +1,12 @@
 import { API_Status_List, authRedirection } from "../utils/utils";
+import ApiCall from "./apiService";
 
-export default class SalesApiCall {
-  static async getAll() {
-    try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sales`, { credentials: "include" });
-      const { status, payload, error, redirectURL } = await result.json();
-      if (status === API_Status_List.ERROR) return { status, error };
-      authRedirection(status, redirectURL);
-      return payload;
-    } catch (error) {
-      throw new Error(error);
-    }
+const path = `${import.meta.env.VITE_API_BASE_URL}/api/sales`;
+export default class SalesApiCall extends ApiCall {
+  constructor() {
+    super(path);
   }
+
   static async create(body) {
     try {
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sales`, {

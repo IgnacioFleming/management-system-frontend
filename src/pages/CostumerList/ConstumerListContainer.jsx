@@ -1,6 +1,6 @@
 import { useGetData } from "../../hooks/useGetData";
 import CostumersApiCall from "../../services/costumers";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CostumerList from "./CostumerList";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import { InputField } from "../../components/InputField/InputField";
@@ -9,11 +9,32 @@ import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
+import { FileUpload } from "primereact/fileupload";
+import { costumersService } from "../../services";
 function CostumerListContainer() {
-  const { data, setData, refreshData } = useGetData(CostumersApiCall);
+  const { data, setData, refreshData } = useGetData(costumersService);
   const [editCostumer, setEditCostumer] = useState(null);
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
+
+  const [file, setFile] = useState("");
+  const fileRef = useRef(null);
+
+  const handleSelect = (filename) => {
+    setFile(filename);
+  };
+  const handleRemove = () => {
+    setFile("");
+  };
+  const emptyTemplate = () => <div>No se ha seleccionado un archivo.</div>;
+
+  const uploadOptions = { style: { display: "none" } };
+
+  const cancelOptions = { style: { display: !file && "none" } };
+
+  const chooseOptions = { className: "bg-green-500 border-green-500" };
+
+  const pt = { badge: { root: { style: { display: "none" } } } };
 
   const deleteCostumer = async (id) => {
     await CostumersApiCall.delete(id);
@@ -22,8 +43,11 @@ function CostumerListContainer() {
   };
   const handleUpdateCostumer = async (id) => {
     const name = document.getElementsByName("name")[0].value;
-
-    const updatedCostumer = await CostumersApiCall.update(id, { name });
+    const updatedFile = fileRef.current.getFiles()[0];
+    const formData = new FormData();
+    formData.append("name", name);
+    if (updatedFile) formData.append("file", updatedFile);
+    const updatedCostumer = await CostumersApiCall.update(id, formData);
 
     const costumerIndex = data.findIndex((e) => e.id === id);
     const newCostumers = [...data];
@@ -33,11 +57,16 @@ function CostumerListContainer() {
   };
 
   const nameBodyTemplate = (client) => {
-    return editCostumer === client.id ? <InputField inputName="name" input={client} /> : client.name;
+    return editCostumer === client?.id ? <InputField inputName="name" input={client} /> : client?.name;
   };
 
   const logoBodyTemplate = (client) => {
-    return <img src={client.logo} alt={client.logo} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />;
+    return (
+      <div className="flex gap-2">
+        <img src={client?.logo} alt={client?.logo} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />
+        {editCostumer === client?.id && <FileUpload chooseLabel="Subir Imagen" chooseOptions={chooseOptions} ref={fileRef} name="thumbnail" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} onClear={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />}
+      </div>
+    );
   };
 
   const actionsBodyTemplate = ({ id }) => {

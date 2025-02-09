@@ -1,14 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import { useFilter } from "../hooks/useFilter";
 import { useGetData } from "../hooks/useGetData";
-import ProductsApiCall from "../services/products";
-import CostumersApiCall from "../services/costumers";
+import { costumersService, productsService } from "../services";
 
 export const SalesContext = createContext();
 
 function SalesContextProvider({ children }) {
-  const { data } = useGetData(CostumersApiCall);
-  const { data: products } = useGetData(ProductsApiCall);
+  const { data } = useGetData(costumersService);
+  const { data: products } = useGetData(productsService);
   const { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems } = useFilter(products, JSON.parse(localStorage.getItem("filteredItems")));
   const [productsIds, setProductsIds] = useState([]);
   const [selectedCostumer, setSelectedCostumer] = useState(JSON.parse(localStorage.getItem("costumer")) || null);

@@ -1,16 +1,11 @@
 import { API_Status_List, authRedirection } from "../utils/utils";
+import ApiCall from "./apiService";
 
-export default class ProductsApiCall {
-  static async getAll() {
-    try {
-      const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products`, { credentials: "include" });
-      const { status, payload, error, redirectURL } = await result.json();
-      if (status === API_Status_List.ERROR) return { status, error };
-      authRedirection(status, redirectURL);
-      return payload;
-    } catch (error) {
-      throw new Error(error);
-    }
+const path = `${import.meta.env.VITE_API_BASE_URL}/api/products`;
+
+export default class ProductsApiCall extends ApiCall {
+  constructor() {
+    super(path);
   }
 
   static async getById(id) {
@@ -42,12 +37,11 @@ export default class ProductsApiCall {
       throw new Error(error);
     }
   }
-  static async update(id, body) {
+  static async update(id, formData) {
     try {
       const result = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`, {
         method: "PUT",
-        body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json" },
+        body: formData,
         credentials: "include",
       });
       const json = await result.json();

@@ -1,7 +1,6 @@
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useGetData } from "../../hooks/useGetData";
-import BalancesApiCall from "../../services/balances";
 import { formatCurrency } from "../../utils/utils";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
@@ -10,9 +9,10 @@ import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
 import { useState } from "react";
 import { FilterMatchMode } from "primereact/api";
+import { balancesService } from "../../services";
 
 function Balances() {
-  const { data, refreshData } = useGetData(BalancesApiCall);
+  const { data, refreshData } = useGetData(balancesService);
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 

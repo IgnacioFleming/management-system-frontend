@@ -10,9 +10,10 @@ import { FilterMatchMode } from "primereact/api";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
+import { salesService } from "../../services";
 
 function SalesListContainer() {
-  const { data, setData, refreshData } = useGetData(SalesApiCall);
+  const { data, setData, refreshData } = useGetData(salesService);
   const [orderNumber, setOrderNumber] = useState();
   const [editSales, setEditSales] = useState();
   const [expandedRows, setExpandedRows] = useState(null);

@@ -10,8 +10,8 @@ function ProductDetail() {
   const { data } = useGetData(ProductsApiCall, id);
   const header = () => {
     return (
-      <div className="flex justify-content-center">
-        <img className="w-8" src={data.thumbnail} alt={data.name} />;
+      <div className="flex justify-content-center p-3">
+        <img className="w-8" src={data.thumbnail} alt={data.name} />
       </div>
     );
   };

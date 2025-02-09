@@ -14,7 +14,7 @@ const initialValues = {
   description: "",
 };
 
-function AddProductManualFrom() {
+function AddProductManualForm() {
   const [file, setFile] = useState(false);
   const fileRef = useRef(null);
   const handleRemove = () => {
@@ -62,4 +62,4 @@ function AddProductManualFrom() {
   );
 }
 
-export default AddProductManualFrom;
+export default AddProductManualForm;
