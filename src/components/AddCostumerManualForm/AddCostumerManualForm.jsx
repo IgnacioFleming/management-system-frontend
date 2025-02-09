@@ -3,8 +3,8 @@ import TextField from "../TextField/TextField";
 import { FileUpload } from "primereact/fileupload";
 import { Button } from "primereact/button";
 import { useRef, useState } from "react";
-import CostumersApiCall from "../../services/costumers";
 import { costumerSchema } from "../../schemas/costumer";
+import { costumersService } from "../../services";
 
 const initialValues = {
   name: "",
@@ -20,7 +20,7 @@ function AddCostumerManualForm() {
       formData.append(key, data[key]);
     }
     formData.append("file", fileRef.current.getFiles()[0]);
-    await CostumersApiCall.create(formData);
+    await costumersService.create(formData);
   };
   const handleSelect = (filename) => {
     setFile(filename);
