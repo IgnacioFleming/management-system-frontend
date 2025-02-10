@@ -3,7 +3,6 @@ import ItemList from "./ItemList";
 import { useGetData } from "../../hooks/useGetData";
 import { useRef, useState } from "react";
 import { formatCurrency } from "../../utils/utils";
-import ProductsApiCall from "../../services/products";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import { InputField } from "../../components/InputField/InputField";
 import { IconField } from "primereact/iconfield";
@@ -14,7 +13,7 @@ import { FileUpload } from "primereact/fileupload";
 import { productsService } from "../../services";
 
 function ItemListContainer() {
-  const { data, setData, refreshData } = useGetData(productsService);
+  const { data, refreshData } = useGetData(productsService);
   const [editProducts, setEditProducts] = useState();
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -49,7 +48,7 @@ function ItemListContainer() {
     formData.append("category", category);
     formData.append("stock", stock);
     formData.append("file", fileRef.current.getFiles()[0]);
-    await ProductsApiCall.update(id, formData);
+    await productsService.update(id, formData);
 
     setEditProducts(null);
     refreshData();
@@ -87,13 +86,8 @@ function ItemListContainer() {
   const footer = `En total hay ${data ? data.length : 0} productos.`;
 
   const deleteProduct = async (id) => {
-    const deletedProduct = await ProductsApiCall.delete(id);
-    if (deletedProduct.status === "success") {
-      const newData = data.filter((e) => e.id !== id);
-      setData(newData);
-    } else {
-      console.log("error al eliminar el producto");
-    }
+    await productsService.delete(id);
+    refreshData();
   };
 
   const updateProduct = (id) => {

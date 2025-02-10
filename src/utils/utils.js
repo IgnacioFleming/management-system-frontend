@@ -31,3 +31,8 @@ export const addModes = {
   manual: "Manual",
   import: "Importar Excel",
 };
+
+export const customRedirect = (path) => {
+  window.history.pushState({}, "", path);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+};

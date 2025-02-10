@@ -1,14 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetData } from "../../hooks/useGetData";
-import MovementsApiCall from "../../services/movements";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { formatCurrency, formatDate } from "../../utils/utils";
 import { Button } from "primereact/button";
+import { movementsService } from "../../services";
 
 function CostumerMovements() {
   const { id } = useParams();
-  const { data } = useGetData(MovementsApiCall, id);
+  const { data } = useGetData(movementsService, id);
   const { costumer, movements, balance } = data;
   const typeBodyTemplate = ({ type }) => {
     if (type === "sale") return "Venta";

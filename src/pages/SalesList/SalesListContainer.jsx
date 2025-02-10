@@ -3,7 +3,6 @@ import { useGetData } from "../../hooks/useGetData";
 import { useState } from "react";
 import { formatCurrency } from "../../utils/utils";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
-import SalesApiCall from "../../services/sales";
 import SalesList from "./SalesList";
 import OrdersListContainer from "../../sections/OrdersList/OrdersListContainer";
 import { FilterMatchMode } from "primereact/api";
@@ -13,7 +12,7 @@ import { InputText } from "primereact/inputtext";
 import { salesService } from "../../services";
 
 function SalesListContainer() {
-  const { data, setData, refreshData } = useGetData(salesService);
+  const { data, refreshData } = useGetData(salesService);
   const [orderNumber, setOrderNumber] = useState();
   const [editSales, setEditSales] = useState();
   const [expandedRows, setExpandedRows] = useState(null);
@@ -55,13 +54,8 @@ function SalesListContainer() {
   const footer = `En total hay ${data ? data.length : 0} Ventas.`;
 
   const deleteSale = async (id) => {
-    const deletedSale = await SalesApiCall.delete(id);
-    if (deletedSale.status === "success") {
-      const newData = data.filter((e) => e.salesId !== id);
-      setData(newData);
-    } else {
-      console.log("error al eliminar el Saleo");
-    }
+    await salesService.delete(id);
+    refreshData();
   };
 
   const updateSale = (id) => {

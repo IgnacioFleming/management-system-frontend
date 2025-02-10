@@ -1,5 +1,4 @@
 import { useGetData } from "../../hooks/useGetData";
-import CostumersApiCall from "../../services/costumers";
 import { useRef, useState } from "react";
 import CostumerList from "./CostumerList";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
@@ -37,7 +36,7 @@ function CostumerListContainer() {
   const pt = { badge: { root: { style: { display: "none" } } } };
 
   const deleteCostumer = async (id) => {
-    await CostumersApiCall.delete(id);
+    await costumersService.delete(id);
     const newData = data.filter((client) => client.id !== id);
     setData(newData);
   };
@@ -47,7 +46,7 @@ function CostumerListContainer() {
     const formData = new FormData();
     formData.append("name", name);
     if (updatedFile) formData.append("file", updatedFile);
-    const updatedCostumer = await CostumersApiCall.update(id, formData);
+    const updatedCostumer = await costumersService.update(id, formData);
 
     const costumerIndex = data.findIndex((e) => e.id === id);
     const newCostumers = [...data];

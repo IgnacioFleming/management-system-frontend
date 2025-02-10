@@ -1,13 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetData } from "../../hooks/useGetData";
-import ProductsApiCall from "../../services/products";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { formatCurrency } from "../../utils/utils";
+import { productsService } from "../../services";
 
 function ProductDetail() {
   const { id } = useParams();
-  const { data } = useGetData(ProductsApiCall, id);
+  const { data } = useGetData(productsService, id);
   const header = () => {
     return (
       <div className="flex justify-content-center p-3">

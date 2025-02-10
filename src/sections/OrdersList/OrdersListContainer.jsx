@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { formatCurrency } from "../../utils/utils";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
-import OrdersApiCall from "../../services/orders";
 import OrderList from "./OrdersList";
 import { InputField } from "../../components/InputField/InputField";
 import { useGetOrdersBySaleId } from "../../hooks/useGetOrdersBySaleId";
+import { ordersService } from "../../services";
 
-function OrdersListContainer({ sale_id, refreshData }) {
-  const { orders, setOrders } = useGetOrdersBySaleId(sale_id);
+function OrdersListContainer({ sale_id }) {
+  const { orders, refreshData } = useGetOrdersBySaleId(sale_id);
+  console.log(orders);
   const [editOrders, setEditOrders] = useState();
   const handleUpdateOrder = async (id) => {
     const quantity = document.getElementsByName("quantity")[0].value;
-    await OrdersApiCall.update(id, { quantity: parseInt(quantity) });
-    const newOrders = await OrdersApiCall.getOrdersBySaleId(sale_id);
-    setOrders(newOrders);
+    await ordersService.update(id, { quantity: parseInt(quantity) });
     setEditOrders(null);
-    refreshData();
+    await refreshData(sale_id);
   };
 
   const quantityBodyTemplate = (order) => {
@@ -33,13 +32,8 @@ function OrdersListContainer({ sale_id, refreshData }) {
   const footer = `Cantidad de Productos: ${orders ? orders.length : 0}`;
 
   const deleteOrder = async (id) => {
-    const deletedOrder = await OrdersApiCall.delete(id);
-    if (deletedOrder.status === "success") {
-      const newData = orders.filter((e) => e.id !== id);
-      setOrders(newData);
-    } else {
-      console.log("error al eliminar el Ordero");
-    }
+    await ordersService.delete(id);
+    await refreshData(sale_id);
   };
 
   const updateOrder = (id) => {

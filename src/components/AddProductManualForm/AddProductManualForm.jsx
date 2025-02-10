@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import ProductsApiCall from "../../services/products";
 import { Formik } from "formik";
 import { productSchema } from "../../schemas/product";
 import TextField from "../TextField/TextField";
 import { FileUpload } from "primereact/fileupload";
 import { Button } from "primereact/button";
+import { productsService } from "../../services";
 
 const initialValues = {
   name: "",
@@ -27,7 +27,8 @@ function AddProductManualForm() {
       formData.append(key, data[key]);
     }
     formData.append("file", fileRef.current.getFiles()[0]);
-    await ProductsApiCall.create(formData);
+    console.log("handle submit de products");
+    await productsService.create(formData);
   };
   const handleSelect = () => {
     setFile(true);

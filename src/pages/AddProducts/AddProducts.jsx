@@ -1,11 +1,11 @@
 import { Card } from "primereact/card";
-import ProductsApiCall from "../../services/products";
 import styles from "./AddProducts.module.css";
 import { useState } from "react";
 import { SelectButton } from "primereact/selectbutton";
 import { addModes } from "../../utils/utils";
 import ImportButton from "../../components/ImportButton/ImportButton";
 import AddProductManualForm from "../../components/AddProductManualForm/AddProductManualForm";
+import { productsService } from "../../services";
 
 function AddProducts() {
   const addModeOptions = [addModes.manual, addModes.import];
@@ -20,7 +20,7 @@ function AddProducts() {
           <SelectButton value={selection} onChange={handleSelectChange} options={addModeOptions} />;
         </div>
         <Card pt={{ title: { className: "m-4" } }} title="Alta de Productos" className="flex justify-content-center">
-          {selection === addModes.manual ? <AddProductManualForm /> : <ImportButton service={ProductsApiCall} />}
+          {selection === addModes.manual ? <AddProductManualForm /> : <ImportButton service={productsService} />}
         </Card>
       </div>
     </div>
