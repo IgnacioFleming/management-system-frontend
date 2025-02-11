@@ -3,18 +3,18 @@ import { formatCurrency } from "../../utils/utils";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import OrderList from "./OrdersList";
 import { InputField } from "../../components/InputField/InputField";
-import { useGetOrdersBySaleId } from "../../hooks/useGetOrdersBySaleId";
 import { ordersService } from "../../services";
+import { useGetData } from "../../hooks/useGetData";
 
 function OrdersListContainer({ sale_id }) {
-  const { orders, refreshData } = useGetOrdersBySaleId(sale_id);
+  const [orders, getOrders] = useGetData(ordersService, sale_id);
   console.log(orders);
   const [editOrders, setEditOrders] = useState();
   const handleUpdateOrder = async (id) => {
     const quantity = document.getElementsByName("quantity")[0].value;
     await ordersService.update(id, { quantity: parseInt(quantity) });
     setEditOrders(null);
-    await refreshData(sale_id);
+    await getOrders(sale_id);
   };
 
   const quantityBodyTemplate = (order) => {
@@ -33,7 +33,7 @@ function OrdersListContainer({ sale_id }) {
 
   const deleteOrder = async (id) => {
     await ordersService.delete(id);
-    await refreshData(sale_id);
+    await getOrders(sale_id);
   };
 
   const updateOrder = (id) => {

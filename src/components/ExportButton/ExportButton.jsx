@@ -4,7 +4,7 @@ import { useGetData } from "../../hooks/useGetData";
 import { ordersService } from "../../services";
 
 function ExportButton({ data = [], filename, sales = [], is_sales = false }) {
-  const { data: orders } = useGetData(ordersService);
+  const [orders] = useGetData(ordersService);
   let newSales;
   let newData;
   if (is_sales) {

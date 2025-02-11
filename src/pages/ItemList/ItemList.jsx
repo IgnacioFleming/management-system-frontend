@@ -4,10 +4,10 @@ import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
 import ExportButton from "../../components/ExportButton/ExportButton";
 
-export default function ItemList({ data, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate, filters }) {
+export default function ItemList({ products, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate, filters }) {
   return (
     <div className="card">
-      <DataTable value={data} removableSort paginator rows={5} header={header} filters={filters} footer={footer} tableStyle={{ minWidth: "60rem" }}>
+      <DataTable value={products} removableSort paginator rows={5} header={header} filters={filters} footer={footer} tableStyle={{ minWidth: "60rem" }}>
         <Column field="name" header="Name" body={nameBodyTemplate} sortable></Column>
         <Column header="Image" body={imageBodyTemplate}></Column>
         <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
@@ -20,7 +20,7 @@ export default function ItemList({ data, header, footer, imageBodyTemplate, pric
             </Link>
           )}
         ></Column>
-        <Column header={<ExportButton data={data} filename="products.xlsx" />} body={actionsBodyTemplate}></Column>
+        <Column header={<ExportButton data={products} filename="products.xlsx" />} body={actionsBodyTemplate}></Column>
       </DataTable>
     </div>
   );

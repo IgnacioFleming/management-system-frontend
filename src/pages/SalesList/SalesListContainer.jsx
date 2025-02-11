@@ -12,7 +12,7 @@ import { InputText } from "primereact/inputtext";
 import { salesService } from "../../services";
 
 function SalesListContainer() {
-  const { data, refreshData } = useGetData(salesService);
+  const [sales, getSales] = useGetData(salesService);
   const [orderNumber, setOrderNumber] = useState();
   const [editSales, setEditSales] = useState();
   const [expandedRows, setExpandedRows] = useState(null);
@@ -32,7 +32,7 @@ function SalesListContainer() {
   const rowExpansionTemplate = () => {
     return (
       // <div className="card">
-      <OrdersListContainer sale_id={orderNumber} refreshData={refreshData} />
+      <OrdersListContainer sale_id={orderNumber} refreshData={getSales} />
       // </div>
     );
   };
@@ -51,11 +51,11 @@ function SalesListContainer() {
     return <ActionsDataTable {...actionsProps} deletion />;
   };
 
-  const footer = `En total hay ${data ? data.length : 0} Ventas.`;
+  const footer = `En total hay ${sales ? sales.length : 0} Ventas.`;
 
   const deleteSale = async (id) => {
     await salesService.delete(id);
-    refreshData();
+    getSales();
   };
 
   const updateSale = (id) => {
@@ -83,14 +83,14 @@ function SalesListContainer() {
               <InputIcon className="pi pi-search" />
               <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar en Ventas" />
             </IconField>
-            <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
+            <Button onClick={getSales} icon="pi pi-refresh" rounded raised />
           </div>
         </div>
       </>
     );
   };
   const header = renderHeader();
-  const props = { header, footer, data, actionsBodyTemplate, amountBodyTemplate, orderNumber, showDataBodyTemplate, rowExpansionTemplate, expandedRows, filters };
+  const props = { header, footer, sales, actionsBodyTemplate, amountBodyTemplate, orderNumber, showDataBodyTemplate, rowExpansionTemplate, expandedRows, filters };
 
   return <SalesList {...props} />;
 }

@@ -8,8 +8,8 @@ import { movementsService } from "../../services";
 
 function CostumerMovements() {
   const { id } = useParams();
-  const { data } = useGetData(movementsService, id);
-  const { costumer, movements, balance } = data;
+  const [movementsData] = useGetData(movementsService, id);
+  const { costumer, movements, balance } = movementsData;
   const typeBodyTemplate = ({ type }) => {
     if (type === "sale") return "Venta";
     if (type === "payment") return "Pago";

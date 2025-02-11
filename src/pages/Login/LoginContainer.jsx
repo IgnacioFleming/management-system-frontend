@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
-import SessionsApiCall from "../../services/sessions";
 import { UserContext } from "../../contexts/user";
+import SessionsApiCall from "../../services/repository/sessions";
 
 function LoginContainer() {
   const navigate = useNavigate();

@@ -13,7 +13,7 @@ import { FileUpload } from "primereact/fileupload";
 import { productsService } from "../../services";
 
 function ItemListContainer() {
-  const { data, refreshData } = useGetData(productsService);
+  const [products, getProducts] = useGetData(productsService);
   const [editProducts, setEditProducts] = useState();
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -51,7 +51,7 @@ function ItemListContainer() {
     await productsService.update(id, formData);
 
     setEditProducts(null);
-    refreshData();
+    getProducts();
   };
 
   const nameBodyTemplate = (product) => {
@@ -83,11 +83,11 @@ function ItemListContainer() {
     return <ActionsDataTable {...actionsProps} deletion updating />;
   };
 
-  const footer = `En total hay ${data ? data.length : 0} productos.`;
+  const footer = `En total hay ${products ? products.length : 0} productos.`;
 
   const deleteProduct = async (id) => {
     await productsService.delete(id);
-    refreshData();
+    getProducts();
   };
 
   const updateProduct = (id) => {
@@ -115,14 +115,14 @@ function ItemListContainer() {
               <InputIcon className="pi pi-search" />
               <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar Producto" />
             </IconField>
-            <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
+            <Button onClick={getProducts} icon="pi pi-refresh" rounded raised />
           </div>
         </div>
       </>
     );
   };
   const header = renderHeader();
-  const props = { imageBodyTemplate, priceBodyTemplate, header, footer, data, deleteProduct, actionsBodyTemplate, categoryBodyTemplate, stockBodyTemplate, nameBodyTemplate, filters };
+  const props = { imageBodyTemplate, priceBodyTemplate, header, footer, products, deleteProduct, actionsBodyTemplate, categoryBodyTemplate, stockBodyTemplate, nameBodyTemplate, filters };
   return <ItemList {...props} />;
 }
 

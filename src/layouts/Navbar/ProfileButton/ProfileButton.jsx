@@ -3,8 +3,8 @@ import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 import { useRef } from "react";
 import styles from "./ProfileButton.module.css";
-import SessionsApiCall from "../../../services/sessions";
 import { API_Status_List } from "../../../utils/utils";
+import SessionsApiCall from "../../../services/repository/sessions";
 
 function ProfileButton() {
   const signOutRef = useRef(null);

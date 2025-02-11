@@ -5,7 +5,7 @@ import { SelectButton } from "primereact/selectbutton";
 import { addModes } from "../../utils/utils";
 import { useState } from "react";
 import ImportButton from "../../components/ImportButton/ImportButton";
-import CostumersApiCall from "../../services/costumers";
+import { costumersService } from "../../services";
 
 function AddCostumer() {
   const addModeOptions = [addModes.manual, addModes.import];
@@ -20,7 +20,7 @@ function AddCostumer() {
           <SelectButton value={selection} onChange={handleSelectChange} options={addModeOptions} />
         </div>
         <Card pt={{ title: { className: "m-4" } }} title="Alta de Clientes" className="flex justify-content-center">
-          {selection === addModes.manual ? <AddCostumerManualForm /> : <ImportButton service={CostumersApiCall} />}
+          {selection === addModes.manual ? <AddCostumerManualForm /> : <ImportButton service={costumersService} />}
         </Card>
       </div>
     </div>

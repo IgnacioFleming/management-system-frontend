@@ -7,17 +7,17 @@ import { productsService } from "../../services";
 
 function ProductDetail() {
   const { id } = useParams();
-  const { data } = useGetData(productsService, id);
+  const [product] = useGetData(productsService, id);
   const header = () => {
     return (
       <div className="flex justify-content-center p-3">
-        <img className="w-8" src={data.thumbnail} alt={data.name} />
+        <img className="w-8" src={product.thumbnail} alt={product.name} />
       </div>
     );
   };
 
   const subtitle = () => {
-    return String(data.category).charAt(0).toUpperCase() + String(data.category).slice(1);
+    return String(product.category).charAt(0).toUpperCase() + String(product.category).slice(1);
   };
 
   const footer = () => {
@@ -30,14 +30,14 @@ function ProductDetail() {
   return (
     <>
       <div className="card flex align-items-center justify-content-center" style={{ height: "calc(100vh - 6rem)" }}>
-        <Card footer={footer} header={header} title={data.name} subTitle={subtitle} className="w-5">
+        <Card footer={footer} header={header} title={product.name} subTitle={subtitle} className="w-5">
           <p className="text-color-secondary text-left flex flex-column gap-3 m-0">
-            {data.description}
+            {product.description}
             <span>
-              <strong>Precio:</strong> {formatCurrency(data.price)}
+              <strong>Precio:</strong> {formatCurrency(product.price)}
             </span>
             <span>
-              <strong>Stock:</strong> {data.stock}
+              <strong>Stock:</strong> {product.stock}
             </span>
           </p>
         </Card>

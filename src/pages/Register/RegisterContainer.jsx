@@ -4,7 +4,7 @@ import Register from "./Register";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import swal from "sweetalert2";
-import SessionsApiCall from "../../services/sessions";
+import SessionsApiCall from "../../services/repository/sessions";
 
 function RegisterContainer() {
   const navigate = useNavigate();

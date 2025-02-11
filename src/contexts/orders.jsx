@@ -6,8 +6,8 @@ import { costumersService, productsService } from "../services";
 export const SalesContext = createContext();
 
 function SalesContextProvider({ children }) {
-  const { data } = useGetData(costumersService);
-  const { data: products } = useGetData(productsService);
+  const [costumers] = useGetData(costumersService);
+  const [products] = useGetData(productsService);
   const { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems } = useFilter(products, JSON.parse(localStorage.getItem("filteredItems")));
   const [productsIds, setProductsIds] = useState([]);
   const [selectedCostumer, setSelectedCostumer] = useState(JSON.parse(localStorage.getItem("costumer")) || null);
@@ -64,7 +64,7 @@ function SalesContextProvider({ children }) {
     localStorage.setItem("costumer", JSON.stringify(costumer));
   };
 
-  const tools = { sale, filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems, data, handleSelectCostumer, selectedCostumer, setQuantity };
+  const tools = { sale, filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems, costumers, handleSelectCostumer, selectedCostumer, setQuantity };
   return <SalesContext.Provider value={tools}>{children}</SalesContext.Provider>;
 }
 

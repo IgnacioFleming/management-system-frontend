@@ -11,7 +11,7 @@ import { Button } from "primereact/button";
 import { FileUpload } from "primereact/fileupload";
 import { costumersService } from "../../services";
 function CostumerListContainer() {
-  const { data, setData, refreshData } = useGetData(costumersService);
+  const [costumers, getCostumers] = useGetData(costumersService);
   const [editCostumer, setEditCostumer] = useState(null);
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -37,8 +37,7 @@ function CostumerListContainer() {
 
   const deleteCostumer = async (id) => {
     await costumersService.delete(id);
-    const newData = data.filter((client) => client.id !== id);
-    setData(newData);
+    getCostumers();
   };
   const handleUpdateCostumer = async (id) => {
     const name = document.getElementsByName("name")[0].value;
@@ -46,13 +45,9 @@ function CostumerListContainer() {
     const formData = new FormData();
     formData.append("name", name);
     if (updatedFile) formData.append("file", updatedFile);
-    const updatedCostumer = await costumersService.update(id, formData);
-
-    const costumerIndex = data.findIndex((e) => e.id === id);
-    const newCostumers = [...data];
-    newCostumers.splice(costumerIndex, 1, updatedCostumer);
-    setData(newCostumers);
+    await costumersService.update(id, formData);
     setEditCostumer(null);
+    getCostumers();
   };
 
   const nameBodyTemplate = (client) => {
@@ -98,7 +93,7 @@ function CostumerListContainer() {
               <InputIcon className="pi pi-search" />
               <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar Cliente" />
             </IconField>
-            <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
+            <Button onClick={getCostumers} icon="pi pi-refresh" rounded raised />
           </div>
         </div>
       </>
@@ -106,8 +101,8 @@ function CostumerListContainer() {
   };
   const header = renderHeader();
 
-  const footer = `En total hay ${data ? data.length : 0} clientes.`;
-  const props = { logoBodyTemplate, actionsBodyTemplate, nameBodyTemplate, data, footer, header, filters };
+  const footer = `En total hay ${costumers ? costumers.length : 0} clientes.`;
+  const props = { logoBodyTemplate, actionsBodyTemplate, nameBodyTemplate, costumers, footer, header, filters };
 
   return <CostumerList {...props} />;
 }

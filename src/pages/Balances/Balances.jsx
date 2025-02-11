@@ -12,7 +12,7 @@ import { FilterMatchMode } from "primereact/api";
 import { balancesService } from "../../services";
 
 function Balances() {
-  const { data, refreshData } = useGetData(balancesService);
+  const [balances, getBalances] = useGetData(balancesService);
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
@@ -58,7 +58,7 @@ function Balances() {
               <InputIcon className="pi pi-search" />
               <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar en Ventas" />
             </IconField>
-            <Button onClick={refreshData} icon="pi pi-refresh" rounded raised />
+            <Button onClick={getBalances} icon="pi pi-refresh" rounded raised />
           </div>
         </div>
       </>
@@ -67,7 +67,7 @@ function Balances() {
   const header = renderHeader();
   return (
     <>
-      <DataTable value={data} header={header} filters={filters} removableSort paginator rows={5}>
+      <DataTable value={balances} header={header} filters={filters} removableSort paginator rows={5}>
         <Column header="Número de Cuenta" field="account_number" sortable />
         <Column header="Cliente" field="name" body={nameBodyTemplate} sortable />
         <Column header="Saldo" field="balance_amount" body={balanceAmountBodyTemplate} sortable />

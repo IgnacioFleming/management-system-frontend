@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import SessionsApiCall from "../services/sessions";
 import { useLocation } from "react-router-dom";
+import SessionsApiCall from "../services/repository/sessions";
 
 export const useCheckSession = () => {
   const [sessionUser, setSessionUser] = useState({});

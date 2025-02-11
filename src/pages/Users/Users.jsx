@@ -1,5 +1,4 @@
 import { useGetData } from "../../hooks/useGetData";
-import UsersApiCall from "../../services/users";
 import { DataView } from "primereact/dataview";
 import { Button } from "primereact/button";
 import { classNames } from "primereact/utils";
@@ -8,15 +7,15 @@ import { useEffect, useState } from "react";
 import { usersService } from "../../services";
 
 function Users() {
-  const { data, refreshData } = useGetData(usersService);
+  const [users, getUsers] = useGetData(usersService);
   const [enabledUsers, setEnabledUsers] = useState([]);
   const [notEnabledUsers, setNotEnabledUsers] = useState([]);
   useEffect(() => {
-    const newEnabledUsers = data?.filter((user) => user.is_enabled === 1);
-    const newNotEnabledUsers = data?.filter((user) => user.is_enabled !== 1);
+    const newEnabledUsers = users?.filter((user) => user.is_enabled === 1);
+    const newNotEnabledUsers = users?.filter((user) => user.is_enabled !== 1);
     setEnabledUsers(newEnabledUsers);
     setNotEnabledUsers(newNotEnabledUsers);
-  }, [data]);
+  }, [users]);
   const itemTemplate = (user, index) => {
     return (
       <div className="col-12" key={user.id}>
@@ -57,8 +56,8 @@ function Users() {
   };
 
   const handleUserState = async (id) => {
-    await UsersApiCall.handleUserState(id);
-    refreshData();
+    await usersService.handleUserState(id);
+    getUsers();
   };
 
   return (
