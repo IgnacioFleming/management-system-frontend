@@ -1,10 +1,10 @@
 import { Formik } from "formik";
 import TextField from "../TextField/TextField";
-import { FileUpload } from "primereact/fileupload";
 import { Button } from "primereact/button";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { costumerSchema } from "../../schemas/costumer";
 import { costumersService } from "../../services";
+import Uploader from "../Uploader/Uploader";
 
 const initialValues = {
   name: "",
@@ -12,7 +12,6 @@ const initialValues = {
 };
 
 function AddCostumerManualForm() {
-  const [file, setFile] = useState("");
   const fileRef = useRef(null);
   const handleSubmit = async (data) => {
     const formData = new FormData();
@@ -22,21 +21,6 @@ function AddCostumerManualForm() {
     formData.append("file", fileRef.current.getFiles()[0]);
     await costumersService.create(formData);
   };
-  const handleSelect = (filename) => {
-    setFile(filename);
-  };
-  const handleRemove = () => {
-    setFile("");
-  };
-  const emptyTemplate = () => <div>No se ha seleccionado un archivo.</div>;
-
-  const uploadOptions = { style: { display: "none" } };
-
-  const cancelOptions = { style: { display: !file && "none" } };
-
-  const chooseOptions = { className: "bg-green-500 border-green-500" };
-
-  const pt = { badge: { root: { style: { display: "none" } } } };
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={costumerSchema} validateOnChange={false}>
@@ -45,7 +29,7 @@ function AddCostumerManualForm() {
           <TextField label={"Nombre"} input={"name"} onChange={props.handleChange} value={props.values.name} invalid={props.errors.name && true} helperText={props.errors.name} />
 
           <TextField label={"Número de Cuenta"} input={"account_number"} onChange={props.handleChange} value={props.values.account_number} invalid={props.errors.account_number && true} helperText={props.errors.account_number} />
-          <FileUpload chooseLabel="Logo" chooseOptions={chooseOptions} ref={fileRef} name="thumbnail" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />
+          <Uploader label="Logo" name="thumbnail" accept="image/*" ptRef={fileRef} />
           <div className="flex justify-content-center">
             <Button label="Crear" type="submit" />
           </div>

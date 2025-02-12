@@ -9,8 +9,8 @@ import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
 import { FilterMatchMode } from "primereact/api";
-import { FileUpload } from "primereact/fileupload";
 import { productsService } from "../../services";
+import Uploader from "../../components/Uploader/Uploader";
 
 function ItemListContainer() {
   const [products, getProducts] = useGetData(productsService);
@@ -18,24 +18,7 @@ function ItemListContainer() {
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
-  const [file, setFile] = useState("");
   const fileRef = useRef(null);
-
-  const handleSelect = (filename) => {
-    setFile(filename);
-  };
-  const handleRemove = () => {
-    setFile("");
-  };
-  const emptyTemplate = () => <div>No se ha seleccionado un archivo.</div>;
-
-  const uploadOptions = { style: { display: "none" } };
-
-  const cancelOptions = { style: { display: !file && "none" } };
-
-  const chooseOptions = { className: "bg-green-500 border-green-500" };
-
-  const pt = { badge: { root: { style: { display: "none" } } } };
 
   const handleUpdateProduct = async (id) => {
     const name = document.getElementsByName("name")[0].value;
@@ -62,7 +45,7 @@ function ItemListContainer() {
     return (
       <div className="flex flex-column gap-2 align-items-center">
         <img src={product?.thumbnail} alt={`Foto de ${product?.name}`} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />
-        {editProducts === product?.id && <FileUpload chooseLabel="Subir Imagen" chooseOptions={chooseOptions} ref={fileRef} name="thumbnail" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} onClear={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />}
+        {editProducts === product?.id && <Uploader label="Subir Imagen" name="thumbnail" ptRef={fileRef} accept="image/*" />}
       </div>
     );
   };

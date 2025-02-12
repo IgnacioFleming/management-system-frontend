@@ -3,8 +3,6 @@ import { FloatLabel } from "primereact/floatlabel";
 import styles from "./PasswordInput.module.css";
 
 function PasswordInput({ handleChange, name, value, invalid, helperText, className, label }) {
-  // const [showPassword, setShowPassword] = useState(false);
-  // const visibilityIconStyle = errors.password && { color: "#d32f2f" };
   const dangerColor = "#d32f2f";
   return (
     <div className={className}>

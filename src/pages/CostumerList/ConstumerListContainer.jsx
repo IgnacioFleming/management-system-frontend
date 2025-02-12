@@ -8,32 +8,15 @@ import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { FileUpload } from "primereact/fileupload";
 import { costumersService } from "../../services";
+import Uploader from "../../components/Uploader/Uploader";
 function CostumerListContainer() {
   const [costumers, getCostumers] = useGetData(costumersService);
   const [editCostumer, setEditCostumer] = useState(null);
   const [filters, setFilters] = useState({ global: { value: null, matchMode: FilterMatchMode.CONTAINS } });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
-  const [file, setFile] = useState("");
   const fileRef = useRef(null);
-
-  const handleSelect = (filename) => {
-    setFile(filename);
-  };
-  const handleRemove = () => {
-    setFile("");
-  };
-  const emptyTemplate = () => <div>No se ha seleccionado un archivo.</div>;
-
-  const uploadOptions = { style: { display: "none" } };
-
-  const cancelOptions = { style: { display: !file && "none" } };
-
-  const chooseOptions = { className: "bg-green-500 border-green-500" };
-
-  const pt = { badge: { root: { style: { display: "none" } } } };
 
   const deleteCostumer = async (id) => {
     await costumersService.delete(id);
@@ -58,7 +41,7 @@ function CostumerListContainer() {
     return (
       <div className="flex gap-2">
         <img src={client?.logo} alt={client?.logo} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />
-        {editCostumer === client?.id && <FileUpload chooseLabel="Subir Imagen" chooseOptions={chooseOptions} ref={fileRef} name="thumbnail" accept="image/*" multiple={false} maxFileSize={1000000} uploadOptions={uploadOptions} cancelOptions={cancelOptions} onSelect={handleSelect} onRemove={handleRemove} onClear={handleRemove} emptyTemplate={emptyTemplate} pt={pt} />}
+        {editCostumer === client?.id && <Uploader label="Subir Imagen" name="thumbnail" accept="image/*" ptRef={fileRef} />}
       </div>
     );
   };
