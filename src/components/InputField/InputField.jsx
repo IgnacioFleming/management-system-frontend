@@ -1,6 +1,6 @@
 import { InputText } from "primereact/inputtext";
 import { useState } from "react";
-import { formatCurrency } from "../../utils/utils";
+import { formatCurrency } from "../../helpers/utils";
 
 export const InputField = ({ input, inputName, isNumber = false }) => {
   const [inputContent, setInputContent] = useState(input[inputName]);

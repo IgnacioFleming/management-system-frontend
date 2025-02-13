@@ -1,4 +1,4 @@
-import { API_Status_List, authRedirection } from "../../utils/utils";
+import { API_Status_List, authRedirection } from "../../helpers/utils";
 
 const requestOptionsHandler = (data, method) => {
   const options = {

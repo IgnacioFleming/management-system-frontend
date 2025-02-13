@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { importXlsx } from "../../helpers/importXlsx";
 import { Button } from "primereact/button";
 import Uploader from "../Uploader/Uploader";
+import { createFormData } from "../../helpers/createFormData";
 
 function ImportButton({ service }) {
   const fileRef = useRef(null);
@@ -11,10 +12,7 @@ function ImportButton({ service }) {
     const sheetData = await importXlsx(fileRef.current);
     await Promise.all(
       sheetData.map(async (item) => {
-        const formData = new FormData();
-        for (const key in item) {
-          formData.append(key, item[key]);
-        }
+        const formData = createFormData(item);
         return await service.create(formData);
       })
     );

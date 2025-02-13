@@ -2,27 +2,14 @@ import { Button } from "primereact/button";
 import { exportSalesXlsx, exportToXlsx } from "../../helpers/exportXlsx";
 import { useGetData } from "../../hooks/useGetData";
 import { ordersService } from "../../services";
+import { deleteIdFromData } from "../../helpers/deleteIdFromData";
 
 function ExportButton({ data = [], filename, sales = [], is_sales = false }) {
   const [orders] = useGetData(ordersService);
-  let newSales;
-  let newData;
-  if (is_sales) {
-    newSales = sales.map((item) => {
-      const newItem = { ...item };
-      delete newItem.id;
-      return newItem;
-    });
-  } else {
-    newData = data.map((item) => {
-      const newItem = { ...item };
-      delete newItem.id;
-      return newItem;
-    });
-  }
+  const dataWithNoId = deleteIdFromData(is_sales ? sales : data);
   const handleExport = () => {
-    if (is_sales) return exportSalesXlsx(newSales, orders, filename);
-    exportToXlsx(newData, filename);
+    if (is_sales) return exportSalesXlsx(dataWithNoId, orders, filename);
+    exportToXlsx(dataWithNoId, filename);
   };
   return <Button label="Exportar" severity="success" onClick={handleExport} />;
 }

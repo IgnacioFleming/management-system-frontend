@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useGetData } from "../../hooks/useGetData";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import { formatCurrency } from "../../utils/utils";
+import { formatCurrency } from "../../helpers/utils";
 import { productsService } from "../../services";
 
 function ProductDetail() {

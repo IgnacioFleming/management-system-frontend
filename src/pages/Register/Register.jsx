@@ -47,12 +47,6 @@ function Register({ handleChange, handleSubmit, errors, values }) {
               <PasswordInput name="password" handleChange={handleChange} invalid={errors.password} helperText={errors.password} value={values.password} />
               <PasswordInput name="confirm_password" label="Confirmar Contraseña" handleChange={handleChange} invalid={errors.confirm_password} helperText={errors.confirm_password} value={values.confirm_password} />
             </div>
-            {/* <div className="flex justify-content-center gap-5 w-full">
-              <TextField fullWidth input="password" label="Contraseña" type="password" onChange={handleChange} helperText={errors.password} error={errors.password && true} value={values.password} />
-
-              <TextField fullWidth input="confirm_password" label="Confirmar Contraseña" type="password" onChange={handleChange} helperText={errors.confirm_password} error={errors.confirm_password && true} value={values.confirm_password} />
-            </div> */}
-
             <Button type="submit" label="Crear Cuenta" className="w-4 align-self-center" />
           </form>
           <div style={dividerStyle}>

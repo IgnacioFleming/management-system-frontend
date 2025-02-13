@@ -2,7 +2,7 @@ import { Card } from "primereact/card";
 import styles from "./AddCostumer.module.css";
 import AddCostumerManualForm from "../../components/AddCostumerManualForm/AddCostumerManualForm";
 import { SelectButton } from "primereact/selectbutton";
-import { addModes } from "../../utils/utils";
+import { addModes } from "../../helpers/utils";
 import { useState } from "react";
 import ImportButton from "../../components/ImportButton/ImportButton";
 import { costumersService } from "../../services";

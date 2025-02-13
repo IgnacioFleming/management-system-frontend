@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { useGetData } from "../../hooks/useGetData";
 import { useState } from "react";
-import { formatCurrency } from "../../utils/utils";
+import { formatCurrency } from "../../helpers/utils";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import SalesList from "./SalesList";
 import OrdersListContainer from "../../sections/OrdersList/OrdersListContainer";

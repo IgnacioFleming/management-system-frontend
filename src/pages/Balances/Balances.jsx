@@ -1,7 +1,7 @@
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useGetData } from "../../hooks/useGetData";
-import { formatCurrency } from "../../utils/utils";
+import { formatCurrency } from "../../helpers/utils";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
 import { IconField } from "primereact/iconfield";

@@ -2,7 +2,7 @@ import { Button } from "primereact/button";
 import ItemList from "./ItemList";
 import { useGetData } from "../../hooks/useGetData";
 import { useRef, useState } from "react";
-import { formatCurrency } from "../../utils/utils";
+import { formatCurrency } from "../../helpers/utils";
 import ActionsDataTable from "../../components/Actions/ActionsDataTable";
 import { InputField } from "../../components/InputField/InputField";
 import { IconField } from "primereact/iconfield";

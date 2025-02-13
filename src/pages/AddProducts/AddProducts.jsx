@@ -2,7 +2,7 @@ import { Card } from "primereact/card";
 import styles from "./AddProducts.module.css";
 import { useState } from "react";
 import { SelectButton } from "primereact/selectbutton";
-import { addModes } from "../../utils/utils";
+import { addModes } from "../../helpers/utils";
 import ImportButton from "../../components/ImportButton/ImportButton";
 import AddProductManualForm from "../../components/AddProductManualForm/AddProductManualForm";
 import { productsService } from "../../services";

@@ -3,6 +3,7 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
 import ExportButton from "../../components/ExportButton/ExportButton";
+import CustomTableContainer from "../../components/CustomTable/CustomTableContainer";
 
 export default function ItemList({ products, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate, filters }) {
   return (
@@ -22,6 +23,9 @@ export default function ItemList({ products, header, footer, imageBodyTemplate, 
         ></Column>
         <Column header={<ExportButton data={products} filename="products.xlsx" />} body={actionsBodyTemplate}></Column>
       </DataTable>
+      <div>
+        <CustomTableContainer items={products} />
+      </div>
     </div>
   );
 }

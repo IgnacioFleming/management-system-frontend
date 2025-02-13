@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { costumerSchema } from "../../schemas/costumer";
 import { costumersService } from "../../services";
 import Uploader from "../Uploader/Uploader";
+import { createFormData } from "../../helpers/createFormData";
 
 const initialValues = {
   name: "",
@@ -14,11 +15,7 @@ const initialValues = {
 function AddCostumerManualForm() {
   const fileRef = useRef(null);
   const handleSubmit = async (data) => {
-    const formData = new FormData();
-    for (const key in data) {
-      formData.append(key, data[key]);
-    }
-    formData.append("file", fileRef.current.getFiles()[0]);
+    const formData = createFormData(data, fileRef);
     await costumersService.create(formData);
   };
 

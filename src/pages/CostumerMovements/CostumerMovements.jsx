@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useGetData } from "../../hooks/useGetData";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { formatCurrency, formatDate } from "../../utils/utils";
+import { formatCurrency, formatDate } from "../../helpers/utils";
 import { Button } from "primereact/button";
 import { movementsService } from "../../services";
 

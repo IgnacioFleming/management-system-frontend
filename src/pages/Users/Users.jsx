@@ -2,7 +2,7 @@ import { useGetData } from "../../hooks/useGetData";
 import { DataView } from "primereact/dataview";
 import { Button } from "primereact/button";
 import { classNames } from "primereact/utils";
-import { formatDate } from "../../utils/utils";
+import { formatDate } from "../../helpers/utils";
 import { useEffect, useState } from "react";
 import { usersService } from "../../services";
 

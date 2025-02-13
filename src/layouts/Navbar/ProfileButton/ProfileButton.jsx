@@ -3,7 +3,7 @@ import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 import { useRef } from "react";
 import styles from "./ProfileButton.module.css";
-import { API_Status_List } from "../../../utils/utils";
+import { API_Status_List } from "../../../helpers/utils";
 import SessionsApiCall from "../../../services/repository/sessions";
 
 function ProfileButton() {

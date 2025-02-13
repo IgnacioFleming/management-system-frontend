@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { formatCurrency } from "../../utils/utils";
+import { formatCurrency } from "../../helpers/utils";
 import { useState } from "react";
 import { FilterMatchMode } from "primereact/api";
 import { IconField } from "primereact/iconfield";
@@ -14,6 +14,7 @@ function ProductPicker({ restItems, filterItem }) {
   const imageBodyTemplate = (product) => {
     return <img alt={product.name} src={product.thumbnail} style={{ width: 100, height: 100, objectFit: "contain" }} />;
   };
+  let a;
 
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;

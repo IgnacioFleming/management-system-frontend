@@ -5,6 +5,7 @@ import TextField from "../TextField/TextField";
 import { Button } from "primereact/button";
 import { productsService } from "../../services";
 import Uploader from "../Uploader/Uploader";
+import { createFormData } from "../../helpers/createFormData";
 
 const initialValues = {
   name: "",
@@ -17,12 +18,7 @@ const initialValues = {
 function AddProductManualForm() {
   const fileRef = useRef(null);
   const handleSubmit = async (data) => {
-    const formData = new FormData();
-    for (const key in data) {
-      formData.append(key, data[key]);
-    }
-    formData.append("file", fileRef.current.getFiles()[0]);
-    console.log("handle submit de products");
+    const formData = createFormData(data, fileRef);
     await productsService.create(formData);
   };
 
