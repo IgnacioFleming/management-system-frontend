@@ -3,7 +3,6 @@ import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/Layout/Layout";
-import ItemListContainer from "./pages/ItemList/ItemListContainer";
 import AddProducts from "./pages/AddProducts/AddProducts";
 import AddCostumer from "./pages/AddCostumer/AddCostumer";
 import CostumerListContainer from "./pages/CostumerList/ConstumerListContainer";
@@ -19,6 +18,7 @@ import CostumerMovements from "./pages/CostumerMovements/CostumerMovements";
 import Users from "./pages/Users/Users";
 import UserContextProvider from "./contexts/user";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import ItemList from "./pages/ItemList/ItemList";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
             <Route path="/login" element={<LoginContainer />} />
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/products" element={<ItemListContainer />} />
+              <Route path="/products" element={<ItemList />} />
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/addProducts" element={<AddProducts />} />
               <Route path="/costumers" element={<CostumerListContainer />} />

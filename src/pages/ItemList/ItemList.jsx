@@ -1,31 +1,55 @@
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { Button } from "primereact/button";
-import { Link } from "react-router-dom";
-import ExportButton from "../../components/ExportButton/ExportButton";
+import { useGetData } from "../../hooks/useGetData";
+import { useRef } from "react";
+import { productsService } from "../../services";
 import CustomTableContainer from "../../components/CustomTable/CustomTableContainer";
+const columns = [
+  { label: "Nombre", field: "name", sortable: true },
+  { label: "Imagen", field: "thumbnail", sortable: false },
+  { label: "Precio", field: "price", sortable: true },
+  { label: "Categoría", field: "category", sortable: true },
+  { label: "Stock", field: "stock", sortable: true },
+];
+function ItemList() {
+  const [products, getProducts] = useGetData(productsService);
+  const fileRef = useRef(null);
 
-export default function ItemList({ products, header, footer, imageBodyTemplate, priceBodyTemplate, actionsBodyTemplate, nameBodyTemplate, categoryBodyTemplate, stockBodyTemplate, filters }) {
-  return (
-    <div className="card">
-      <DataTable value={products} removableSort paginator rows={5} header={header} filters={filters} footer={footer} tableStyle={{ minWidth: "60rem" }}>
-        <Column field="name" header="Name" body={nameBodyTemplate} sortable></Column>
-        <Column header="Image" body={imageBodyTemplate}></Column>
-        <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
-        <Column field="category" header="Category" body={categoryBodyTemplate} sortable></Column>
-        <Column field="stock" header="Stock" body={stockBodyTemplate} sortable></Column>
-        <Column
-          body={(prod) => (
-            <Link to={`/products/${prod.id}`}>
-              <Button label="Ver Detalle" />
-            </Link>
-          )}
-        ></Column>
-        <Column header={<ExportButton data={products} filename="products.xlsx" />} body={actionsBodyTemplate}></Column>
-      </DataTable>
-      <div>
-        <CustomTableContainer items={products} />
-      </div>
-    </div>
-  );
+  const handleUpdateProduct = async (id) => {
+    const name = document.getElementsByName("name")[0].value;
+    const price = document.getElementsByName("price")[0].value;
+    const category = document.getElementsByName("category")[0].value;
+    const stock = document.getElementsByName("stock")[0].value;
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("category", category);
+    formData.append("stock", stock);
+    formData.append("file", fileRef.current.getFiles()[0]);
+    await productsService.update(id, formData);
+    getProducts();
+  };
+
+  const handleDeleteProduct = async (id) => {
+    await productsService.delete(id);
+    getProducts();
+  };
+
+  const props = {
+    label: "Productos",
+    columns,
+    items: products,
+    refreshItems: getProducts,
+    path: "/products",
+    extractionFilename: "products.xlsx",
+    paginator: true,
+    rows: 5,
+    updating: true,
+    handleUpdate: handleUpdateProduct,
+    deletion: true,
+    handleDelete: handleDeleteProduct,
+    ptRef: fileRef,
+  };
+
+  return <CustomTableContainer {...props} />;
 }
+
+export default ItemList;
