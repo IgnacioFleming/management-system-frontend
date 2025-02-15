@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 
-export const useGetData = (service, id) => {
+export const useGetData = (service) => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    id ? getDataById(id) : getData();
+    getData();
   }, [service]);
-  const getDataById = async (data_id) => {
-    const retrievedData = await service.getById(data_id);
-    setData(retrievedData);
-  };
   const getData = async () => {
     const retrievedData = await service.getAll();
     setData(retrievedData);

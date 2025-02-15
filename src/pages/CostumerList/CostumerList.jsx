@@ -1,15 +1,36 @@
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import ExportButton from "../../components/ExportButton/ExportButton";
-function CostumerList({ costumers, logoBodyTemplate, nameBodyTemplate, actionsBodyTemplate, footer, header, filters }) {
+import CustomTableContainer from "../../components/CustomTable/CustomTableContainer";
+import { useRef } from "react";
+import { costumersService } from "../../services";
+import { useGetData } from "../../hooks/useGetData";
+
+const columns = [
+  { label: "Logo", field: "logo" },
+  { label: "Número de Cuenta", field: "account_number", sortable: true, isNumber: true },
+  { label: "Nombre", field: "name", sortable: true, isEditable: true },
+];
+
+function CostumerList() {
+  const [costumers, getCostumers] = useGetData(costumersService);
+
+  const fileRef = useRef(null);
+  const handleUpdateCostumer = async (id) => {
+    const name = document.getElementsByName("name")[0].value;
+    const updatedFile = fileRef.current.getFiles()[0];
+    const formData = new FormData();
+    formData.append("name", name);
+    if (updatedFile) formData.append("file", updatedFile);
+    await costumersService.update(id, formData);
+    getCostumers();
+  };
+
+  const deleteCostumer = async (id) => {
+    await costumersService.delete(id);
+    getCostumers();
+  };
+
   return (
     <div className="card">
-      <DataTable value={costumers} removableSort paginator rows={5} filters={filters} header={header} footer={footer} tableStyle={{ minWidth: "50rem" }}>
-        <Column header="Logo" body={logoBodyTemplate}></Column>
-        <Column field="account_number" header="Numero de Cuenta" sortable></Column>
-        <Column field="name" header="Name" body={nameBodyTemplate} sortable></Column>
-        <Column header={<ExportButton data={costumers} filename="costumers.xlsx" />} body={actionsBodyTemplate}></Column>
-      </DataTable>
+      <CustomTableContainer columns={columns} items={costumers} extractionFilename="costumers.xlsx" label="Clientes" paginator rows={5} updating deletion ptRef={fileRef} handleUpdate={handleUpdateCostumer} handleDelete={deleteCostumer} />
     </div>
   );
 }

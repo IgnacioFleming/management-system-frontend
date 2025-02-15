@@ -5,10 +5,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/Layout/Layout";
 import AddProducts from "./pages/AddProducts/AddProducts";
 import AddCostumer from "./pages/AddCostumer/AddCostumer";
-import CostumerListContainer from "./pages/CostumerList/ConstumerListContainer";
 import Home from "./pages/Home/Home";
 import Page404 from "./pages/Page404/Page404";
-import SalesListContainer from "./pages/SalesList/SalesListContainer";
 import AddSalesContainer from "./pages/AddSale/AddSalesContainer";
 import SalesContextProvider from "./contexts/orders";
 import RegisterContainer from "./pages/Register/RegisterContainer";
@@ -19,6 +17,8 @@ import Users from "./pages/Users/Users";
 import UserContextProvider from "./contexts/user";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import ItemList from "./pages/ItemList/ItemList";
+import CostumerList from "./pages/CostumerList/CostumerList";
+import SalesList from "./pages/SalesList/SalesList";
 
 function App() {
   return (
@@ -33,9 +33,9 @@ function App() {
               <Route path="/products" element={<ItemList />} />
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/addProducts" element={<AddProducts />} />
-              <Route path="/costumers" element={<CostumerListContainer />} />
+              <Route path="/costumers" element={<CostumerList />} />
               <Route path="/addCostumer" element={<AddCostumer />} />
-              <Route path="/sales" element={<SalesListContainer />} />
+              <Route path="/sales" element={<SalesList />} />
               <Route path="/balances" element={<Balances />} />
               <Route path="/balances/:id" element={<CostumerMovements />} />
               <Route path="/users" element={<Users />} />

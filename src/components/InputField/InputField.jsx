@@ -1,11 +1,13 @@
 import { InputText } from "primereact/inputtext";
 import { useState } from "react";
+import { inputTypes } from "../../helpers/utils";
 
-export const InputField = ({ input, inputName, isNumber = false }) => {
+export const InputField = ({ input, inputName, inputType = inputTypes.ANY }) => {
   const [inputContent, setInputContent] = useState(input[inputName]);
   const handleChange = (e) => setInputContent(e.target.value);
-  // const value = inputName === "price" ? formatCurrency(inputContent) : inputContent;
-  let keyfilter = inputName === "price" ? "num" : isNumber ? "int" : null;
-
+  let keyfilter;
+  if (inputType === inputTypes.CURR || inputType === inputTypes.FLOAT) keyfilter = "num";
+  if (inputType === inputTypes.INT) keyfilter = "int";
+  if (inputType === inputTypes.ANY) keyfilter = null;
   return <InputText keyfilter={keyfilter} name={inputName} onChange={handleChange} value={inputContent} />;
 };

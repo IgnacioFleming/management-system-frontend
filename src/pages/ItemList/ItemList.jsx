@@ -2,28 +2,22 @@ import { useGetData } from "../../hooks/useGetData";
 import { useRef } from "react";
 import { productsService } from "../../services";
 import CustomTableContainer from "../../components/CustomTable/CustomTableContainer";
+import { inputTypes } from "../../helpers/utils";
+import { getProductInputs } from "../../helpers/getProductInputs";
+
 const columns = [
-  { label: "Nombre", field: "name", sortable: true },
+  { label: "Nombre", field: "name", sortable: true, isEditable: true },
   { label: "Imagen", field: "thumbnail", sortable: false },
-  { label: "Precio", field: "price", sortable: true },
-  { label: "Categoría", field: "category", sortable: true },
-  { label: "Stock", field: "stock", sortable: true },
+  { label: "Precio", field: "price", sortable: true, isEditable: true, inputType: inputTypes.CURR },
+  { label: "Categoría", field: "category", sortable: true, isEditable: true },
+  { label: "Stock", field: "stock", sortable: true, isNumber: true, isEditable: true },
 ];
 function ItemList() {
   const [products, getProducts] = useGetData(productsService);
   const fileRef = useRef(null);
 
   const handleUpdateProduct = async (id) => {
-    const name = document.getElementsByName("name")[0].value;
-    const price = document.getElementsByName("price")[0].value;
-    const category = document.getElementsByName("category")[0].value;
-    const stock = document.getElementsByName("stock")[0].value;
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("category", category);
-    formData.append("stock", stock);
-    formData.append("file", fileRef.current.getFiles()[0]);
+    const formData = getProductInputs(fileRef);
     await productsService.update(id, formData);
     getProducts();
   };

@@ -46,7 +46,6 @@ export default class ApiCall {
   async getById(id) {
     try {
       const payload = await helpers.requestHandle(`${this.path}/${id}`);
-      console.log(payload, "desde el servicio");
       return payload;
     } catch (error) {
       console.log(error);

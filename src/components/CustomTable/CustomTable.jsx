@@ -2,14 +2,14 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import ExportButton from "../ExportButton/ExportButton";
 
-function CustomTable({ header, columns, items, path, extractionFilename, filters, paginator, rows, getBodyTemplate, detailButtonTemplate, actionsBodyTemplate, footer }) {
+function CustomTable({ header, columns, items, showDetailButton = false, extractionFilename, filters, paginator, rows, getBodyTemplate, detailButtonTemplate, actionsBodyTemplate, expandedRows, rowExpansionTemplate, dataKey, footer }) {
   return (
-    <DataTable removableSort paginator={paginator} rows={rows} header={header} value={items} filters={filters} footer={footer}>
-      {columns.map(({ label, field, sortable = false }, index) => {
-        const body = getBodyTemplate(field);
+    <DataTable removableSort paginator={paginator} rows={rows} header={header} value={items} filters={filters} expandedRows={expandedRows} rowExpansionTemplate={rowExpansionTemplate} dataKey={dataKey} footer={footer}>
+      {columns?.map(({ label, field, sortable = false, isEditable = false, inputType }, index) => {
+        const body = getBodyTemplate(field, isEditable, inputType);
         return <Column key={index} header={label} field={field} body={body} sortable={sortable}></Column>;
       })}
-      {path && <Column body={detailButtonTemplate}></Column>}
+      {showDetailButton && <Column body={detailButtonTemplate}></Column>}
       <Column header={extractionFilename && <ExportButton data={items} filename={extractionFilename} />} body={actionsBodyTemplate}></Column>
     </DataTable>
   );

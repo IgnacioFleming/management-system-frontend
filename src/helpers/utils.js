@@ -36,3 +36,10 @@ export const customRedirect = (path) => {
   window.history.pushState({}, "", path);
   window.dispatchEvent(new PopStateEvent("popstate"));
 };
+
+export const inputTypes = {
+  ANY: "any",
+  INT: "int",
+  FLOAT: "float",
+  CURR: "currency",
+};

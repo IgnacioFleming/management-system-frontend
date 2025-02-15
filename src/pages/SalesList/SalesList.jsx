@@ -1,26 +1,35 @@
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import ExportButton from "../../components/ExportButton/ExportButton";
+import CustomTableContainer from "../../components/CustomTable/CustomTableContainer";
+import { salesService } from "../../services";
+import { useGetData } from "../../hooks/useGetData";
+import { inputTypes } from "../../helpers/utils";
+import { useState } from "react";
+import OrderList from "../../sections/OrdersList/OrdersList";
 
-export default function SalesList({ sales, header, footer, actionsBodyTemplate, amountBodyTemplate, expandedRows, showDataBodyTemplate, rowExpansionTemplate, filters }) {
-  const exportHeaders = [
-    { label: "Id de Venta", key: "id" },
-    { label: "Id de Cliente", key: "costumer_id" },
-    { label: "Nombre", key: "name" },
-    { label: "Número de cuenta", key: "account_number" },
-    { label: "Url de imagen", key: "logo" },
-    { label: "Cantidad de items", key: "items_quantity" },
-    { label: "Monto Total", key: "total_amount" },
-    { label: "Fecha", key: "sale_date" },
-  ];
-  return (
-    <DataTable value={sales} filters={filters} removableSort paginator rows={5} header={header} footer={footer} expandedRows={expandedRows} rowExpansionTemplate={rowExpansionTemplate} dataKey="salesId" tableStyle={{ minWidth: "60rem" }}>
-      <Column name="id" field="salesId" header="Número de Orden" sortable></Column>
-      <Column name="costumer_name" field="name" header="Cliente" sortable></Column>
-      <Column name="costumer_account_number" field="account_number" header="Número de Cuenta" sortable></Column>
-      <Column name="total_amount" field="total_amount" header="Monto" body={amountBodyTemplate} sortable></Column>
-      <Column body={showDataBodyTemplate}></Column>
-      <Column header={<ExportButton is_sales sales={sales} orders={expandedRows} filename="sales.xlsx" headers={exportHeaders} />} body={actionsBodyTemplate}></Column>
-    </DataTable>
-  );
+const columns = [
+  { label: "Número de Orden", field: "salesId", sortable: true },
+  { label: "Cliente", field: "name", sortable: true },
+  { label: "Número de Cuenta", field: "account_number", sortable: true },
+  { label: "Monto", field: "total_amount", sortable: true, inputType: inputTypes.CURR },
+];
+
+export default function SalesList() {
+  const [sales, getSales] = useGetData(salesService);
+  const [expandedRows, setExpandedRows] = useState(null);
+  const [orderNumber, setOrderNumber] = useState();
+
+  const showSaleDetail = (salesId) => {
+    if (orderNumber === salesId) {
+      setOrderNumber(null);
+      setExpandedRows(null);
+      return;
+    }
+    setOrderNumber(salesId);
+    setExpandedRows({ [salesId]: true });
+  };
+
+  const deleteSale = async (id) => {
+    await salesService.delete(id);
+    getSales();
+  };
+  return <CustomTableContainer dataKey="salesId" columns={columns} items={sales} label="Ventas" extractionFilename="sales.xlsx" paginator rows={5} deletion handleDelete={deleteSale} handleDetail={showSaleDetail} expandedRows={expandedRows} InnerComponent={<OrderList sale_id={orderNumber} />} />;
 }
