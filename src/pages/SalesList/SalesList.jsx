@@ -31,5 +31,5 @@ export default function SalesList() {
     await salesService.delete(id);
     getSales();
   };
-  return <CustomTableContainer dataKey="salesId" columns={columns} items={sales} label="Ventas" extractionFilename="sales.xlsx" paginator rows={5} deletion handleDelete={deleteSale} handleDetail={showSaleDetail} expandedRows={expandedRows} InnerComponent={<OrderList sale_id={orderNumber} />} />;
+  return <CustomTableContainer dataKey="salesId" columns={columns} items={sales} label="Ventas" extractionFilename="sales.xlsx" paginator rows={5} deletion handleDelete={deleteSale} handleDetail={showSaleDetail} expandedRows={expandedRows} refreshItems={getSales} is_sales InnerComponent={<OrderList sale_id={orderNumber} refreshSales={getSales} />} />;
 }

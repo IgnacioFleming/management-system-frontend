@@ -44,9 +44,9 @@ const imageBodyTemplate = (editItems, ptRef) => {
   };
 };
 
-const actionsBodyTemplate = (editItems, setEditItems, updateRegister, handleDelete, updateItem, deletion, updating) => {
-  return function bodyTemplate({ id }) {
-    const actionsProps = { editingId: editItems, setEditItems, id, updateRegister, deleteRegister: handleDelete, handleUpdateRegister: updateItem, deletion, updating };
+const actionsBodyTemplate = (editItems, setEditItems, updateRegister, handleDelete, updateItem, deletion, updating, is_sales) => {
+  return function bodyTemplate(item) {
+    const actionsProps = { editingId: editItems, setEditItems, id: is_sales ? item.salesId : item.id, updateRegister, deleteRegister: handleDelete, handleUpdateRegister: updateItem, deletion, updating };
     return <ActionsDataTable {...actionsProps} />;
   };
 };
