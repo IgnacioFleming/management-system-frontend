@@ -5,7 +5,7 @@ import { useGlobalFilter } from "../../hooks/useGlobalFilter";
 import BodyTemplates from "./BodyTemplates";
 
 function CustomTableContainer({ label, columns, items, refreshItems, path, extractionFilename, paginator = false, rows, handleDetail, updating = false, handleUpdate, deletion = false, handleDelete, ptRef, dataKey, expandedRows, InnerComponent = null, is_sales = false }) {
-  const [editItems, setEditItems] = useState();
+  const [editItems, setEditItems] = useState(null);
   const { globalFilterValue, onGlobalFilterChange, handleRefresh, filters } = useGlobalFilter();
 
   const updateRegister = (id) => {

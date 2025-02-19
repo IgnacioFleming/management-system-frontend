@@ -9,7 +9,7 @@ const getDetailButtonTemplate = (path, handleDetail) => {
   return function detailButtonTemplate(item) {
     if (path) {
       return (
-        <Link to={`${path}/${item.id}`}>
+        <Link to={`${path}/${item.costumer_id || item.id}`}>
           <Button label="Ver Detalle" />
         </Link>
       );

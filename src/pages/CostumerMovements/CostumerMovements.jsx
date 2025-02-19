@@ -1,14 +1,15 @@
 import { Link, useParams } from "react-router-dom";
-import { useGetData } from "../../hooks/useGetData";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { formatCurrency, formatDate } from "../../helpers/utils";
 import { Button } from "primereact/button";
 import { movementsService } from "../../services";
+import { useGetDataById } from "../../hooks/useGetDataById";
 
 function CostumerMovements() {
   const { id } = useParams();
-  const [movementsData] = useGetData(movementsService, id);
+  const [movementsData] = useGetDataById(movementsService, id);
+  console.log(movementsData);
   const { costumer, movements, balance } = movementsData;
   const typeBodyTemplate = ({ type }) => {
     if (type === "sale") return "Venta";

@@ -28,7 +28,7 @@ function SalesContextProvider({ children }) {
     const product_ids = filteredItems.map((item) => {
       const previusProduct = productsIds.find((e) => e.id === item.id);
       const quantity = previusProduct ? previusProduct.quantity : 1;
-      return { id: item.id, quantity, amount: item.price * quantity };
+      return { product_id: item.id, quantity, amount: item.price * quantity };
     });
 
     setProductsIds(product_ids);
