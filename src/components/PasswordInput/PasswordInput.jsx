@@ -1,14 +1,14 @@
 import { Password } from "primereact/password";
 import { FloatLabel } from "primereact/floatlabel";
 import styles from "./PasswordInput.module.css";
+import { customColors } from "../../helpers/utils";
 
 function PasswordInput({ handleChange, name, value, invalid, helperText, className, label }) {
-  const dangerColor = "#d32f2f";
   return (
     <div className={className}>
       <FloatLabel className="w-full">
-        <Password name={name} inputId="password" value={value} feedback={false} onChange={handleChange} toggleMask className="w-full" invalid={invalid} pt={{ iconField: { root: { className: "w-full" } }, input: { className: "w-full" }, showIcon: { style: { color: helperText && dangerColor } }, hideIcon: { style: { color: helperText && dangerColor } } }} />
-        <label htmlFor="password" style={{ color: helperText && dangerColor }}>
+        <Password name={name} inputId="password" value={value} feedback={false} onChange={handleChange} toggleMask className="w-full" invalid={invalid} pt={{ iconField: { root: { className: "w-full" } }, input: { className: "w-full" }, showIcon: { style: { color: helperText && customColors.DANGER } }, hideIcon: { style: { color: helperText && customColors.DANGER } } }} />
+        <label htmlFor="password" style={{ color: helperText && customColors.DANGER }}>
           {label || "Contraseña"}
         </label>
       </FloatLabel>

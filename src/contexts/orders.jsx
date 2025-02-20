@@ -45,7 +45,7 @@ function SalesContextProvider({ children }) {
 
   const setQuantity = (item, newQuantity) => {
     if (sale.products) {
-      const itemIndex = productsIds.findIndex((e) => e.id === item.id);
+      const itemIndex = productsIds.findIndex((e) => e.product_id === item.id);
       if (itemIndex === -1) return;
       const newProductsIds = [...productsIds];
       newProductsIds[itemIndex].quantity = newQuantity;
