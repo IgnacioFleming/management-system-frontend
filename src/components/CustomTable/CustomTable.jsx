@@ -5,8 +5,8 @@ import ExportButton from "../ExportButton/ExportButton";
 function CustomTable({ header, columns, items, showDetailButton = false, extractionFilename, filters, paginator, rows, getBodyTemplate, detailButtonTemplate, actionsBodyTemplate, expandedRows, rowExpansionTemplate, dataKey, footer }) {
   return (
     <DataTable removableSort paginator={paginator} rows={rows} header={header} value={items} filters={filters} expandedRows={expandedRows} rowExpansionTemplate={rowExpansionTemplate} dataKey={dataKey} footer={footer}>
-      {columns?.map(({ label, field, sortable = false, isEditable = false, inputType }, index) => {
-        const body = getBodyTemplate(field, isEditable, inputType);
+      {columns?.map(({ label, field, sortable = false, isEditable = false, inputType, color }, index) => {
+        const body = getBodyTemplate(field, isEditable, inputType, color);
         return <Column key={index} header={label} field={field} body={body} sortable={sortable}></Column>;
       })}
       {showDetailButton && <Column body={detailButtonTemplate}></Column>}

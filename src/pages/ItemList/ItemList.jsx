@@ -2,13 +2,14 @@ import { useGetData } from "../../hooks/useGetData";
 import { useRef } from "react";
 import { productsService } from "../../services";
 import CustomTableContainer from "../../components/CustomTable/CustomTableContainer";
-import { inputTypes } from "../../helpers/utils";
+import { customColors, inputTypes } from "../../helpers/utils";
 import { getProductInputs } from "../../helpers/getProductInputs";
 
 const columns = [
   { label: "Nombre", field: "name", sortable: true, isEditable: true },
   { label: "Imagen", field: "thumbnail", sortable: false },
   { label: "Precio", field: "price", sortable: true, isEditable: true, inputType: inputTypes.CURR },
+  { label: "Costo", field: "cost", sortable: true, isEditable: true, inputType: inputTypes.CURR, color: customColors.DANGER },
   { label: "Categoría", field: "category", sortable: true, isEditable: true },
   { label: "Stock", field: "stock", sortable: true, isNumber: true, isEditable: true },
 ];

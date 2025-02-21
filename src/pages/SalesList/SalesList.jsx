@@ -1,7 +1,7 @@
 import CustomTableContainer from "../../components/CustomTable/CustomTableContainer";
 import { salesService } from "../../services";
 import { useGetData } from "../../hooks/useGetData";
-import { inputTypes } from "../../helpers/utils";
+import { customColors, inputTypes } from "../../helpers/utils";
 import { useState } from "react";
 import OrderList from "../../sections/OrdersList/OrdersList";
 
@@ -10,6 +10,7 @@ const columns = [
   { label: "Cliente", field: "name", sortable: true },
   { label: "Número de Cuenta", field: "account_number", sortable: true },
   { label: "Monto", field: "total_amount", sortable: true, inputType: inputTypes.CURR },
+  { label: "Costo de Venta", field: "sale_cost", sortable: true, inputType: inputTypes.CURR, color: customColors.DANGER },
 ];
 
 export default function SalesList() {

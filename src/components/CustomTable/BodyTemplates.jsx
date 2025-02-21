@@ -19,17 +19,18 @@ const getDetailButtonTemplate = (path, handleDetail) => {
 };
 
 const getBodyTemplate = (editItems, ptRef) => {
-  return function bodyTemplate(field, isEditable, inputType) {
+  return function bodyTemplate(field, isEditable, inputType, color) {
     if (field === "thumbnail" || field === "logo") return imageBodyTemplate(editItems, ptRef);
-    return fieldBodyTemplate(field, isEditable, inputType, editItems);
+    return fieldBodyTemplate(field, isEditable, inputType, editItems, color);
   };
 };
 
-const fieldBodyTemplate = (field, isEditable, inputType, editItems) => {
+const fieldBodyTemplate = (field, isEditable, inputType, editItems, color) => {
   return function body(item) {
+    console.log("color del campo", field, color);
     const content = inputType === inputTypes.CURR ? formatCurrency(item[field]) : item[field];
     if (!isEditable) return content;
-    return editItems === item.id ? <InputField inputName={field} input={item} inputType={inputType} /> : content;
+    return editItems === item.id ? <InputField inputName={field} input={item} inputType={inputType} /> : <div style={{ color }}>{content}</div>;
   };
 };
 
@@ -37,7 +38,7 @@ const imageBodyTemplate = (editItems, ptRef) => {
   return function bodyTemplate(item) {
     return (
       <div className="flex flex-column gap-2 align-items-start">
-        <img src={item?.thumbnail || item?.logo} alt={`Foto de ${item?.name}`} className="w-6rem h-6rem shadow-2 border-round" style={{ objectFit: "cover" }} />
+        <img src={item?.thumbnail || item?.logo} alt={`Foto de ${item?.name}`} className="w-6rem h-6rem shadow-2 border-round " style={{ objectFit: "cover" }} />
         {editItems === item?.id && <Uploader label="Subir Imagen" name="thumbnail" ptRef={ptRef} accept="image/*" />}
       </div>
     );

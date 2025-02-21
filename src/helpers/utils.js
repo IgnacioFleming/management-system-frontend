@@ -43,3 +43,7 @@ export const inputTypes = {
   FLOAT: "float",
   CURR: "currency",
 };
+
+export const customColors = {
+  DANGER: "#d32f2f",
+};
