@@ -56,6 +56,7 @@ function SalesContextProvider({ children }) {
   };
 
   const handleSelectCostumer = (costumer) => {
+    console.log(costumer);
     setSelectedCostumer(costumer);
     if (!costumer) {
       refreshFilteredItems();

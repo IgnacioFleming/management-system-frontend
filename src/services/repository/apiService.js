@@ -7,7 +7,8 @@ export default class ApiCall {
 
   async getAll() {
     try {
-      const payload = helpers.requestHandle(this.path);
+      const payload = await helpers.requestHandle(this.path);
+      console.log(payload);
       return payload;
     } catch (error) {
       console.log("Exception throwed, ", error);

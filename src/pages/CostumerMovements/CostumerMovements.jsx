@@ -1,31 +1,30 @@
 import { Link, useParams } from "react-router-dom";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { formatCurrency, formatDate } from "../../helpers/utils";
+import { formatCurrency, inputTypes } from "../../helpers/utils";
 import { Button } from "primereact/button";
 import { movementsService } from "../../services";
 import { useGetDataById } from "../../hooks/useGetDataById";
+import CustomTableContainer from "../../components/CustomTable/CustomTableContainer";
+
+const columns = [
+  { label: "Fecha", field: "date", inputType: inputTypes.DATE, sortable: true },
+  { label: "Tipo de movimiento", field: "type", sortable: true },
+  { label: "Monto", field: "amount", sortable: true, inputType: inputTypes.CURR },
+];
 
 function CostumerMovements() {
   const { id } = useParams();
   const [movementsData] = useGetDataById(movementsService, id);
-  console.log(movementsData);
   const { costumer, movements, balance } = movementsData;
-  const typeBodyTemplate = ({ type }) => {
-    if (type === "sale") return "Venta";
-    if (type === "payment") return "Pago";
-  };
+  console.log(movements);
 
-  const dateBodyTemplate = ({ date }) => formatDate(date);
-  const amountBodyTemplate = ({ type, amount }) => {
-    return <div className={`${type === "sale" ? "text-red-500" : "pl-2 text-green-500"}`}>{type === "sale" ? formatCurrency(-amount) : formatCurrency(amount)}</div>;
+  const footer = () => {
+    return (
+      <div>
+        El saldo del cliente es: <strong>{formatCurrency(balance)}</strong>
+      </div>
+    );
   };
-
-  const footer = () => (
-    <div style={{ marginLeft: "78%" }}>
-      <div>Total: {balance && formatCurrency(balance)}</div>
-    </div>
-  );
+  console.log(footer);
   return (
     <>
       <div className="flex justify-content-center mb-6 ">
@@ -35,11 +34,7 @@ function CostumerMovements() {
           <div>Número de Cuenta: {costumer?.account_number}</div>
         </div>
       </div>
-      <DataTable value={movements} footer={footer}>
-        <Column field="date" header="Fecha" body={dateBodyTemplate}></Column>
-        <Column field="type" header="Tipo de Movimiento" body={typeBodyTemplate}></Column>
-        <Column field="amount" header="Monto" body={amountBodyTemplate}></Column>
-      </DataTable>
+      <CustomTableContainer label="Movimientos" columns={columns} items={movements} extractionFilename="movements.xlsx" paginator rows={5} customFooter={footer} />
       <Link to="/balances">
         <Button className="m-3" label="Volver" />
       </Link>

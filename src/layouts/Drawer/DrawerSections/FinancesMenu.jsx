@@ -1,7 +1,10 @@
 import AccordionMenu from "../DrawerComponentes/AccordionMenu";
 
 function FinancesMenu() {
-  const listItems = [{ label: "Cuentas Corrientes", path: "/balances" }];
+  const listItems = [
+    { label: "Cuentas Corrientes", path: "/balances" },
+    { label: "Registrar Pago", path: "/addPayments" },
+  ];
 
   return (
     <>

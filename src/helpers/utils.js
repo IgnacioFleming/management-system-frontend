@@ -42,8 +42,10 @@ export const inputTypes = {
   INT: "int",
   FLOAT: "float",
   CURR: "currency",
+  DATE: "date",
 };
 
 export const customColors = {
   DANGER: "#d32f2f",
+  SUCCESS: "#22c55e",
 };

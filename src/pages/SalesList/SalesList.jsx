@@ -11,12 +11,14 @@ const columns = [
   { label: "Número de Cuenta", field: "account_number", sortable: true },
   { label: "Monto", field: "total_amount", sortable: true, inputType: inputTypes.CURR },
   { label: "Costo de Venta", field: "sale_cost", sortable: true, inputType: inputTypes.CURR, color: customColors.DANGER },
+  { label: "Fecha de Venta", field: "sale_date", sortable: true, inputType: inputTypes.DATE },
 ];
 
 export default function SalesList() {
   const [sales, getSales] = useGetData(salesService);
   const [expandedRows, setExpandedRows] = useState(null);
   const [orderNumber, setOrderNumber] = useState();
+  console.log(sales);
 
   const showSaleDetail = (salesId) => {
     if (orderNumber === salesId) {

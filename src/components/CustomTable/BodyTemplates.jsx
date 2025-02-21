@@ -2,7 +2,7 @@ import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
 import Uploader from "../Uploader/Uploader";
 import { InputField } from "../InputField/InputField";
-import { formatCurrency, inputTypes } from "../../helpers/utils";
+import { customColors, formatCurrency, formatDate, inputTypes } from "../../helpers/utils";
 import ActionsDataTable from "../Actions/ActionsDataTable";
 
 const getDetailButtonTemplate = (path, handleDetail) => {
@@ -27,9 +27,12 @@ const getBodyTemplate = (editItems, ptRef) => {
 
 const fieldBodyTemplate = (field, isEditable, inputType, editItems, color) => {
   return function body(item) {
-    console.log("color del campo", field, color);
-    const content = inputType === inputTypes.CURR ? formatCurrency(item[field]) : item[field];
-    if (!isEditable) return content;
+    let content;
+    if (field === "amount") item[field] < 0 ? (color = customColors.DANGER) : (color = customColors.SUCCESS);
+    if (!inputType || inputType) content = item[field];
+    if (inputType === inputTypes.CURR) content = formatCurrency(item[field]);
+    if (inputType === inputTypes.DATE) content = formatDate(item[field]);
+    if (!isEditable) return <div style={{ color }}>{content}</div>;
     return editItems === item.id ? <InputField inputName={field} input={item} inputType={inputType} /> : <div style={{ color }}>{content}</div>;
   };
 };
