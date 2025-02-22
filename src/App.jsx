@@ -19,6 +19,7 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import ItemList from "./pages/ItemList/ItemList";
 import CostumerList from "./pages/CostumerList/CostumerList";
 import SalesList from "./pages/SalesList/SalesList";
+import AddPayment from "./pages/AddPayment/AddPayment";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
               <Route path="/balances" element={<Balances />} />
               <Route path="/balances/:id" element={<CostumerMovements />} />
               <Route path="/users" element={<Users />} />
+              <Route path="/addPayments" element={<AddPayment />} />
               <Route
                 path="/addSale"
                 element={

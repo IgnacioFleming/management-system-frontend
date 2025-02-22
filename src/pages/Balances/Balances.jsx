@@ -12,6 +12,7 @@ const columns = [
 // costumer_id,balance_amount ,costumers.account_number, costumers.name, costumers.logo
 function Balances() {
   const [balances, getBalances] = useGetData(balancesService);
+  console.log(balances);
 
   return <CustomTableContainer columns={columns} items={balances} extractionFilename="balances.xlsx" label="Balances" paginator rows={5} path="/balances" refreshItems={getBalances} />;
 }

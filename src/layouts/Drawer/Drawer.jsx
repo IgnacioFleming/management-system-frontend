@@ -13,7 +13,7 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
   const drawerContent = ({ closeIconRef }) => {
     return (
       <div className="min-h-screen flex relative lg:static surface-ground">
-        <div id="app-sidebar-2" className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none" style={{ width: "280px" }}>
+        <div id="app-sidebar-2" className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none" style={{ width: "100%" }}>
           <div className="flex flex-column h-full mt-3">
             <Header handleDrawerVisibility={handleDrawerVisibility} closeIconRef={closeIconRef} />
             <div className="overflow-y-auto mt-4">
@@ -30,7 +30,7 @@ export default function Drawer({ drawerConfig, handleDrawerVisibility }) {
   };
   return (
     <div className="card flex justify-content-center">
-      <Sidebar modal={false} visible={drawerConfig.drawerVisible} dismissable={false} content={drawerContent}></Sidebar>
+      <Sidebar modal={false} visible={drawerConfig.drawerVisible} dismissable={false} content={drawerContent} style={{ width: "280px" }}></Sidebar>
     </div>
   );
 }
