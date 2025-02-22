@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Register from "./Register";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import swal from "sweetalert2";
 import SessionsApiCall from "../../services/repository/sessions";
+import Alerts from "../../helpers/alerts/alerts";
 
 function RegisterContainer() {
   const navigate = useNavigate();
@@ -46,36 +46,10 @@ function RegisterContainer() {
   async function registerUser({ username, first_name, last_name, email, password }) {
     const register = await SessionsApiCall.register({ username, first_name, last_name, email, password });
     if (register.status === "error") {
-      swal
-        .fire({
-          title: "We're sorry",
-          text: "User email already exists. Please Login or try registering with another email",
-          icon: "error",
-        })
-        .then(() => resetForm());
+      await Alerts.errorAlert({ title: "We're sorry", text: "User email already exists. Please Login or try registering with another email", resolveCallback: resetForm });
       return;
     }
-    swal
-      .fire({
-        title: "Registration completed!",
-        text: "You have been registered successfully. Please Login to start purchasing",
-        icon: "success",
-        confirmButtonText: "Go to Login",
-      })
-      .then((res) => {
-        if (res.isConfirmed) {
-          navigate("/login");
-        }
-      })
-      .catch((err) => {
-        swal
-          .fire({
-            title: "We're Sorry",
-            text: err,
-            icon: "error",
-          })
-          .then(() => resetForm());
-      });
+    await Alerts.successAlert({ title: "Registration completed!", text: "You have been registered successfully. Please Login to start purchasing", confirmButtonText: "Go to Login", resolveCallback: () => navigate("/login") });
   }
   return <Register handleChange={handleChange} handleSubmit={handleSubmit} values={values} errors={errors} />;
 }

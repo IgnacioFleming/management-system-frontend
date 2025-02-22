@@ -7,8 +7,9 @@ export default class SessionsApiCall {
   static async register(user) {
     try {
       const options = helpers.requestOptionsHandler(user, "POST");
-      const result = await helpers.requestHandle(`${path}/register`, options);
-      return result;
+      const result = await fetch(`${path}/register`, { ...options, credentials: "include" });
+      const jsonResult = await result.json();
+      return jsonResult;
     } catch (error) {
       return new Error(error);
     }
@@ -16,8 +17,9 @@ export default class SessionsApiCall {
   static async login(credentials) {
     try {
       const options = helpers.requestOptionsHandler(credentials, "POST");
-      const result = await helpers.requestHandle(`${path}/login`, options);
-      return result;
+      const result = await fetch(`${path}/login`, { ...options, credentials: "include" });
+      const jsonResult = await result.json();
+      return jsonResult;
     } catch (error) {
       return new Error(error);
     }

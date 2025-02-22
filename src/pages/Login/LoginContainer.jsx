@@ -3,9 +3,10 @@ import Login from "./Login";
 import * as Yup from "yup";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import swal from "sweetalert2";
 import { UserContext } from "../../contexts/user";
 import SessionsApiCall from "../../services/repository/sessions";
+import Alerts from "../../helpers/alerts/alerts";
+import { API_Status_List } from "../../helpers/utils";
 
 function LoginContainer() {
   const navigate = useNavigate();
@@ -25,14 +26,9 @@ function LoginContainer() {
   });
   async function loginUser({ username, password }) {
     const login = await SessionsApiCall.login({ username, password });
-    if (login.status === "error") {
-      swal
-        .fire({
-          title: "We're sorry",
-          text: login.message,
-          icon: "error",
-        })
-        .then(() => resetForm());
+    console.log(login);
+    if (login.status === API_Status_List.UNAUTHORIZED) {
+      await Alerts.errorAlert({ text: login.message, resolveCallback: resetForm });
       return;
     }
     setUserData(login.payload);

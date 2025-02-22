@@ -21,7 +21,7 @@ function UserContextProvider({ children }) {
   }, [session]);
 
   useEffect(() => {
-    if (location.pathname === "/login" && Object.keys(session).length > 0) {
+    if (location.pathname === "/login" && session && Object.keys(session).length > 0) {
       window.history.pushState(null, "", "/");
       window.dispatchEvent(new PopStateEvent("popstate"));
       return;
