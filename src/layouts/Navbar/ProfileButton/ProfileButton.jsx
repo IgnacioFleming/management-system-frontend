@@ -3,8 +3,8 @@ import { Button } from "primereact/button";
 import { Menu } from "primereact/menu";
 import { useRef } from "react";
 import styles from "./ProfileButton.module.css";
-import { API_Status_List } from "../../../helpers/utils";
 import SessionsApiCall from "../../../services/repository/sessions";
+import Alerts from "../../../helpers/alerts/alerts";
 
 function ProfileButton() {
   const signOutRef = useRef(null);
@@ -14,7 +14,8 @@ function ProfileButton() {
       icon: "pi pi-sign-out",
       command: async () => {
         const logout = await SessionsApiCall.logout();
-        if (logout.status === API_Status_List.SUCCESS) return (window.location.pathname = "/login");
+        if (!logout?.status) return (window.location.pathname = "/login");
+        return Alerts.errorAlert();
       },
     },
   ];
