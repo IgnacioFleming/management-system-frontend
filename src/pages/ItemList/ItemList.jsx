@@ -11,7 +11,7 @@ const columns = [
   { label: "Precio", field: "price", sortable: true, isEditable: true, inputType: inputTypes.CURR },
   { label: "Costo", field: "cost", sortable: true, isEditable: true, inputType: inputTypes.CURR, color: customColors.DANGER },
   { label: "Categoría", field: "category", sortable: true, isEditable: true },
-  { label: "Stock", field: "stock", sortable: true, isNumber: true, isEditable: true },
+  { label: "Stock", field: "stock", sortable: true, isNumber: true, isEditable: true, inputType: inputTypes.INT },
 ];
 function ItemList() {
   const [products, getProducts] = useGetData(productsService);

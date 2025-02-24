@@ -48,4 +48,5 @@ export const inputTypes = {
 export const customColors = {
   DANGER: "#d32f2f",
   SUCCESS: "#22c55e",
+  WARN: "#f97316",
 };
