@@ -2,12 +2,12 @@ import AccordionMenu from "../DrawerComponentes/AccordionMenu";
 
 function CostumersMenu() {
   const listItems = [
-    { label: "Clientes Registrados", path: "/costumers" },
-    { label: "Alta de Clientes", path: "/addCostumer" },
+    { label: "Clientes Registrados", path: "/costumers", icon: "pi-address-book" },
+    { label: "Alta de Clientes", path: "/addCostumer", icon: "pi-user-plus" },
   ];
   return (
     <>
-      <ul className="list-none p-3 m-0">
+      <ul className="list-none px-3  m-0">
         <AccordionMenu header="CLIENTES" listItems={listItems} />
       </ul>
     </>

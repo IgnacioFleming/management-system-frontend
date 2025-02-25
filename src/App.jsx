@@ -20,6 +20,7 @@ import ItemList from "./pages/ItemList/ItemList";
 import CostumerList from "./pages/CostumerList/CostumerList";
 import SalesList from "./pages/SalesList/SalesList";
 import AddPayment from "./pages/AddPayment/AddPayment";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="/balances/:id" element={<CostumerMovements />} />
               <Route path="/users" element={<Users />} />
               <Route path="/addPayments" element={<AddPayment />} />
+              <Route path="/profile" element={<Profile />} />
               <Route
                 path="/addSale"
                 element={
