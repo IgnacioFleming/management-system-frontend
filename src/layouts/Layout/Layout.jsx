@@ -4,19 +4,16 @@ import Navbar from "../Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 
 function Layout() {
-  const [drawerConfig, setDrawerVisible] = useState({ drawerVisible: true, navbarWidth: "narrow" });
-  const handleDrawerVisibility = () => {
-    if (drawerConfig.drawerVisible) return setDrawerVisible({ drawerVisible: false, navbarWidth: "wide" });
-    return setDrawerVisible({ drawerVisible: true, navbarWidth: "narrow" });
-  };
-  const margin = { marginLeft: drawerConfig.navbarWidth === "narrow" ? "280px" : "0" };
+  const [narrowDrawer, setNarrowDrawer] = useState(false);
+  const handleDrawerWidth = () => setNarrowDrawer(!narrowDrawer);
+  const margin = { marginLeft: narrowDrawer ? "80px" : "280px" };
   return (
     <>
       <div style={margin}>
-        <Navbar drawerConfig={drawerConfig} />
+        <Navbar />
       </div>
       <div>
-        <Drawer drawerConfig={drawerConfig} setDrawerVisible={setDrawerVisible} handleDrawerVisibility={handleDrawerVisibility} />
+        <Drawer narrowDrawer={narrowDrawer} handleDrawerWidth={handleDrawerWidth} />
       </div>
       <div style={margin}>
         <Outlet />

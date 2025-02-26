@@ -3,12 +3,12 @@ import MenuHeader from "./MenuHeader";
 import MenuBody from "./MenuBody";
 import { Divider } from "primereact/divider";
 
-function AccordionMenu({ header, listItems }) {
+function AccordionMenu({ header, listItems, narrowDrawer }) {
   const btnRef = useRef(null);
   return (
     <li>
-      <MenuHeader label={header} btnRef={btnRef} />
-      <MenuBody listItems={listItems} />
+      {!narrowDrawer && <MenuHeader label={header} btnRef={btnRef} narrowDrawer={narrowDrawer} />}
+      <MenuBody listItems={listItems} narrowDrawer={narrowDrawer} />
       <Divider />
     </li>
   );
