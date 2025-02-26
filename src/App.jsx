@@ -21,6 +21,7 @@ import CostumerList from "./pages/CostumerList/CostumerList";
 import SalesList from "./pages/SalesList/SalesList";
 import AddPayment from "./pages/AddPayment/AddPayment";
 import Profile from "./pages/Profile/Profile";
+import DrawerContextProvider from "./contexts/drawer";
 
 function App() {
   return (
@@ -30,7 +31,13 @@ function App() {
           <Routes>
             <Route path="/register" element={<RegisterContainer />} />
             <Route path="/login" element={<LoginContainer />} />
-            <Route element={<Layout />}>
+            <Route
+              element={
+                <DrawerContextProvider>
+                  <Layout />
+                </DrawerContextProvider>
+              }
+            >
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<ItemList />} />
               <Route path="/products/:id" element={<ProductDetail />} />

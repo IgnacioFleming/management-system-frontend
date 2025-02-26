@@ -7,22 +7,23 @@ import UsersMenu from "./DrawerSections/UsersMenu";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user";
 import Header from "./DrawerSections/Header";
+import { DrawerContext } from "../../contexts/drawer";
 
-export default function Drawer({ narrowDrawer, handleDrawerWidth }) {
+export default function Drawer() {
   const { user } = useContext(UserContext);
-  console.log(narrowDrawer);
+  const { narrowDrawer } = useContext(DrawerContext);
   const drawerContent = () => {
     return (
       <div className="min-h-screen flex relative lg:static surface-ground">
         <div id="app-sidebar-2" className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none" style={{ width: "100%" }}>
           <div className="flex flex-column h-full mt-3 ">
-            <Header handleDrawerWidth={handleDrawerWidth} narrowDrawer={narrowDrawer} />
+            <Header />
             <div className="overflow-y-auto mt-2">
-              <ProductsMenu narrowDrawer={narrowDrawer} />
-              <CostumersMenu narrowDrawer={narrowDrawer} />
-              <SalesMenu narrowDrawer={narrowDrawer} />
-              <FinancesMenu narrowDrawer={narrowDrawer} />
-              {user.role === "super_admin" && <UsersMenu narrowDrawer={narrowDrawer} />}
+              <ProductsMenu />
+              <CostumersMenu />
+              <SalesMenu />
+              <FinancesMenu />
+              {user.role === "super_admin" && <UsersMenu />}
             </div>
           </div>
         </div>

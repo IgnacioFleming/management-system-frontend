@@ -1,6 +1,6 @@
 import AccordionMenu from "../DrawerComponentes/AccordionMenu";
 
-function FinancesMenu({ narrowDrawer }) {
+function FinancesMenu() {
   const listItems = [
     { label: "Cuentas Corrientes", path: "/balances", icon: "pi-wallet" },
     { label: "Registrar Pago", path: "/addPayments", icon: "pi-plus" },
@@ -9,7 +9,7 @@ function FinancesMenu({ narrowDrawer }) {
   return (
     <>
       <ul className="list-none px-3  m-0">
-        <AccordionMenu header="FINANZAS" listItems={listItems} narrowDrawer={narrowDrawer} />
+        <AccordionMenu header="FINANZAS" listItems={listItems} />
       </ul>
     </>
   );
