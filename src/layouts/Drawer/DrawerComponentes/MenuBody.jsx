@@ -1,9 +1,12 @@
 import { Ripple } from "primereact/ripple";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { DrawerContext } from "../../../contexts/drawer";
 
-function MenuBody({ listItems, narrowDrawer }) {
+function MenuBody({ listItems }) {
+  const { narrowDrawer } = useContext(DrawerContext);
   return (
-    <ul className="list-none p-0 m-0 overflow-hidden">
+    <ul className="list-none p-0 m-0 overflow-hidden menu-body">
       {listItems.map((item, index) => {
         return (
           <li key={index}>

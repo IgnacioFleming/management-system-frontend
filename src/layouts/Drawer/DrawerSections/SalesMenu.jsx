@@ -1,6 +1,6 @@
 import AccordionMenu from "../DrawerComponentes/AccordionMenu";
 
-function SalesMenu({ narrowDrawer }) {
+function SalesMenu() {
   const listItems = [
     { label: "Lista de Ventas", path: "/sales", icon: "pi-clipboard" },
     { label: "Alta de Venta", path: "/addSale", icon: "pi-plus-circle" },
@@ -8,7 +8,7 @@ function SalesMenu({ narrowDrawer }) {
   return (
     <>
       <ul className="list-none px-3 m-0">
-        <AccordionMenu header="VENTAS" listItems={listItems} narrowDrawer={narrowDrawer} />
+        <AccordionMenu header="VENTAS" listItems={listItems} />
       </ul>
     </>
   );
