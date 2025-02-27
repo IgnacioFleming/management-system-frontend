@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { salesService } from "../services";
 
-export const useGetMonthlySales = () => {
-  const [data, setData] = useState([]);
+export const useGetMonthlySales = (initial) => {
+  const [data, setData] = useState(initial);
   useEffect(() => {
     getMonthlySales();
   }, []);

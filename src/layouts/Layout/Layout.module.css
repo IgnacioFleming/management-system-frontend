@@ -1,0 +1,10 @@
+.narrowDrawer {
+  margin-left: 80px;
+}
+
+.wideDrawer {
+  margin-left: 80px;
+  @media (min-width: 600px) {
+    margin-left: 280px;
+  }
+}

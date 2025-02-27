@@ -5,7 +5,7 @@ import { DrawerContext } from "../../../contexts/drawer";
 function Header() {
   const { narrowDrawer, handleDrawerWidth } = useContext(DrawerContext);
   return (
-    <div className="flex align-items-center justify-content-between px-4 pt-3 flex-shrink-0">
+    <div className="flex align-items-center justify-content-between px-4 pt-3 pb-0 flex-shrink-0">
       {!narrowDrawer && (
         <span className="inline-flex align-items-center gap-2">
           <span className="font-semibold text-xl text-info">Business Manager</span>

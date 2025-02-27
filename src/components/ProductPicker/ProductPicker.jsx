@@ -14,7 +14,6 @@ function ProductPicker({ restItems, filterItem }) {
   const imageBodyTemplate = (product) => {
     return <img alt={product.name} src={product.thumbnail} style={{ width: 100, height: 100, objectFit: "contain" }} />;
   };
-  let a;
 
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;
@@ -45,9 +44,9 @@ function ProductPicker({ restItems, filterItem }) {
   const header = renderHeader();
 
   return (
-    <div className="flex flex-column align-items-center m-5 row-gap-5">
+    <div className="flex flex-column align-items-center m-1 sm:m-5 row-gap-5 w-full">
       <h2>Seleccione los productos para agregar a la orden</h2>
-      <DataTable header={header} filters={filters} paginator rows={5} removableSort value={restItems} style={{ width: "80%" }}>
+      <DataTable header={header} filters={filters} paginator rows={5} removableSort value={restItems} className="w-full sm:w-10" pt={{ paginator: { root: { className: "w-full p-0" } } }}>
         <Column field="name" header="Producto" sortable></Column>
         <Column body={imageBodyTemplate}></Column>
         <Column field="price" header="Precio" body={(product) => formatCurrency(product.price)} sortable></Column>

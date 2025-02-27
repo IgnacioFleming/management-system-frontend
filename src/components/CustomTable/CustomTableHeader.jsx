@@ -17,7 +17,7 @@ export const renderHeader = (label, refreshItems, globalFilterValue, onGlobalFil
             <InputIcon className="pi pi-search" />
             <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar Producto" />
           </IconField>
-          {refreshItems && <Button onClick={refreshAllItems} icon="pi pi-refresh" rounded raised />}
+          {refreshItems && <Button className="hidden sm:block" onClick={refreshAllItems} icon="pi pi-refresh" rounded raised />}
         </div>
       </div>
     </>

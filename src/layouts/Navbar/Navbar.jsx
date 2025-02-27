@@ -40,7 +40,7 @@ export default function Navbar() {
           </div>
           <div>
             <Menu model={items} ref={signOutRef} id="popup-sign-out" popup></Menu>
-            <Button className={styles.button} aria-controls="popup-sign-out" onClick={(e) => signOutRef.current.toggle(e)} aria-haspopup>
+            <Button className={`${styles.button} p-0 sm:p-2`} aria-controls="popup-sign-out" onClick={(e) => signOutRef.current.toggle(e)} aria-haspopup>
               <Avatar size="large" image="https://res.cloudinary.com/dah7yxmc5/image/upload/v1731529767/Business-manager/default-avatar.jpg" shape="circle" />
             </Button>
           </div>

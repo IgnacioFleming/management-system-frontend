@@ -26,7 +26,7 @@ function AddProductManualForm() {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={productSchema} validateOnChange={false}>
       {(props) => (
-        <form id="form" className="flex flex-column row-gap-5" onSubmit={props.handleSubmit} encType="multipart/form-data">
+        <form id="form" className="flex flex-column row-gap-1" onSubmit={props.handleSubmit} encType="multipart/form-data">
           <TextField label={"Nombre"} input={"name"} onChange={props.handleChange} value={props.values.name} invalid={props.errors.name && true} helperText={props.errors.name} />
           <TextField label={"Precio"} input={"price"} onChange={props.handleChange} value={props.values.price} invalid={props.errors.price && true} helperText={props.errors.price} />
           <TextField label={"Costo"} input={"cost"} onChange={props.handleChange} value={props.values.cost} invalid={props.errors.cost && true} helperText={props.errors.cost} />

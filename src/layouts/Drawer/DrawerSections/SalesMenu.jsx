@@ -7,7 +7,7 @@ function SalesMenu() {
   ];
   return (
     <>
-      <ul className="list-none px-3 m-0">
+      <ul className="list-none px-3 py-0 m-0">
         <AccordionMenu header="VENTAS" listItems={listItems} />
       </ul>
     </>
