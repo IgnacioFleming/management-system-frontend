@@ -9,10 +9,10 @@ function AccordionMenu({ header, listItems }) {
   const { narrowDrawer } = useContext(DrawerContext);
 
   return (
-    <li>
+    <li className="py-0">
       {!narrowDrawer && <MenuHeader label={header} btnRef={btnRef} />}
       <MenuBody listItems={listItems} />
-      <Divider />
+      <Divider className="my-3" />
     </li>
   );
 }

@@ -16,7 +16,7 @@ export default function Drawer() {
     return (
       <div className="min-h-screen flex relative lg:static surface-ground">
         <div id="app-sidebar-2" className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none" style={{ width: "100%" }}>
-          <div className="flex flex-column h-full mt-3 ">
+          <div className="flex flex-column h-full mt-3 gap-5">
             <Header />
             <div className="overflow-y-auto mt-2">
               <ProductsMenu />

@@ -10,7 +10,7 @@ function MenuBody({ listItems }) {
       {listItems.map((item, index) => {
         return (
           <li key={index}>
-            <Link to={item.path} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
+            <Link to={item.path} className="p-ripple flex align-items-center cursor-pointer px-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full no-underline">
               <i className={`pi ${item.icon} mr-2`}></i>
               {!narrowDrawer && <span className="font-medium">{item.label}</span>}
               <Ripple />

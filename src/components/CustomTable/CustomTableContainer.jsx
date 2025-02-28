@@ -8,8 +8,6 @@ function CustomTableContainer({ label, columns, items, refreshItems, path, extra
   const [editItems, setEditItems] = useState(null);
   const { globalFilterValue, onGlobalFilterChange, handleRefresh, filters } = useGlobalFilter();
 
-  console.log(customFooter);
-
   const updateRegister = (id) => {
     setEditItems(id);
   };

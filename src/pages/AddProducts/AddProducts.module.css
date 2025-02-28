@@ -1,8 +1,11 @@
 .cardContainer {
   display: flex;
   justify-content: center;
-  padding-top: 100px;
+  padding-top: 20px;
 }
 .card {
-  width: 50%;
+  width: 100%;
+  @media (min-width: 600px) {
+    width: 50%;
+  }
 }

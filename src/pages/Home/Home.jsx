@@ -1,73 +1,22 @@
-import { useState, useEffect } from "react";
-import { Chart } from "primereact/chart";
+import { useEffect, useState } from "react";
 import { useGetMonthlySales } from "../../hooks/useGetMonthlySales";
+import SalesChart from "./SalesChart";
+import WellcomeSection from "./WellcomeSection";
 
 export default function Home() {
-  const [chartData, setChartData] = useState({});
-  const [chartOptions, setChartOptions] = useState({});
-
-  const [sales] = useGetMonthlySales();
-
-  const Xaxis = sales.map((sale) => sale.sale_day + "/" + sale.sale_month);
-  const Yaxis = sales.map((sale) => sale.total_amount_per_day.toFixed(2));
-
+  const [loading, setLoading] = useState(true);
+  const [sales] = useGetMonthlySales(null);
   useEffect(() => {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue("--text-color");
-    const textColorSecondary = documentStyle.getPropertyValue("--text-color-secondary");
-    const surfaceBorder = documentStyle.getPropertyValue("--surface-border");
-    const data = {
-      labels: Xaxis,
-      datasets: [
-        {
-          label: "Ventas Diarias",
-          data: Yaxis,
-          fill: false,
-          borderColor: documentStyle.getPropertyValue("--red-500"),
-          tension: 0.4,
-        },
-      ],
-    };
-    const options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.6,
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor,
-          },
-        },
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-          },
-        },
-        y: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-          },
-        },
-      },
-    };
-    console.log(data);
-    setChartData(data);
-    setChartOptions(options);
+    if (sales === undefined || sales === null) return;
+    setLoading(false);
   }, [sales]);
 
-  return (
-    <div className="card w-full flex flex-column align-items-center justify-content-center mt-8">
-      <div className="w-7 h-25rem">
-        <h3 className="text-center">Ventas del último Mes</h3>
-        <Chart type="line" data={chartData} options={chartOptions} />
+  if (loading) {
+    return (
+      <div className="flex justify-content-center align-items-center" style={{ height: "calc(100vh-100px" }}>
+        Loading...
       </div>
-    </div>
-  );
+    );
+  }
+  return sales?.length <= 0 ? <WellcomeSection /> : <SalesChart sales={sales} />;
 }

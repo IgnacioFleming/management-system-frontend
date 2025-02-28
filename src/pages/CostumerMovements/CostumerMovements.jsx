@@ -24,11 +24,10 @@ function CostumerMovements() {
       </div>
     );
   };
-  console.log(footer);
   return (
     <>
-      <div className="flex justify-content-center mb-6 ">
-        <div className="flex flex-column align-items-center w-3 ">
+      <div className="flex justify-content-center mb-6 mt-1 ">
+        <div className="flex flex-column align-items-center w-3">
           <img className="w-full h-13rem" style={{ objectFit: "contain" }} src={costumer?.logo} alt="Costumer Logo" />
           <h3>{costumer?.name}</h3>
           <div>Número de Cuenta: {costumer?.account_number}</div>

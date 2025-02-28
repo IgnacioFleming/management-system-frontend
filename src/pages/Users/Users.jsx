@@ -18,9 +18,9 @@ function Users() {
   }, [users]);
   const itemTemplate = (user, index) => {
     return (
-      <div className="col-12" key={user.id}>
-        <div className={classNames("flex p-4 gap-4", { "border-top-1 surface-border": index !== 0 })}>
-          <div className="flex flex-column  justify-content-between w-5 align-items-center xl:align-items-start  gap-4">
+      <div className="w-full" key={user.id}>
+        <div className={classNames("flex flex-column sm:flex-row p-0 sm:p-4 text-xs sm:text-lg gap-4", { "border-top-1 surface-border": index !== 0 })}>
+          <div className="flex flex-column  justify-content-between w-auto mr-5 align-items-center xl:align-items-start  gap-4">
             <h2 className="m-0">
               <span className="w-15rem inline-block">Usuario:</span> <span className={`text-900  ${user.is_enabled === 1 ? "text-green-500" : "text-red-500"} `}>{user.username}</span>
             </h2>
