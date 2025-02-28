@@ -15,7 +15,6 @@ function CostumerMovements() {
   const { id } = useParams();
   const [movementsData] = useGetDataById(movementsService, id);
   const { costumer, movements, balance } = movementsData;
-  console.log(movements);
 
   const footer = () => {
     return (

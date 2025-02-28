@@ -1,5 +1,6 @@
 import ApiCall from "./apiService";
 import helpers from "../utils/utils.js";
+import Alerts from "../../helpers/alerts/alerts.js";
 
 const path = `${import.meta.env.VITE_API_BASE_URL}/api/sales`;
 export default class SalesApiCall extends ApiCall {
@@ -11,7 +12,7 @@ export default class SalesApiCall extends ApiCall {
       const payload = await helpers.requestHandle(`${this.path}/monthlySales`);
       return payload;
     } catch (error) {
-      console.log("Exception throwed, ", error);
+      Alerts.errorAlert({ text: error });
     }
   }
 }

@@ -26,7 +26,6 @@ function LoginContainer() {
   });
   async function loginUser({ username, password }) {
     const login = await SessionsApiCall.login({ username, password });
-    console.log(login);
     if (login.status === API_Status_List.UNAUTHORIZED) {
       await Alerts.errorAlert({ text: login.message, resolveCallback: resetForm });
       return;
