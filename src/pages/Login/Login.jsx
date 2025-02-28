@@ -19,9 +19,7 @@ const Login = ({ handleChange, handleSubmit, values, errors }) => {
             <div className="flex flex-column gap-5 align-items-center ">
               <TextField label="Nombre de Usuario" input="username" className="w-5" onChange={handleChange} value={values.username} invalid={errors.username} helperText={errors.username} />
               <PasswordInput name="password" handleChange={handleChange} className="w-5" value={values.password} invalid={errors.password} helperText={errors.password} />
-              <div className="">
-                <Button type="submit" label="Ingresar" severity="info" className="w-10rem" />
-              </div>
+              <Button type="submit" label="Ingresar" severity="info" className="w-10rem" />
             </div>
           </form>
 
