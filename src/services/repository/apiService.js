@@ -1,3 +1,4 @@
+import Alerts from "../../helpers/alerts/alerts";
 import helpers from "../utils/utils";
 
 export default class ApiCall {
@@ -10,7 +11,7 @@ export default class ApiCall {
       const payload = await helpers.requestHandle(this.path);
       return payload;
     } catch (error) {
-      console.log("Exception throwed, ", error);
+      Alerts.errorAlert({ text: error });
     }
   }
 
@@ -20,7 +21,7 @@ export default class ApiCall {
       const payload = await helpers.requestHandle(this.path, options);
       return payload;
     } catch (error) {
-      console.log("Exception throwed ", error);
+      Alerts.errorAlert({ text: error });
     }
   }
 
@@ -39,7 +40,7 @@ export default class ApiCall {
       const payload = await helpers.requestHandle(`${this.path}/${id}`, { method: "DELETE" });
       return payload;
     } catch (error) {
-      console.log("Exception throwed ", error);
+      Alerts.errorAlert({ text: error });
     }
   }
 
@@ -48,7 +49,7 @@ export default class ApiCall {
       const payload = await helpers.requestHandle(`${this.path}/${id}`);
       return payload;
     } catch (error) {
-      console.log(error);
+      Alerts.errorAlert({ text: error });
     }
   }
 }

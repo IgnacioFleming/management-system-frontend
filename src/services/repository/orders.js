@@ -1,3 +1,4 @@
+import Alerts from "../../helpers/alerts/alerts";
 import helpers from "../utils/utils";
 import ApiCall from "./apiService";
 
@@ -11,7 +12,7 @@ export default class OrdersApiCall extends ApiCall {
       const payload = await helpers.requestHandle(`${this.path}/sale_id/${id}`);
       return payload;
     } catch (error) {
-      console.log(error);
+      Alerts.errorAlert({ text: error });
     }
   }
 }

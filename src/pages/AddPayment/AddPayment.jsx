@@ -25,7 +25,6 @@ function AddPayment() {
           {({ handleChange, handleSubmit, values, errors }) => (
             <form onSubmit={handleSubmit} className="flex flex-column gap-5 justify-content-center align-items-center">
               <CostumerDropdown data={costumers} selectedCostumer={selectedCostumer} handleSelectCostumer={handleSelectCostumer} />
-              {console.log(errors)}
               <TextField input="payment_amount" onChange={handleChange} label="Monto" value={values.amount} invalid={errors.payment_amount && true} helperText={errors.payment_amount} />
               <Button type="submit" label="Agregar" severity="info" />
             </form>

@@ -18,7 +18,6 @@ export default function SalesList() {
   const [sales, getSales] = useGetData(salesService);
   const [expandedRows, setExpandedRows] = useState(null);
   const [orderNumber, setOrderNumber] = useState();
-  console.log(sales);
 
   const showSaleDetail = (salesId) => {
     if (orderNumber === salesId) {
