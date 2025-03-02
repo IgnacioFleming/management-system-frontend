@@ -3,7 +3,7 @@ import { Button } from "primereact/button";
 import styles from "./AddSales.module.css";
 import ProductPicker from "../../components/ProductPicker/ProductPicker";
 import ProductsPicked from "../../components/ProductsPicked/ProductsPicked";
-import CostumerDropdown from "../../components/CostumerDropdown/CostumerDropDown";
+import CostumerDropdown from "../../components/CostumerDropdown/CostumerDropdown";
 
 function AddSales({ costumers, filteredItems, removeFilteredItem, restItems, filterItem, handleSelectCostumer, handleSubmit, selectedCostumer }) {
   return (
