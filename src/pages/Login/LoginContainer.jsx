@@ -30,6 +30,9 @@ function LoginContainer() {
       await Alerts.errorAlert({ text: login.message, resolveCallback: resetForm });
       return;
     }
+    if (login.status !== API_Status_List.SUCCESS) {
+      return await Alerts.errorAlert({ text: "Unexpected error.", resolveCallback: resetForm });
+    }
     setUserData(login.payload);
     navigate("/");
   }
