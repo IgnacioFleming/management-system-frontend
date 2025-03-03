@@ -1,5 +1,4 @@
 import { Card } from "primereact/card";
-import CostumerDropdown from "../../components/CostumerDropdown/CostumerDropDown";
 import { useGetData } from "../../hooks/useGetData";
 import { costumersService, paymentsService } from "../../services";
 import { Formik } from "formik";
@@ -7,6 +6,7 @@ import TextField from "../../components/TextField/TextField";
 import { paymentSchema } from "../../schemas/payment";
 import { Button } from "primereact/button";
 import { useState } from "react";
+import CostumerDropdown from "../../components/CostumerDropdown/CostumerDropDown";
 
 const initialValues = { payment_amount: "" };
 
