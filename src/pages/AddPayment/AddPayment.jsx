@@ -6,7 +6,7 @@ import TextField from "../../components/TextField/TextField";
 import { paymentSchema } from "../../schemas/payment";
 import { Button } from "primereact/button";
 import { useState } from "react";
-import CostumerDropdown from "../../components/CostumerDropdown/CostumerDropDown";
+import CostumerDropdown from "../../components/CostumerDropdown/CostumerDropdown";
 
 const initialValues = { payment_amount: "" };
 
