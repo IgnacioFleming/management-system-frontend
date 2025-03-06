@@ -24,6 +24,7 @@ import Profile from "./pages/Profile/Profile";
 import DrawerContextProvider from "./contexts/drawer";
 
 function App() {
+  console.log(document.cookie);
   return (
     <>
       <BrowserRouter>
