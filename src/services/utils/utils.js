@@ -13,10 +13,8 @@ const requestOptionsHandler = (data, method) => {
   }
   return options;
 };
-const cookie = document.cookie;
-console.log(cookie);
 const requestHandle = async (path, options = {}) => {
-  const result = await fetch(path, { ...options, credentials: "include", headers: { Cookie: cookie } });
+  const result = await fetch(path, { ...options, credentials: "include", headers: { "Access-Control-Allow-Origin": "*" }, mode: "no-cors" });
   const { status, payload, error, redirectURL } = await result.json();
   if (status === API_Status_List.ERROR) return { status, error };
   authRedirection(status, redirectURL);
