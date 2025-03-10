@@ -1,4 +1,4 @@
-import Alerts from "../../helpers/alerts/alerts";
+import { API_Status_List } from "../../helpers/utils";
 import helpers from "../utils/utils";
 
 export default class ApiCall {
@@ -11,7 +11,7 @@ export default class ApiCall {
       const payload = await helpers.requestHandle(this.path);
       return payload;
     } catch (error) {
-      Alerts.errorAlert({ text: error });
+      throw new Error(error);
     }
   }
 
@@ -19,9 +19,10 @@ export default class ApiCall {
     try {
       const options = helpers.requestOptionsHandler(data, "POST");
       const payload = await helpers.requestHandle(this.path, options);
+      if (payload.status === API_Status_List.ERROR) throw new Error("An error ocurred while creating the product");
       return payload;
     } catch (error) {
-      Alerts.errorAlert({ text: error });
+      throw new Error(error);
     }
   }
 
@@ -40,7 +41,7 @@ export default class ApiCall {
       const payload = await helpers.requestHandle(`${this.path}/${id}`, { method: "DELETE" });
       return payload;
     } catch (error) {
-      Alerts.errorAlert({ text: error });
+      throw new Error(error);
     }
   }
 
@@ -49,7 +50,7 @@ export default class ApiCall {
       const payload = await helpers.requestHandle(`${this.path}/${id}`);
       return payload;
     } catch (error) {
-      Alerts.errorAlert({ text: error });
+      throw new Error(error);
     }
   }
 }
