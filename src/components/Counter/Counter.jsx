@@ -3,7 +3,7 @@ import { useCounter } from "../../hooks/useCounter";
 import { SalesContext } from "../../contexts/orders";
 
 function Counter({ product }) {
-  const { counter, substractFromCount, addToCount, refreshCount } = useCounter(1);
+  const { counter, substractFromCount, addToCount, refreshCount } = useCounter(1, product.stock);
   const { setQuantity } = useContext(SalesContext);
 
   useEffect(() => {
