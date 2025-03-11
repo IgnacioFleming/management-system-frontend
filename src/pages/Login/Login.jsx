@@ -3,18 +3,8 @@ import TextField from "../../components/TextField/TextField";
 import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import { useEffect } from "react";
 
 const Login = ({ handleChange, handleSubmit, values, errors }) => {
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}`, { credentials: "include" });
-  });
-
-  const setCookie = async () => {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/setCookie`, { credentials: "include" });
-    const json = await res.json();
-    alert(json);
-  };
   return (
     <>
       <div className={`${styles.container} flex align-items-center`}>
@@ -40,7 +30,6 @@ const Login = ({ handleChange, handleSubmit, values, errors }) => {
             </Link>
           </div>
         </div>
-        <Button label="set cookie" onClick={setCookie} />
       </div>
     </>
   );
