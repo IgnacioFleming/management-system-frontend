@@ -10,7 +10,7 @@ function CustomTable({ header, columns, items, showDetailButton = false, extract
         return <Column key={index} header={label} field={field} body={body} sortable={sortable}></Column>;
       })}
       {showDetailButton && <Column header={extractionFilename && <ExportButton data={items} filename={extractionFilename} />} body={detailButtonTemplate}></Column>}
-      <Column header={!detailButtonTemplate && extractionFilename && <ExportButton data={items} filename={extractionFilename} />} body={actionsBodyTemplate}></Column>
+      <Column header={!showDetailButton && extractionFilename && <ExportButton data={items} filename={extractionFilename} />} body={actionsBodyTemplate}></Column>
     </DataTable>
   );
 }
