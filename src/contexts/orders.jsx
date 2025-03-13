@@ -7,8 +7,9 @@ export const SalesContext = createContext();
 
 function SalesContextProvider({ children }) {
   const [costumers] = useGetData(costumersService);
-  const [products] = useGetData(productsService);
-  const { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems } = useFilter(products, JSON.parse(localStorage.getItem("filteredItems")));
+  const [products, getProducts] = useGetData(productsService);
+  const productsWithStock = products.filter((product) => product.stock > 0);
+  const { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems } = useFilter(productsWithStock, JSON.parse(localStorage.getItem("filteredItems")));
   const [productsIds, setProductsIds] = useState([]);
   const [selectedCostumer, setSelectedCostumer] = useState(JSON.parse(localStorage.getItem("costumer")) || null);
   const [sale, setSale] = useState(selectedCostumer?.id ? { costumer_id: selectedCostumer.id } : {});
@@ -33,6 +34,11 @@ function SalesContextProvider({ children }) {
 
     setProductsIds(product_ids);
   }, [filteredItems]);
+
+  useEffect(() => {
+    getProducts();
+  }, [sale]);
+
   const getItemsQuantity = (array) => {
     const quantity = array.reduce((acc, { quantity }) => acc + quantity, 0);
     return quantity;
@@ -64,7 +70,12 @@ function SalesContextProvider({ children }) {
     localStorage.setItem("costumer", JSON.stringify(costumer));
   };
 
-  const tools = { sale, filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems, costumers, handleSelectCostumer, selectedCostumer, setQuantity };
+  const refreshSaleItems = () => {
+    refreshFilteredItems();
+    setSale(selectedCostumer?.id ? { costumer_id: selectedCostumer.id } : {});
+  };
+
+  const tools = { sale, filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems, costumers, handleSelectCostumer, selectedCostumer, setQuantity, refreshSaleItems };
   return <SalesContext.Provider value={tools}>{children}</SalesContext.Provider>;
 }
 
