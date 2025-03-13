@@ -2,8 +2,12 @@ import { DataView } from "primereact/dataview";
 import Counter from "../Counter/Counter";
 import { Button } from "primereact/button";
 import { classNames } from "primereact/utils";
+import { useContext } from "react";
+import { SalesContext } from "../../contexts/orders";
 
 function ProductsPicked({ filteredItems, removeFilteredItem }) {
+  const { sale } = useContext(SalesContext);
+  console.log(sale);
   const itemTemplate = (product, index) => {
     return (
       <div className="col-12" key={product.id}>

@@ -8,36 +8,46 @@ export const SalesContext = createContext();
 function SalesContextProvider({ children }) {
   const [costumers] = useGetData(costumersService);
   const [products, getProducts] = useGetData(productsService);
-  const productsWithStock = products.filter((product) => product.stock > 0);
+  const [productsWithStock, setProductsWithStock] = useState([]);
   const { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems } = useFilter(productsWithStock, JSON.parse(localStorage.getItem("filteredItems")));
   const [productsIds, setProductsIds] = useState([]);
   const [selectedCostumer, setSelectedCostumer] = useState(JSON.parse(localStorage.getItem("costumer")) || null);
   const [sale, setSale] = useState(selectedCostumer?.id ? { costumer_id: selectedCostumer.id } : {});
 
   useEffect(() => {
+    if (products?.length > 0) {
+      const filteredProducts = products.filter((product) => product.stock > 0);
+      setProductsWithStock(filteredProducts);
+    }
+  }, [products]);
+  useEffect(() => {
     if (!selectedCostumer) return setSale({});
     const newSale = { ...sale, costumer_id: selectedCostumer.id };
     setSale(newSale);
   }, [selectedCostumer]);
+  //
+  console.log("first");
 
   useEffect(() => {
     const newSale = { costumer_id: sale.costumer_id, products: productsIds, items_quantity: getItemsQuantity(productsIds), total_amount: getTotalAmount(productsIds) };
     setSale(newSale);
   }, [productsIds]);
-
+  //
   useEffect(() => {
     const product_ids = filteredItems.map((item) => {
       const previusProduct = productsIds.find((e) => e.id === item.id);
       const quantity = previusProduct ? previusProduct.quantity : 1;
       return { product_id: item.id, quantity, amount: item.price * quantity };
     });
-
     setProductsIds(product_ids);
   }, [filteredItems]);
+
+  //
 
   useEffect(() => {
     getProducts();
   }, [sale]);
+  //
 
   const getItemsQuantity = (array) => {
     const quantity = array.reduce((acc, { quantity }) => acc + quantity, 0);
