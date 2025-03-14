@@ -26,7 +26,5 @@ export const useFilter = (data, initialFilteredItems) => {
     localStorage.removeItem("filteredItems");
   };
 
-  const refreshRestItems = () => {};
-
   return { filteredItems, restItems, filterItem, removeFilteredItem, refreshFilteredItems };
 };
