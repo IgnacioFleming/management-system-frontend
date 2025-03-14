@@ -25,10 +25,7 @@ function Profile() {
             </div>
             <div className="flex">
               <strong className="w-6rem block">Nombre: </strong>
-              <div>
-                {user.first_name}
-                {user.last_name}
-              </div>
+              <div>{`${user.first_name} ${user.last_name}`}</div>
             </div>
             <div className="flex">
               <strong className="w-6rem block">Rol: </strong>
