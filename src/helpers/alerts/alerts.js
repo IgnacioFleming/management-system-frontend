@@ -23,23 +23,26 @@ export default class Alerts {
     });
     if (resolveCallback) return resolveCallback();
   }
-  static async warnAlert({ title = "Advertencia!", text = "", hasCancellation, confirmCallback, rejectCallback, confirmButtonText, cancelButtonText } = {}) {
-    const res = await Swal.fire({
-      title,
-      text,
-      icon: "warning",
-      showConfirmButton: true,
-      confirmButtonText: confirmButtonText || "OK",
-      showCancelButton: hasCancellation || false,
-      cancelButtonText: cancelButtonText || "Cancelar",
-      confirmButtonColor: customColors.DANGER,
-    });
-    if (res.isConfirmed) {
-      const res = await confirmCallback();
-      if (res?.status === API_Status_List.ERROR) return await this.errorToast();
-      return await this.successToast();
+  static async warnAlert({ title = "Advertencia!", text = "", hasCancellation, confirmCallback, confirmButtonText, cancelButtonText } = {}) {
+    try {
+      const res = await Swal.fire({
+        title,
+        text,
+        icon: "warning",
+        showConfirmButton: true,
+        confirmButtonText: confirmButtonText || "OK",
+        showCancelButton: hasCancellation || false,
+        cancelButtonText: cancelButtonText || "Cancelar",
+        confirmButtonColor: customColors.DANGER,
+      });
+      if (res.isConfirmed) {
+        const res = await confirmCallback();
+        if (res?.status === API_Status_List.ERROR) return await this.errorToast();
+        return await this.successToast();
+      }
+    } catch (error) {
+      return this.errorToast({ text: error });
     }
-    return rejectCallback();
   }
 
   static async addItem({ title = "Agregar Item", text = "Estás seguro que querés agregar este item?", hasCancellation, confirmCallback, confirmButtonText, cancelButtonText } = {}) {
@@ -73,6 +76,8 @@ export default class Alerts {
       icon: "error",
       toast: true,
       position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
     });
   }
 }
