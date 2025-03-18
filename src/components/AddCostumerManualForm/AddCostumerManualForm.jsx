@@ -22,9 +22,9 @@ function AddCostumerManualForm() {
       await costumersService.create(formData);
       resetForm();
       if (fileRef.current) fileRef.current.clear();
-      await Alerts.successAlert({ title: "Cliente creado!", toast: true, position: "top-end" });
+      await Alerts.successToast({ title: "Cliente creado!" });
     } catch (error) {
-      await Alerts.errorAlert({ text: error, toast: true, position: "top-end" });
+      await Alerts.errorToast({ text: error });
     }
   };
   const addItemWithAlert = async (data) => {

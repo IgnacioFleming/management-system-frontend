@@ -8,7 +8,7 @@ export const useCheckSession = () => {
   const location = useLocation();
   const checkSession = async () => await SessionsApiCall.checkSession();
   useEffect(() => {
-    if (location.pathname === "/register") return;
+    if (location.pathname === "/register" || location.pathname === "/login") return;
     checkSession()
       .then((res) => setSessionUser(res))
       .catch((err) => Alerts.errorAlert({ text: err }));
