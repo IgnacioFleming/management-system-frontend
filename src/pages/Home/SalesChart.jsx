@@ -4,21 +4,27 @@ import { useEffect, useState } from "react";
 function SalesChart({ sales }) {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
+  const [axis, setAxis] = useState({ x: [], y: [] });
 
-  const Xaxis = sales.map((sale) => sale.sale_day + "/" + sale.sale_month);
-  const Yaxis = sales.map((sale) => sale.total_amount_per_day.toFixed(2));
-
+  useEffect(() => {
+    if (sales?.length > 0) {
+      const Xaxis = sales.map((sale) => sale.sale_day + "/" + sale.sale_month);
+      const Yaxis = sales.map((sale) => sale.total_amount_per_day.toFixed(2));
+      const axisData = { x: Xaxis, y: Yaxis };
+      setAxis(axisData);
+    }
+  }, [sales]);
   useEffect(() => {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue("--text-color");
     const textColorSecondary = documentStyle.getPropertyValue("--text-color-secondary");
     const surfaceBorder = documentStyle.getPropertyValue("--surface-border");
     const data = {
-      labels: Xaxis,
+      labels: axis.x,
       datasets: [
         {
           label: "Ventas Diarias",
-          data: Yaxis,
+          data: axis.y,
           fill: false,
           borderColor: documentStyle.getPropertyValue("--cyan-500"),
           tension: 0.4,
@@ -56,7 +62,7 @@ function SalesChart({ sales }) {
     };
     setChartData(data);
     setChartOptions(options);
-  }, [sales]);
+  }, [axis]);
 
   return (
     <div className="card w-full flex flex-column align-items-center justify-content-center mt-8">
