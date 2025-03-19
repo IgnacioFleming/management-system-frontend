@@ -1,5 +1,5 @@
 import js from "@eslint/js";
-import globals from "globals";
+import globals, { jest } from "globals";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -32,6 +32,9 @@ export default [
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       "react/prop-types": "off",
       "react-hooks/exhaustive-deps": "off",
+    },
+    env: {
+      jest: true,
     },
   },
 ];
