@@ -4,6 +4,6 @@ import AddCostumerManualForm from "./AddCostumerManualForm";
 describe("AddCostumerManualForm", () => {
   test("renders form", () => {
     const component = render(<AddCostumerManualForm />);
-    console.log(component);
+    console.log(Object.keys(component.container));
   });
 });
