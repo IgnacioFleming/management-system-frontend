@@ -14,7 +14,7 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex justify-content-center align-items-center" style={{ height: "calc(100vh-100px" }}>
+      <div className="flex justify-content-center align-items-center" style={{ height: "calc(100vh-100px)" }}>
         Loading...
       </div>
     );
