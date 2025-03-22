@@ -7,7 +7,7 @@ export default {
     "\\.(css|scss|sass)$": "identity-obj-proxy",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-  testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[tj]s?(x)"],
+  testMatch: ["**/?(*.)+(spec|test).[tj]s?(x)"],
   extensionsToTreatAsEsm: [".jsx"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx"],
 };
