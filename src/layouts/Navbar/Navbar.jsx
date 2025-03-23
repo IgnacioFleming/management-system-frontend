@@ -12,7 +12,7 @@ export default function Navbar() {
   const signOutRef = useRef(null);
   const items = [
     {
-      label: "Mi Perfil",
+      label: "My Profile",
       icon: "pi pi-user",
       command: () => {
         window.history.pushState(null, "", "/profile");
@@ -20,7 +20,7 @@ export default function Navbar() {
       },
     },
     {
-      label: "Cerrar Sesión",
+      label: "Log out",
       icon: "pi pi-sign-out",
       command: async () => {
         const logout = await SessionsApiCall.logout();

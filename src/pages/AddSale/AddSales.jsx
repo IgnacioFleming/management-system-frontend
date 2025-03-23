@@ -10,11 +10,11 @@ function AddSales({ costumers, filteredItems, removeFilteredItem, restItems, fil
     <>
       <div className={styles.cardContainer}>
         <div className={`card ${styles.card}`}>
-          <Card pt={{ title: { className: "m-4" } }} title="Nueva Venta" className="flex justify-content-center">
+          <Card pt={{ title: { className: "m-4" } }} title="New Sale" className="flex justify-content-center">
             <form className="flex flex-column row-gap-5" onSubmit={handleSubmit}>
               <CostumerDropdown handleSelectCostumer={handleSelectCostumer} selectedCostumer={selectedCostumer} data={costumers} />
               <div className="flex justify-content-center">
-                <Button label="Crear Nueva Venta" type="submit" disabled={filteredItems.length > 0 ? false : true} />
+                <Button label="Add new sale" type="submit" disabled={filteredItems.length > 0 ? false : true} />
               </div>
             </form>
 

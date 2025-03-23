@@ -5,8 +5,8 @@ import { useGetData } from "../../hooks/useGetData";
 
 const columns = [
   { label: "Logo", field: "logo" },
-  { label: "Número de Cuenta", field: "account_number", sortable: true, isNumber: true },
-  { label: "Nombre", field: "name", sortable: true, isEditable: true },
+  { label: "Account Number", field: "account_number", sortable: true, isNumber: true },
+  { label: "Name", field: "name", sortable: true, isEditable: true },
 ];
 
 function CostumerList() {
@@ -30,7 +30,7 @@ function CostumerList() {
 
   return (
     <div className="card">
-      <CustomTableContainer columns={columns} items={costumers} extractionFilename="costumers.xlsx" label="Clientes" paginator rows={5} updating deletion ptRef={fileRef} handleUpdate={handleUpdateCostumer} handleDelete={deleteCostumer} />
+      <CustomTableContainer columns={columns} items={costumers} extractionFilename="costumers.xlsx" label="Costumers" paginator rows={5} updating deletion ptRef={fileRef} handleUpdate={handleUpdateCostumer} handleDelete={deleteCostumer} />
     </div>
   );
 }

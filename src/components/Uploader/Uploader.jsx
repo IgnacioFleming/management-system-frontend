@@ -10,7 +10,7 @@ function Uploader({ label, name, accept, ptRef }) {
   const handleRemove = () => {
     setFile("");
   };
-  const emptyTemplate = () => <div>No se ha seleccionado un archivo.</div>;
+  const emptyTemplate = () => <div>No file selected.</div>;
 
   const uploadOptions = { style: { display: "none" } };
 

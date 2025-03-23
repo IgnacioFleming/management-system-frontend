@@ -19,7 +19,7 @@ function AddProducts() {
         <div className="flex justify-content-end mb-1">
           <SelectButton value={selection} onChange={handleSelectChange} options={addModeOptions} />
         </div>
-        <Card pt={{ title: { className: "m-1" } }} title="Alta de Productos" className="flex justify-content-center">
+        <Card pt={{ title: { className: "m-1" } }} title="Add Product" className="flex justify-content-center">
           {selection === addModes.manual ? <AddProductManualForm /> : <ImportButton service={productsService} />}
         </Card>
       </div>

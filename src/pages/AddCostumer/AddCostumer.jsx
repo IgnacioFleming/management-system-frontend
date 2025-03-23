@@ -19,7 +19,7 @@ function AddCostumer() {
         <div className="flex justify-content-end mb-5">
           <SelectButton value={selection} onChange={handleSelectChange} options={addModeOptions} />
         </div>
-        <Card pt={{ title: { className: "m-1" } }} title="Alta de Clientes" className="flex justify-content-center">
+        <Card pt={{ title: { className: "m-1" } }} title="Add Costumer" className="flex justify-content-center">
           {selection === addModes.manual ? <AddCostumerManualForm /> : <ImportButton service={costumersService} />}
         </Card>
       </div>

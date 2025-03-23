@@ -5,11 +5,10 @@ import { inputTypes } from "../../helpers/utils";
 
 const columns = [
   { label: "Logo", field: "logo" },
-  { label: "Cliente", field: "name", sortable: true },
-  { label: "Número de Cuenta", field: "account_number", sortable: true, isNumber: true },
+  { label: "Costumer", field: "name", sortable: true },
+  { label: "Account Number", field: "account_number", sortable: true, isNumber: true },
   { label: "Balance", field: "balance_amount", sortable: true, isNumber: true, inputType: inputTypes.CURR },
 ];
-// costumer_id,balance_amount ,costumers.account_number, costumers.name, costumers.logo
 function Balances() {
   const [balances, getBalances] = useGetData(balancesService);
 

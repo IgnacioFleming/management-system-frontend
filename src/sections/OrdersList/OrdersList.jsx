@@ -4,12 +4,12 @@ import { useGetDataById } from "../../hooks/useGetDataById";
 import { ordersService } from "../../services";
 
 const columns = [
-  { label: "Producto", field: "name", sortable: true },
-  { label: "Categoría", field: "category", sortable: true },
-  { label: "Cantidad", field: "quantity", sortable: true, isEditable: true, inputType: inputTypes.INT },
-  { label: "Precio", field: "price", sortable: true, inputType: inputTypes.CURR },
-  { label: "Monto", field: "amount", sortable: true, inputType: inputTypes.CURR },
-  { label: "Costo", field: "order_cost", sortable: true, inputType: inputTypes.CURR },
+  { label: "Product", field: "name", sortable: true },
+  { label: "Category", field: "category", sortable: true },
+  { label: "Quantity", field: "quantity", sortable: true, isEditable: true, inputType: inputTypes.INT },
+  { label: "Price", field: "price", sortable: true, inputType: inputTypes.CURR },
+  { label: "Amount", field: "amount", sortable: true, inputType: inputTypes.CURR },
+  { label: "Cost", field: "order_cost", sortable: true, inputType: inputTypes.CURR },
 ];
 
 export default function OrderList({ sale_id, refreshSales }) {

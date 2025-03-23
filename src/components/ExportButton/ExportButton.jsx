@@ -11,7 +11,7 @@ function ExportButton({ data = [], filename, sales = [], is_sales = false }) {
     if (is_sales) return exportSalesXlsx(dataWithNoId, orders, filename);
     exportToXlsx(dataWithNoId, filename);
   };
-  return <Button size="small" label="Exportar" severity="success" onClick={handleExport} />;
+  return <Button size="small" label="Export" severity="success" onClick={handleExport} />;
 }
 
 export default ExportButton;

@@ -11,7 +11,7 @@ function AddSalesContainer() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await Alerts.addItem({ title: "Crear Venta", text: "Deseas crear esta venta?", confirmCallback: async () => await salesService.create(sale), hasCancellation: true });
+      const res = await Alerts.addItem({ title: "Add Sale", text: "Do you want to add this sale?", confirmCallback: async () => await salesService.create(sale), hasCancellation: true });
       if (res.status === API_Status_List.ERROR) return await Alerts.errorToast();
       refreshSaleItems();
       return await Alerts.successToast();

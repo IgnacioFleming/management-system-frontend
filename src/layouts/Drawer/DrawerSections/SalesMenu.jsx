@@ -2,13 +2,13 @@ import AccordionMenu from "../DrawerComponentes/AccordionMenu";
 
 function SalesMenu() {
   const listItems = [
-    { label: "Lista de Ventas", path: "/sales", icon: "pi-clipboard" },
-    { label: "Alta de Venta", path: "/addSale", icon: "pi-plus-circle" },
+    { label: "Sales", path: "/sales", icon: "pi-clipboard" },
+    { label: "Add Sale", path: "/addSale", icon: "pi-plus-circle" },
   ];
   return (
     <>
       <ul className="list-none px-3 py-0 m-0">
-        <AccordionMenu header="VENTAS" listItems={listItems} />
+        <AccordionMenu header="SALES" listItems={listItems} />
       </ul>
     </>
   );

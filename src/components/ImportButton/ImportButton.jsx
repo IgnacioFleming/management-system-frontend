@@ -10,7 +10,7 @@ function ImportButton({ service }) {
 
   const submitWithAlert = async (e) => {
     e.preventDefault();
-    await Alerts.warnAlert({ title: "Atencion!", text: "Estás seguro que querés importar los items por archivo?", hasCancellation: true, confirmCallback: () => handleImportSubmit(), confirmButtonText: "Importar" });
+    await Alerts.warnAlert({ title: "Warning!", text: "Are you sure you want to import the items of the file uploaded?", hasCancellation: true, confirmCallback: () => handleImportSubmit(), confirmButtonText: "Import" });
   };
   const handleImportSubmit = async () => {
     const sheetData = await importXlsx(fileRef.current);
@@ -24,12 +24,12 @@ function ImportButton({ service }) {
 
   return (
     <form className="flex flex-column gap-3" onSubmit={submitWithAlert}>
-      <div>Importá un archivo Excel con los productos a agregar:</div>
+      <div>Import products to add of an Excel file:</div>
       <div>
-        <Uploader label="Subir Archivo" name="file" ptRef={fileRef} accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+        <Uploader label="Upload File" name="file" ptRef={fileRef} accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
       </div>
       <div className="flex justify-content-center">
-        <Button label="Importar" type="submit" />
+        <Button label="Import" type="submit" />
       </div>
     </form>
   );

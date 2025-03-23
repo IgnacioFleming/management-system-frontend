@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { API_Status_List, customColors } from "../utils";
 export default class Alerts {
-  static async successAlert({ title = "Felicitaciones!", text = "El proceso finalizó con éxito.", confirmButtonText = "OK", resolveCallback, toast = false, position } = {}) {
+  static async successAlert({ title = "Congratulations!", text = "Process finished succesfully.", confirmButtonText = "OK", resolveCallback, toast = false, position } = {}) {
     const res = await Swal.fire({
       title,
       text,
@@ -13,7 +13,7 @@ export default class Alerts {
     if (resolveCallback && res.isConfirmed) return resolveCallback();
   }
 
-  static async errorAlert({ title = "Error!", text = "Ocurrió un error durante el proceso.", resolveCallback, toast = false, position } = {}) {
+  static async errorAlert({ title = "Error!", text = "An error has ocurred during the process.", resolveCallback, toast = false, position } = {}) {
     await Swal.fire({
       title,
       text,
@@ -23,7 +23,7 @@ export default class Alerts {
     });
     if (resolveCallback) return resolveCallback();
   }
-  static async warnAlert({ title = "Advertencia!", text = "", hasCancellation, confirmCallback, confirmButtonText, cancelButtonText } = {}) {
+  static async warnAlert({ title = "Warning!", text = "", hasCancellation, confirmCallback, confirmButtonText, cancelButtonText } = {}) {
     try {
       const res = await Swal.fire({
         title,
@@ -32,7 +32,7 @@ export default class Alerts {
         showConfirmButton: true,
         confirmButtonText: confirmButtonText || "OK",
         showCancelButton: hasCancellation || false,
-        cancelButtonText: cancelButtonText || "Cancelar",
+        cancelButtonText: cancelButtonText || "Cancel",
         confirmButtonColor: customColors.DANGER,
       });
       if (res.isConfirmed) {
@@ -45,20 +45,20 @@ export default class Alerts {
     }
   }
 
-  static async addItem({ title = "Agregar Item", text = "Estás seguro que querés agregar este item?", hasCancellation, confirmCallback, confirmButtonText, cancelButtonText } = {}) {
+  static async addItem({ title = "Add Item", text = "Are you sure you want to add this item?", hasCancellation, confirmCallback, confirmButtonText, cancelButtonText } = {}) {
     const res = await Swal.fire({
       title,
       text,
       icon: "question",
       showConfirmButton: true,
-      confirmButtonText: confirmButtonText || "Agregar",
+      confirmButtonText: confirmButtonText || "Add",
       showCancelButton: hasCancellation || false,
-      cancelButtonText: cancelButtonText || "Cancelar",
+      cancelButtonText: cancelButtonText || "Cancel",
       confirmButtonColor: customColors.WARN,
     });
     if (res.isConfirmed) return confirmCallback();
   }
-  static async successToast({ title = "Proceso exitoso!", text = "Se ejecutaron correctamente los cambios" } = {}) {
+  static async successToast({ title = "Process Success!", text = "Changes applied correctly" } = {}) {
     await Swal.fire({
       title,
       text,
@@ -69,7 +69,7 @@ export default class Alerts {
       timer: 3000,
     });
   }
-  static async errorToast({ title = "Proceso fallido", text = "Hubo un error al procesar los cambios" } = {}) {
+  static async errorToast({ title = "Process Failure", text = "There was en error while applying changes" } = {}) {
     await Swal.fire({
       title,
       text,

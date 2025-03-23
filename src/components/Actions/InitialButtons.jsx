@@ -3,7 +3,7 @@ import Alerts from "../../helpers/alerts/alerts";
 
 function InitialButtons({ id, updating, deletion, updateRegister, deleteRegister }) {
   const deleteWithAlert = async () => {
-    await Alerts.warnAlert({ title: "Advertencia!", text: "Estás seguro que querés eliminar este registro?", hasCancellation: true, confirmCallback: async () => await deleteRegister(id), confirmButtonText: "Eliminar", cancelButtonText: "Cancelar" });
+    await Alerts.warnAlert({ title: "Warning!", text: "Are you sure you want to delete this register?", hasCancellation: true, confirmCallback: async () => await deleteRegister(id), confirmButtonText: "Delete", cancelButtonText: "Cancel" });
   };
   return (
     <div className="flex flex-column gap-1">

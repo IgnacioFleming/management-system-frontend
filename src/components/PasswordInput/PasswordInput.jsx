@@ -9,7 +9,7 @@ function PasswordInput({ handleChange, name, value, invalid, helperText, classNa
       <FloatLabel className="w-full">
         <Password name={name} value={value} feedback={false} onChange={handleChange} toggleMask className="w-full" invalid={invalid} pt={{ iconField: { root: { className: "w-full" } }, input: { className: "w-full" }, showIcon: { style: { color: helperText && customColors.DANGER } }, hideIcon: { style: { color: helperText && customColors.DANGER } } }} />
         <label htmlFor="password" style={{ color: helperText && customColors.DANGER }}>
-          {label || "Contraseña"}
+          {label || "Password"}
         </label>
       </FloatLabel>
       {helperText && <div className={`${styles.helperText} ${styles.color_danger}`}>{helperText}</div>}

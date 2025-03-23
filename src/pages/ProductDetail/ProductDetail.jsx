@@ -23,7 +23,7 @@ function ProductDetail() {
   const footer = () => {
     return (
       <Link to="/products">
-        <Button label="Volver" />
+        <Button label="Back" />
       </Link>
     );
   };

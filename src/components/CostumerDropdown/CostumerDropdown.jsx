@@ -21,11 +21,11 @@ function CostumerDropdown({ data, selectedCostumer, handleSelectCostumer }) {
   };
 
   return (
-    <div className="flex flex-column row-gap-2">
+    <div className="flex flex-column row-gap-2 w-full">
       <label htmlFor="costumer" className="text-lg">
-        Cliente
+        Costumer
       </label>
-      <Dropdown id="costumer" name="costumer" value={selectedCostumer} onChange={(e) => handleSelectCostumer(e.target.value)} showClear options={data} optionLabel="name" valueTemplate={selectedCostumerTemplate} filter itemTemplate={costumerOptionTemplate} placeholder="Selecciona un Cliente" />
+      <Dropdown id="costumer" name="costumer" value={selectedCostumer} onChange={(e) => handleSelectCostumer(e.target.value)} showClear options={data} optionLabel="name" valueTemplate={selectedCostumerTemplate} filter itemTemplate={costumerOptionTemplate} placeholder="Select Costumer" />
     </div>
   );
 }

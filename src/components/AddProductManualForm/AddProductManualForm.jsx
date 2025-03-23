@@ -25,29 +25,29 @@ function AddProductManualForm() {
       await productsService.create(formData);
       resetForm();
       if (fileRef.current) fileRef.current.clear();
-      await Alerts.successAlert({ title: "Producto creado!", toast: true, position: "top-end" });
+      await Alerts.successAlert({ title: "Product created!", toast: true, position: "top-end" });
     } catch (error) {
       await Alerts.errorAlert({ text: error, toast: true, position: "top-end" });
     }
   };
   const addItemWithAlert = async (data) => {
-    await Alerts.addItem({ title: "Agregar Producto", hasCancellation: true, confirmCallback: () => addProduct(data) });
+    await Alerts.addItem({ title: "Add Product", hasCancellation: true, confirmCallback: () => addProduct(data) });
   };
 
   const { handleChange, handleSubmit, resetForm, values, errors } = useFormik({ initialValues, validationSchema: productSchema, validateOnChange: false, onSubmit: addItemWithAlert });
 
   return (
     <form id="form" className="flex flex-column row-gap-4" onSubmit={handleSubmit} encType="multipart/form-data">
-      <TextField label={"Nombre"} input={"name"} onChange={handleChange} value={values.name} invalid={errors.name && true} helperText={errors.name} />
-      <TextField label={"Precio"} input={"price"} onChange={handleChange} value={values.price} invalid={errors.price && true} helperText={errors.price} />
-      <TextField label={"Costo"} input={"cost"} onChange={handleChange} value={values.cost} invalid={errors.cost && true} helperText={errors.cost} />
+      <TextField label={"Name"} input={"name"} onChange={handleChange} value={values.name} invalid={errors.name && true} helperText={errors.name} />
+      <TextField label={"Price"} input={"price"} onChange={handleChange} value={values.price} invalid={errors.price && true} helperText={errors.price} />
+      <TextField label={"Cost"} input={"cost"} onChange={handleChange} value={values.cost} invalid={errors.cost && true} helperText={errors.cost} />
       <TextField label={"Stock"} input={"stock"} onChange={handleChange} value={values.stock} invalid={errors.stock && true} helperText={errors.stock} />
-      <TextField label={"Categoría"} input={"category"} onChange={handleChange} value={values.category} invalid={errors.category && true} helperText={errors.category} />
-      <TextField label={"Descripción"} input={"description"} onChange={handleChange} value={values.description} invalid={errors.description && true} helperText={errors.description} />
+      <TextField label={"Category"} input={"category"} onChange={handleChange} value={values.category} invalid={errors.category && true} helperText={errors.category} />
+      <TextField label={"Description"} input={"description"} onChange={handleChange} value={values.description} invalid={errors.description && true} helperText={errors.description} />
 
-      <Uploader accept="image/*" label="Imagen del Producto" name="file" ptRef={fileRef} />
+      <Uploader accept="image/*" label="Product Image" name="file" ptRef={fileRef} />
       <div className="flex justify-content-center">
-        <Button label="Crear" type="submit" />
+        <Button label="Create" type="submit" />
       </div>
     </form>
   );
