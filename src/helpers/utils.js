@@ -29,7 +29,7 @@ export const formatDate = (timestamp) => {
 
 export const addModes = {
   manual: "Manual",
-  import: "Importar Excel",
+  import: "Import Excel",
 };
 
 export const customRedirect = (path) => {

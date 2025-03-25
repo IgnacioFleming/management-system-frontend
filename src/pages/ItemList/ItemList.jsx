@@ -6,11 +6,11 @@ import { customColors, inputTypes } from "../../helpers/utils";
 import { getProductInputs } from "../../helpers/getProductInputs";
 
 const columns = [
-  { label: "Nombre", field: "name", sortable: true, isEditable: true },
-  { label: "Imagen", field: "thumbnail", sortable: false },
-  { label: "Precio", field: "price", sortable: true, isEditable: true, inputType: inputTypes.CURR },
-  { label: "Costo", field: "cost", sortable: true, isEditable: true, inputType: inputTypes.CURR, color: customColors.DANGER },
-  { label: "Categoría", field: "category", sortable: true, isEditable: true },
+  { label: "Name", field: "name", sortable: true, isEditable: true },
+  { label: "Image", field: "thumbnail", sortable: false },
+  { label: "Price", field: "price", sortable: true, isEditable: true, inputType: inputTypes.CURR },
+  { label: "Cost", field: "cost", sortable: true, isEditable: true, inputType: inputTypes.CURR, color: customColors.DANGER },
+  { label: "Category", field: "category", sortable: true, isEditable: true },
   { label: "Stock", field: "stock", sortable: true, isNumber: true, isEditable: true, inputType: inputTypes.INT },
 ];
 function ItemList() {
@@ -29,7 +29,7 @@ function ItemList() {
   };
 
   const props = {
-    label: "Productos",
+    label: "Products",
     columns,
     items: products,
     refreshItems: getProducts,

@@ -2,8 +2,8 @@ import AccordionMenu from "../DrawerComponentes/AccordionMenu";
 
 function FinancesMenu() {
   const listItems = [
-    { label: "Cuentas Corrientes", path: "/balances", icon: "pi-wallet" },
-    { label: "Registrar Pago", path: "/addPayments", icon: "pi-plus" },
+    { label: "Balances", path: "/balances", icon: "pi-wallet" },
+    { label: "Add Payment", path: "/addPayments", icon: "pi-plus" },
   ];
 
   return (

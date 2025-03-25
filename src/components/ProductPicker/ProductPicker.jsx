@@ -30,11 +30,11 @@ function ProductPicker({ restItems, filterItem }) {
     return (
       <>
         <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-          <span className="text-xl text-900 font-bold">Productos</span>
+          <span className="text-xl text-900 font-bold">Product</span>
           <div className="flex justify-content-end gap-2">
             <IconField iconPosition="left">
               <InputIcon className="pi pi-search" />
-              <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar Producto" />
+              <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Search Product" />
             </IconField>
           </div>
         </div>
@@ -45,14 +45,14 @@ function ProductPicker({ restItems, filterItem }) {
 
   return (
     <div className="flex flex-column align-items-center m-1 sm:m-5 row-gap-5 w-full">
-      <h2>Seleccione los productos para agregar a la orden</h2>
+      <h2>Add products to the order</h2>
       <DataTable header={header} filters={filters} paginator rows={5} removableSort value={restItems} className="w-full sm:w-10" pt={{ paginator: { root: { className: "w-full p-0" } } }}>
-        <Column field="name" header="Producto" sortable></Column>
+        <Column field="name" header="Product" sortable></Column>
         <Column body={imageBodyTemplate}></Column>
-        <Column field="price" header="Precio" body={(product) => formatCurrency(product.price)} sortable></Column>
+        <Column field="price" header="Price" body={(product) => formatCurrency(product.price)} sortable></Column>
         <Column field="stock" header="Stock" sortable></Column>
-        <Column field="category" header="Categoría" sortable></Column>
-        <Column body={(e) => <Button label="Agregar" onClick={() => filterItem(e)} />}></Column>
+        <Column field="category" header="Category" sortable></Column>
+        <Column body={(e) => <Button label="Add" onClick={() => filterItem(e)} />}></Column>
       </DataTable>
     </div>
   );

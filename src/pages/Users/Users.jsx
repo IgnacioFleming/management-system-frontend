@@ -22,20 +22,20 @@ function Users() {
         <div className={classNames("flex flex-column sm:flex-row p-0 sm:p-4 text-xs sm:text-lg gap-4", { "border-top-1 surface-border": index !== 0 })}>
           <div className="flex flex-column  justify-content-between w-auto mr-5 align-items-center xl:align-items-start  gap-4">
             <h2 className="m-0">
-              <span className="w-15rem inline-block">Usuario:</span> <span className={`text-900  ${user.is_enabled === 1 ? "text-green-500" : "text-red-500"} `}>{user.username}</span>
+              <span className="w-15rem inline-block">Username:</span> <span className={`text-900  ${user.is_enabled === 1 ? "text-green-500" : "text-red-500"} `}>{user.username}</span>
             </h2>
             <h2 className="m-0">
-              <span className="w-15rem inline-block">Nombre:</span>
+              <span className="w-15rem inline-block">Name:</span>
               <span className="text-900 ">{` ${user.first_name} ${user.last_name}`}</span>
             </h2>
             <h2 className="m-0">
               <span className="w-15rem inline-block">Email:</span> <span className="text-900 ">{user.email}</span>
             </h2>
             <h2 className="m-0">
-              <span className="w-15rem inline-block">Rol:</span> <span className="text-900 ">{user.role}</span>
+              <span className="w-15rem inline-block">Role:</span> <span className="text-900 ">{user.role}</span>
             </h2>
             <h2 className="m-0">
-              <span className="w-15rem inline-block">Fecha de Alta:</span> <span className="text-900 ">{formatDate(user.signup_date)}</span>
+              <span className="w-15rem inline-block">Registration Date:</span> <span className="text-900 ">{formatDate(user.signup_date)}</span>
             </h2>
           </div>
           <div className="flex align-items-center">
@@ -63,13 +63,13 @@ function Users() {
   return (
     <>
       <div className="card">
-        <h1>Usuarios habilitados</h1>
-        {enabledUsers.length === 0 ? <h3>No existen Usuarion habilitados.</h3> : <DataView value={enabledUsers} listTemplate={listTemplate} />}
+        <h1>Enabled Users</h1>
+        {enabledUsers.length === 0 ? <h3>There's no enabled users.</h3> : <DataView value={enabledUsers} listTemplate={listTemplate} />}
       </div>
 
       <div className="card">
-        <h1>Usuarios No Habilitados</h1>
-        {notEnabledUsers.length === 0 ? <h3>No existen Usuarion no habilitados.</h3> : <DataView value={notEnabledUsers} listTemplate={listTemplate} />}
+        <h1>Disabled Users</h1>
+        {notEnabledUsers.length === 0 ? <h3>There's no disabled users.</h3> : <DataView value={notEnabledUsers} listTemplate={listTemplate} />}
       </div>
     </>
   );

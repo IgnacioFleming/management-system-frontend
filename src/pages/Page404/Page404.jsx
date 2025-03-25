@@ -5,9 +5,9 @@ function Page404() {
     <div className={styles.container}>
       <div className={styles.content}>
         <h1 className={styles.mainTitle}>Error 404</h1>
-        <p>La página que está buscando se movió, quitó, renombró o podría no existir nunca.</p>
+        <p>The page you are looking for may have been moved, deleted, renamed or never existed.</p>
         <Link to="/" className={styles.button}>
-          Ir a la página de Inicio
+          Go back to Home
         </Link>
       </div>
       <div className={styles.imageContainer}>

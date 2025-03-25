@@ -34,12 +34,12 @@ function AddCostumerManualForm() {
   const { handleChange, handleSubmit, resetForm, values, errors } = useFormik({ initialValues, validationSchema: costumerSchema, validateOnChange: false, onSubmit: addItemWithAlert });
   return (
     <form className="flex flex-column row-gap-5" onSubmit={handleSubmit}>
-      <TextField label={"Nombre"} input={"name"} onChange={handleChange} value={values.name} invalid={errors.name && true} helperText={errors.name} />
+      <TextField label={"Name"} input={"name"} onChange={handleChange} value={values.name} invalid={errors.name && true} helperText={errors.name} />
 
-      <TextField label={"Número de Cuenta"} input={"account_number"} onChange={handleChange} value={values.account_number} invalid={errors.account_number && true} helperText={errors.account_number} />
+      <TextField label={"Account Number"} input={"account_number"} onChange={handleChange} value={values.account_number} invalid={errors.account_number && true} helperText={errors.account_number} />
       <Uploader label="Logo" name="thumbnail" accept="image/*" ptRef={fileRef} />
       <div className="flex justify-content-center">
-        <Button label="Crear" type="submit" />
+        <Button label="Add Costumer" type="submit" />
       </div>
     </form>
   );

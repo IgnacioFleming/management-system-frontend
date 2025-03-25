@@ -10,11 +10,11 @@ const getDetailButtonTemplate = (path, handleDetail) => {
     if (path) {
       return (
         <Link to={`${path}/${item.costumer_id || item.id}`}>
-          <Button label="Ver Detalle" />
+          <Button label="Show Details" />
         </Link>
       );
     }
-    return <Button onClick={() => handleDetail(item.salesId)} label="Ver Detalle" />;
+    return <Button onClick={() => handleDetail(item.salesId)} label="Show Details" />;
   };
 };
 
@@ -41,8 +41,8 @@ const imageBodyTemplate = (editItems, ptRef) => {
   return function bodyTemplate(item) {
     return (
       <div className="flex flex-column gap-2 align-items-start">
-        <img src={item?.thumbnail || item?.logo} alt={`Foto de ${item?.name}`} className="w-6rem h-6rem shadow-2 border-round " style={{ objectFit: "cover" }} />
-        {editItems === item?.id && <Uploader label="Subir Imagen" name="thumbnail" ptRef={ptRef} accept="image/*" />}
+        <img src={item?.thumbnail || item?.logo} alt={`Photo of ${item?.name}`} className="w-6rem h-6rem shadow-2 border-round " style={{ objectFit: "cover" }} />
+        {editItems === item?.id && <Uploader label="Upload Image" name="thumbnail" ptRef={ptRef} accept="image/*" />}
       </div>
     );
   };
@@ -55,7 +55,7 @@ const actionsBodyTemplate = (editItems, setEditItems, updateRegister, handleDele
   };
 };
 
-const footerTemplate = (items, label) => `En total hay ${items ? items.length : 0} ${label}.`;
+const footerTemplate = (items, label) => `In total there ${items?.length === 0 ? "is" : "are"} ${items ? items.length : 0} ${label}.`;
 
 export default {
   getDetailButtonTemplate,

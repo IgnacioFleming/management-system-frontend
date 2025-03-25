@@ -15,7 +15,7 @@ export const renderHeader = (label, refreshItems, globalFilterValue, onGlobalFil
         <div className="flex justify-content-end gap-2">
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search" />
-            <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar Producto" />
+            <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Search" />
           </IconField>
           {refreshItems && <Button className="hidden sm:block" onClick={refreshAllItems} icon="pi pi-refresh" rounded raised />}
         </div>

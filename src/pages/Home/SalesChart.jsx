@@ -62,7 +62,7 @@ function SalesChart({ sales }) {
   return (
     <div className="card w-full flex flex-column align-items-center justify-content-center mt-8">
       <div className="sm:w-full md:w-7">
-        <h3 className="text-center">Ventas del último Mes</h3>
+        <h3 className="text-center">Last month Sales</h3>
         {chartData?.labels?.length > 0 && chartData?.datasets?.length > 0 && <Chart type="line" data={chartData} options={chartOptions} className="w-12 h-20rem md:h-full md:h-12" />}
       </div>
     </div>
