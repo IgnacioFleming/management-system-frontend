@@ -1,4 +1,4 @@
-import { customRedirect } from "../../helpers/utils";
+import { API_Status_List, customRedirect } from "../../helpers/utils";
 import helpers from "../utils/utils";
 
 const path = `${import.meta.env.VITE_API_BASE_URL}/api/sessions`;
@@ -7,7 +7,7 @@ export default class SessionsApiCall {
   static async register(user) {
     try {
       const options = helpers.requestOptionsHandler(user, "POST");
-      const result = await fetch(`${path}/register`, { ...options, credentials: "include" });
+      const result = await fetch(`${path}/register`, options);
       const jsonResult = await result.json();
       return jsonResult;
     } catch (error) {
@@ -17,8 +17,9 @@ export default class SessionsApiCall {
   static async login(credentials) {
     try {
       const options = helpers.requestOptionsHandler(credentials, "POST");
-      const result = await fetch(`${path}/login`, { ...options, credentials: "include" });
+      const result = await fetch(`${path}/login`, options);
       const jsonResult = await result.json();
+      jsonResult?.payload?.token && localStorage.setItem("backoffice_manager_auth_token", JSON.stringify(jsonResult));
       return jsonResult;
     } catch (error) {
       return new Error(error);
@@ -26,7 +27,8 @@ export default class SessionsApiCall {
   }
   static async logout() {
     try {
-      const result = await helpers.requestHandle(`${path}/logout`, { method: "POST" });
+      const result = await helpers.requestHandle(`${path}/logout`, { method: "POST", auth: false });
+      if (result.status === API_Status_List.SUCCESS) localStorage.removeItem("backoffice_manager_auth_token");
       return result;
     } catch (error) {
       return new Error(error);
