@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SessionsApiCall from "../services/repository/sessions";
-import Alerts from "../helpers/alerts/alerts";
 
 export const useCheckSession = () => {
   const [sessionUser, setSessionUser] = useState({});
@@ -9,9 +8,7 @@ export const useCheckSession = () => {
   const checkSession = async () => await SessionsApiCall.checkSession();
   useEffect(() => {
     if (location.pathname === "/register" || location.pathname === "/login") return;
-    checkSession()
-      .then((res) => setSessionUser(res))
-      .catch((err) => Alerts.errorAlert({ text: err }));
+    checkSession().then((res) => setSessionUser(res));
   }, [location.pathname]);
   return sessionUser;
 };
