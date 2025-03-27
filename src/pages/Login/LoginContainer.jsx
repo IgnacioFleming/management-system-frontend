@@ -26,6 +26,7 @@ function LoginContainer() {
   });
   async function loginUser({ username, password }) {
     const login = await SessionsApiCall.login({ username, password });
+
     if (login.status === API_Status_List.UNAUTHORIZED) {
       await Alerts.errorAlert({ text: login.message, resolveCallback: resetForm });
       return;
@@ -33,7 +34,7 @@ function LoginContainer() {
     if (login.status !== API_Status_List.SUCCESS) {
       return await Alerts.errorAlert({ text: "Unexpected error.", resolveCallback: resetForm });
     }
-    setUserData(login.payload);
+    setUserData(login.payload.user);
     navigate("/");
   }
 

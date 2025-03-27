@@ -7,6 +7,7 @@ import { Avatar } from "primereact/avatar";
 import Alerts from "../../helpers/alerts/alerts";
 import SessionsApiCall from "../../services/repository/sessions";
 import { Link } from "react-router-dom";
+import { API_Status_List } from "../../helpers/utils";
 
 export default function Navbar() {
   const signOutRef = useRef(null);
@@ -24,7 +25,7 @@ export default function Navbar() {
       icon: "pi pi-sign-out",
       command: async () => {
         const logout = await SessionsApiCall.logout();
-        if (!logout?.status) return (window.location.pathname = "/login");
+        if (logout.status === API_Status_List.SUCCESS) return (window.location.pathname = "/login");
         return Alerts.errorAlert();
       },
     },
