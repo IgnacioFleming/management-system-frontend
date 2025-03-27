@@ -13,23 +13,19 @@ function UserContextProvider({ children }) {
       localStorage.setItem("user", JSON.stringify(data));
     }
   };
+
   const session = useCheckSession();
-
   useEffect(() => {
-    if (!session || Object.keys(session).length === 0) return;
-    setUserData(session);
-  }, [session]);
-
-  useEffect(() => {
+    if (session && Object.keys(session).length > 0) setUserData(user);
     if (location.pathname === "/login" && session && Object.keys(session).length > 0) {
       window.history.pushState(null, "", "/");
       window.dispatchEvent(new PopStateEvent("popstate"));
       return;
     }
-    if (Object.keys(user).length !== 0) return;
-    if (location.pathname === "/register") return;
-    window.history.pushState(null, "", "/login");
-    window.dispatchEvent(new PopStateEvent("popstate"));
+    if (location.pathname !== "/register" || (location.pathname !== "/login" && !session)) {
+      window.history.pushState(null, "", "/login");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    }
   }, [user, location]);
 
   const value = { user, setUserData };

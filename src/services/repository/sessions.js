@@ -40,7 +40,6 @@ export default class SessionsApiCall {
       const result = await helpers.requestHandle(`${path}/checkSession`);
       return result;
     } catch (error) {
-      customRedirect("/login");
       return new Error(error);
     }
   }

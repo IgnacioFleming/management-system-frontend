@@ -1,38 +1,32 @@
 .container {
-  width: 100%;
-  height: 100vh;
+  width: calc(100%+16px);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-block: -8px;
+  margin: -8px;
+  padding-inline: 8px;
+  /* width: 100vh; */
   padding-block: 20px;
+  background-image: url(https://res.cloudinary.com/dah7yxmc5/image/upload/v1731957078/Business-manager/register-bg_se2p6y.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+  @media (max-width: 600px) {
+    background-image: none;
+    background-color: rgba(18, 196, 245, 0.697);
+  }
 }
 
 .formContainer {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  height: 100%;
   justify-content: center;
   align-items: center;
   background-color: white;
   border-radius: 25px;
-  padding-top: 10%;
   margin-block: -8px;
-}
-
-.background {
-  position: absolute;
-  background-image: url(https://res.cloudinary.com/dah7yxmc5/image/upload/v1731957078/Business-manager/register-bg_se2p6y.webp);
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  filter: blur(1px);
-  opacity: 0.6;
-  z-index: -1;
-  margin-left: -8px;
-  margin-bottom: -100px;
 }
 
 .logo {

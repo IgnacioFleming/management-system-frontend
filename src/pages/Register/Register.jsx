@@ -9,9 +9,8 @@ const dividerStyle = { display: "flex", alignItems: "center", gap: 2, justifyCon
 function Register({ handleChange, handleSubmit, errors, values }) {
   return (
     <>
-      <div className={styles.background}></div>
       <div className={styles.container}>
-        <div className={styles.formContainer}>
+        <div className={`${styles.formContainer} p-4`}>
           <img className={styles.logo} src="https://res.cloudinary.com/dah7yxmc5/image/upload/v1729266657/Business-manager/logo-with-caption_dwtzyf.png" alt="Logo.png" />
           <h2>Create Account</h2>
           <p className="m-0 text-color text-base">Please register your new account here:</p>
