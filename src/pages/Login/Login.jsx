@@ -14,8 +14,8 @@ const Login = ({ handleChange, handleSubmit, values, errors }) => {
           <div className="flex justify-content-center">
             <img src="https://res.cloudinary.com/dah7yxmc5/image/upload/v1729266657/Business-manager/logo-with-caption_dwtzyf.png" alt="Logo" />
           </div>
-          <form className="m-0 lg:m-6 w-full sm:w-auto" onSubmit={handleSubmit}>
-            <h3 className="text-center text-color-secondary m-3 lg:m-5">Please enter your credentials here:</h3>
+          <form className="m-0 w-full sm:w-auto flex-grow-1" onSubmit={handleSubmit}>
+            <h3 className="text-center text-color-secondary m-3">Please enter your credentials here:</h3>
             <div className="flex flex-column gap-5 align-items-center ">
               <TextField label="Username" input="username" className="w-8 sm:w-5" onChange={handleChange} value={values.username} invalid={errors.username} helperText={errors.username} />
               <PasswordInput name="password" handleChange={handleChange} className="w-8 sm:w-5" value={values.password} invalid={errors.password} helperText={errors.password} />

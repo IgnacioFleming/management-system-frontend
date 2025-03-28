@@ -3,7 +3,7 @@
   height: 100vh;
 }
 .mainImage {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .logo {

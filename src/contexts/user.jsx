@@ -27,6 +27,7 @@ function UserContextProvider({ children }) {
       return;
     }
     if (Object.keys(user).length !== 0) return;
+    if (location.pathname === "/register") return;
     window.history.pushState(null, "", "/login");
     window.dispatchEvent(new PopStateEvent("popstate"));
   }, [user, location]);
