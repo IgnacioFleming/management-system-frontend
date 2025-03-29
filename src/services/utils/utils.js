@@ -3,7 +3,6 @@ import { API_Status_List, authRedirection } from "../../helpers/utils";
 const requestOptionsHandler = (data, method) => {
   const authInfo = JSON.parse(localStorage.getItem("backoffice_manager_auth_token"));
   const sessionId = authInfo?.payload.token || "";
-  console.log(sessionId);
   const options = {
     method: method,
     headers: {
