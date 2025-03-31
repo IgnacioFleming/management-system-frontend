@@ -19,7 +19,7 @@ export default class SessionsApiCall {
       const options = helpers.requestOptionsHandler(credentials, "POST");
       const result = await fetch(`${path}/login`, options);
       const jsonResult = await result.json();
-      jsonResult?.payload?.token && localStorage.setItem("backoffice_manager_auth_token", JSON.stringify(jsonResult));
+      jsonResult?.payload?.token && localStorage.setItem("backoffice_manager_auth_token", JSON.stringify(jsonResult?.payload?.token));
       return jsonResult;
     } catch (error) {
       return new Error(error);

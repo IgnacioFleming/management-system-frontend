@@ -25,8 +25,6 @@ function SalesContextProvider({ children }) {
     const newSale = { ...sale, costumer_id: selectedCostumer.id };
     setSale(newSale);
   }, [selectedCostumer]);
-  //
-  console.log("first");
 
   useEffect(() => {
     const newSale = { costumer_id: sale.costumer_id, products: productsIds, items_quantity: getItemsQuantity(productsIds), total_amount: getTotalAmount(productsIds) };

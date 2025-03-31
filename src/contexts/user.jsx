@@ -15,15 +15,18 @@ function UserContextProvider({ children }) {
   };
 
   const session = useCheckSession();
+
   useEffect(() => {
-    console.log(session);
     if (session && Object.keys(session).length > 0) setUserData(session);
-    if (location.pathname === "/login" && session && Object.keys(session).length > 0) {
+  }, [session]);
+
+  useEffect(() => {
+    if (location.pathname === "/login" && user && Object.keys(user).length > 0) {
       window.history.pushState(null, "", "/");
       window.dispatchEvent(new PopStateEvent("popstate"));
       return;
     }
-    if ((location.pathname !== "/register" || location.pathname !== "/login") && !session) {
+    if (location.pathname !== "/register" && location.pathname !== "/login" && Object.keys(user).length === 0) {
       window.history.pushState(null, "", "/login");
       window.dispatchEvent(new PopStateEvent("popstate"));
     }

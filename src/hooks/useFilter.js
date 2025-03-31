@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 export const useFilter = (data, initialFilteredItems) => {
   const [filteredItems, setFilteredItems] = useState(initialFilteredItems || []);
   const [restItems, setRestItems] = useState([]);
-  console.log(data);
 
   useEffect(() => {
     if (filteredItems.length < 1) return setRestItems(data);

@@ -2,7 +2,7 @@ import { API_Status_List, authRedirection } from "../../helpers/utils";
 
 const requestOptionsHandler = (data, method) => {
   const authInfo = JSON.parse(localStorage.getItem("backoffice_manager_auth_token"));
-  const sessionId = authInfo?.payload.token || "";
+  const sessionId = authInfo || "";
   const options = {
     method: method,
     headers: {
@@ -14,7 +14,7 @@ const requestOptionsHandler = (data, method) => {
     options.body = data;
   } else {
     options.body = JSON.stringify(data);
-    options.headers = { "Content-Type": "application/json" };
+    options.headers = { ...options.headers, "Content-Type": "application/json" };
   }
   return options;
 };
@@ -22,7 +22,7 @@ const requestOptionsHandler = (data, method) => {
 const requestHandle = async (path, options = {}, auth = true) => {
   if (auth) {
     const authInfo = JSON.parse(localStorage.getItem("backoffice_manager_auth_token"));
-    const sessionId = authInfo?.payload.token || "";
+    const sessionId = authInfo || "";
     options.headers = { Authorization: `Bearer ${sessionId}` };
   }
   const result = await fetch(path, options);
