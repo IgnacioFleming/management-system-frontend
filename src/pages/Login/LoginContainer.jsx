@@ -19,7 +19,7 @@ function LoginContainer() {
     },
     onSubmit: loginUser,
     validationSchema: Yup.object().shape({
-      username: Yup.string().required("Email field is required").min(6),
+      username: Yup.string().required("Email field is required"),
       password: Yup.string().required("Password fiel is required").min(6),
     }),
     validateOnChange: submitted,
