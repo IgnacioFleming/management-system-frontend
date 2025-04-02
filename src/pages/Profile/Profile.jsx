@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 function Profile() {
   const { user } = useContext(UserContext);
-  console.log(user);
   return (
     <div className="flex align-items-center justify-content-center" style={{ height: "calc(100vh - 100px)" }}>
       <Card className="flex justify-content-center w-9">
