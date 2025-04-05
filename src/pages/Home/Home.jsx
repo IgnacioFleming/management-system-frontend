@@ -5,7 +5,7 @@ import WellcomeSection from "./WellcomeSection";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const [sales] = useGetMonthlySales(null);
+  const [sales] = useGetMonthlySales([]);
   useEffect(() => {
     if (sales === undefined || sales === null) return;
     setLoading(false);

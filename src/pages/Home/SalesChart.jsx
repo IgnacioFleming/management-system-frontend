@@ -6,7 +6,8 @@ function SalesChart({ sales }) {
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
-    if (!sales || sales?.length <= 0) return;
+    if (sales?.length <= 0) return;
+    console.log(sales);
     const Xaxis = sales.map((sale) => sale.sale_day + "/" + sale.sale_month);
     const Yaxis = sales.map((sale) => sale.total_amount_per_day.toFixed(2));
 
