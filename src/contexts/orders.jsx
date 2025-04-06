@@ -32,7 +32,7 @@ function SalesContextProvider({ children }) {
   }, [productsIds]);
   //
   useEffect(() => {
-    const product_ids = filteredItems.map((item) => {
+    const product_ids = filteredItems?.map((item) => {
       const previusProduct = productsIds.find((e) => e.id === item.id);
       const quantity = previusProduct ? previusProduct.quantity : 1;
       return { product_id: item.id, quantity, amount: item.price * quantity };
