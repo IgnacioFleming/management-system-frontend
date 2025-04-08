@@ -48,7 +48,7 @@ function Users() {
   const listTemplate = (items) => {
     if (!items || items.length === 0) return null;
 
-    let list = items.map((product, index) => {
+    let list = items?.map((product, index) => {
       return itemTemplate(product, index);
     });
 

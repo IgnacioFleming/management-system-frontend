@@ -6,9 +6,9 @@ function SalesChart({ sales }) {
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
-    if (!sales || sales?.length <= 0) return;
-    const Xaxis = sales.map((sale) => sale.sale_day + "/" + sale.sale_month);
-    const Yaxis = sales.map((sale) => sale.total_amount_per_day.toFixed(2));
+    if (!sales || sales?.length <= 0 || !Array.isArray(sales)) return;
+    const Xaxis = sales?.map((sale) => sale.sale_day + "/" + sale.sale_month);
+    const Yaxis = sales?.map((sale) => sale.total_amount_per_day.toFixed(2));
 
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue("--text-color");
