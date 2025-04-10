@@ -59,7 +59,7 @@ Create a `.env` file at the project root with the following:
 ```ini
 Copiar
 Editar
-VITE_API_BASE_URL=http://localhost:5173
+VITE_API_BASE_URL=http://localhost:8080
 ```
 
 (Make sure this URL matches the backend server URL.)
@@ -70,7 +70,7 @@ VITE_API_BASE_URL=http://localhost:5173
 npm run dev
 ```
 
-The application will be available at `http://localhost:5174`.
+The application will be available at `http://localhost:5173`.
 
 ## 📂 Project Structure
 
