@@ -77,12 +77,14 @@ The application will be available at `http://localhost:5173`.
 ```bash
 src/
 ├── components/     # Reusable UI components
-├── pages/          # Page-level components
-├── services/       # API request services
+├── contexts/       # Context API providers
+├── helpers/        # Utility functions
 ├── hooks/          # Custom React hooks
-├── context/        # Context API providers
-├── utils/          # Utility functions
-├── styles/         # Global and modular styles
+├── layouts/        # Layout-level components
+├── pages/          # Page-level components
+├── schemas/        # For form data validation with Yup
+├── sections/       # Section-level components
+├── services/       # API request services
 └── main.jsx        # Application entry point
 ```
 
