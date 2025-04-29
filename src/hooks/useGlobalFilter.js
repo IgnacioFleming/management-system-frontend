@@ -8,7 +8,7 @@ export const useGlobalFilter = () => {
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;
     let inputValue = value;
-    if (inputValue.startsWith("$")) inputValue = value.slice(1);
+    if (inputValue.startsWith("$") && typeof inputValue === "string") inputValue = value.slice(1);
     inputValue = inputValue.replace(/(\.0{0,2})$/, "");
     let _filters = { ...filters };
     _filters["global"].value = inputValue;
