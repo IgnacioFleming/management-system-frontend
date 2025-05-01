@@ -17,7 +17,9 @@ function ProductDetail() {
   };
 
   const subtitle = () => {
-    return String(product.category).charAt(0).toUpperCase() + String(product.category).slice(1);
+    if (product.category && typeof product.category === "string") {
+      return String(product.category).charAt(0).toUpperCase() + String(product.category).slice(1);
+    }
   };
 
   const footer = () => {
