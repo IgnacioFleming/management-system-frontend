@@ -9,12 +9,11 @@ const requestOptionsHandler = (data, method) => {
       Authorization: `Bearer ${sessionId}`,
     },
   };
-
   if (data instanceof FormData) {
     options.body = data;
   } else {
     options.body = JSON.stringify(data);
-    options.headers = { ...options.headers, "Content-Type": "application/json" };
+    options.headers["Content-Type"] = "application/json";
   }
   return options;
 };
@@ -23,7 +22,7 @@ const requestHandle = async (path, options = {}, auth = true) => {
   if (auth) {
     const authInfo = JSON.parse(localStorage.getItem("backoffice_manager_auth_token"));
     const sessionId = authInfo || "";
-    options.headers = { Authorization: `Bearer ${sessionId}` };
+    options.headers = { ...options.headers, Authorization: `Bearer ${sessionId}` };
   }
   const result = await fetch(path, options);
   const { status, payload, error, redirectURL } = await result.json();
