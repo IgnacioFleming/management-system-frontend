@@ -35,3 +35,7 @@ export default {
   requestOptionsHandler,
   requestHandle,
 };
+
+export const calculateItemsQuantity = (products) => products.reduce((acc, { quantity }) => acc + quantity, 0);
+
+export const calculateTotalAmount = (products) => products.reduce((acc, { amount }) => acc + amount, 0);

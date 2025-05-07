@@ -1,5 +1,5 @@
 import { API_Status_List } from "../../helpers/utils";
-import helpers from "../utils/utils";
+import helpers, { calculateItemsQuantity, calculateTotalAmount } from "../utils/utils";
 
 export default class ApiCall {
   constructor(path) {
@@ -17,7 +17,7 @@ export default class ApiCall {
 
   async create(data) {
     try {
-      const options = helpers.requestOptionsHandler(data, "POST");
+      const options = helpers.requestOptionsHandler({ ...data, items_quantity: calculateItemsQuantity(data.products), total_amount: calculateTotalAmount(data.products) }, "POST");
       const payload = await helpers.requestHandle(this.path, options);
       if (payload.status === API_Status_List.ERROR) throw new Error("An error ocurred while creating the product");
       return payload;

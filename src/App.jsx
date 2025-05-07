@@ -8,7 +8,7 @@ import AddCostumer from "./pages/AddCostumer/AddCostumer";
 import Home from "./pages/Home/Home";
 import Page404 from "./pages/Page404/Page404";
 import AddSalesContainer from "./pages/AddSale/AddSalesContainer";
-import SalesContextProvider from "./contexts/orders";
+import SalesContextProvider from "./contexts/sales";
 import RegisterContainer from "./pages/Register/RegisterContainer";
 import LoginContainer from "./pages/Login/LoginContainer";
 import Balances from "./pages/Balances/Balances";
