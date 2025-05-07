@@ -7,11 +7,11 @@ export const useGlobalFilter = () => {
 
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;
-    let inputValue = value;
-    if (inputValue && inputValue.startsWith("$") && typeof inputValue === "string") inputValue = value.slice(1);
-    inputValue = inputValue.replace(/(\.0{0,2})$/, "");
+    // let inputValue = value;
+    // if (inputValue && inputValue.startsWith("$") && typeof inputValue === "string") inputValue = value.slice(1);
+    // inputValue = inputValue.replace(/(\.0{0,2})$/, "");
     let _filters = { ...filters };
-    _filters["global"].value = inputValue;
+    _filters["global"].value = value?.[0] === "$" ? value.slice(1) : value;
     setFilters(_filters);
     setGlobalFilterValue(value);
   };
