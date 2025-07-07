@@ -1,7 +1,7 @@
 export default {
   testEnvironment: "jsdom",
   transform: {
-    "^.+\\.jsx?$": "babel-jest",
+    "^.+\\.[tj]sx?$": "babel-jest",
   },
   moduleNameMapper: {
     "\\.(css|scss|sass)$": "identity-obj-proxy",

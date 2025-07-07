@@ -25,7 +25,7 @@ export default function Navbar() {
       icon: "pi pi-sign-out",
       command: async () => {
         const logout = await SessionsApiCall.logout();
-        if (logout.status === API_Status_List.SUCCESS) return (window.location.pathname = "/login");
+        if (logout.status === API_Status_List.SUCCESS) return (window.location.pathname = "/demo-login");
         return Alerts.errorAlert();
       },
     },

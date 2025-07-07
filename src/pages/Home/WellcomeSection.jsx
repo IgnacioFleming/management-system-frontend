@@ -13,7 +13,7 @@ function WellcomeSection() {
           <strong>Customer Management:</strong> <span className="text-color-secondary text-lg">Keep a record of all your customers, their contact information and purchase history.</span>
         </li>
         <li>
-          <strong>Current Accounts:</strong> <span className="text-color-secondary text-lg">Manage your customers' accounts and keep track of outstanding balances.</span>
+          <strong>Current Accounts:</strong> <span className="text-color-secondary text-lg">Manage your customers&apos; accounts and keep track of outstanding balances.</span>
         </li>
         <li>
           <strong>Sales:</strong> <span className="text-color-secondary text-lg">Record all sales made, generating tickets and updating inventories automatically.</span>

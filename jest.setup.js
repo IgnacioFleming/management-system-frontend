@@ -1,4 +1,7 @@
 import "@testing-library/jest-dom";
+jest.mock("primereact", () => ({}));
+jest.mock("primereact/hooks", () => ({}));
+jest.mock("primereact/componentbase", () => ({}));
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,

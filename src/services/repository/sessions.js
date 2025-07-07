@@ -1,4 +1,4 @@
-import { API_Status_List, customRedirect } from "../../helpers/utils";
+import { API_Status_List } from "../../helpers/utils";
 import helpers from "../utils/utils";
 
 const path = `${import.meta.env.VITE_API_BASE_URL}/api/sessions`;

@@ -22,6 +22,7 @@ import SalesList from "./pages/SalesList/SalesList";
 import AddPayment from "./pages/AddPayment/AddPayment";
 import Profile from "./pages/Profile/Profile";
 import DrawerContextProvider from "./contexts/drawer";
+import DemoLoginContainer from "./pages/DemoLogin/DemoLoginContainer";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             <Route path="/register" element={<RegisterContainer />} />
             <Route path="/login" element={<LoginContainer />} />
+            <Route path="/demo-login" element={<DemoLoginContainer />} />
             <Route
               element={
                 <DrawerContextProvider>

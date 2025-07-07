@@ -24,7 +24,7 @@ const Login = ({ handleChange, handleSubmit, values, errors }) => {
           </form>
 
           <div className="flex flex-column align-items-center">
-            <h3 className="text-center text-color-secondary ">In case you don't have an account registered, you can create it here:</h3>
+            <h3 className="text-center text-color-secondary ">In case you don&apos;t have an account registered, you can create it here:</h3>
             <Link to="/register">
               <Button label="Register" severity="warning" className="w-10rem" />
             </Link>

@@ -64,12 +64,12 @@ function Users() {
     <>
       <div className="card">
         <h1>Enabled Users</h1>
-        {enabledUsers.length === 0 ? <h3>There's no enabled users.</h3> : <DataView value={enabledUsers} listTemplate={listTemplate} />}
+        {enabledUsers.length === 0 ? <h3>There is no enabled users.</h3> : <DataView value={enabledUsers} listTemplate={listTemplate} />}
       </div>
 
       <div className="card">
         <h1>Disabled Users</h1>
-        {notEnabledUsers.length === 0 ? <h3>There's no disabled users.</h3> : <DataView value={notEnabledUsers} listTemplate={listTemplate} />}
+        {notEnabledUsers.length === 0 ? <h3>There is no disabled users.</h3> : <DataView value={notEnabledUsers} listTemplate={listTemplate} />}
       </div>
     </>
   );

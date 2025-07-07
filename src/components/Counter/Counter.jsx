@@ -24,7 +24,9 @@ function Counter({ product }) {
   return (
     <div className="flex align-items-center gap-2">
       <i onClick={handleDecreaseQuantity} className="pi pi-minus-circle cursor-pointer"></i>
-      <span className="block w-12">{counter}</span>
+      <span data-testid="counter-value" className="block w-12">
+        {counter}
+      </span>
       <div className="flex gap-1 align-items-center">
         <i onClick={handleAddQuantity} className="pi pi-plus-circle cursor-pointer"></i>
         <i onClick={handleRefreshQuantity} className="pi pi-refresh m-2 cursor-pointer"></i>
