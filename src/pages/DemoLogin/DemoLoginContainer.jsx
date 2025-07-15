@@ -12,13 +12,13 @@ function DemoLoginContainer() {
   const { setUserData } = useContext(UserContext);
   const { handleSubmit, resetForm } = useFormik({
     initialValues: {
-      username: "administrator",
-      password: "adminPassword",
+      username: "",
+      password: "",
     },
     onSubmit: loginUser,
   });
-  async function loginUser({ username, password }) {
-    const login = await SessionsApiCall.login({ username, password });
+  async function loginUser() {
+    const login = await SessionsApiCall.demoLogin();
 
     if (login.status === API_Status_List.UNAUTHORIZED) {
       await Alerts.errorAlert({ text: login.message, resolveCallback: resetForm });

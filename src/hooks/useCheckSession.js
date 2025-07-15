@@ -7,7 +7,7 @@ export const useCheckSession = () => {
   const location = useLocation();
   const checkSession = async () => await SessionsApiCall.checkSession();
   useEffect(() => {
-    if (location.pathname === "/register" || location.pathname === "/login") return;
+    if (location.pathname === "/register" || location.pathname === "/login" || location.pathname === "/demo-login") return;
     checkSession().then((res) => setSessionUser(res));
   }, [location.pathname]);
   return sessionUser;

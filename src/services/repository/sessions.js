@@ -25,6 +25,17 @@ export default class SessionsApiCall {
       return new Error(error);
     }
   }
+  static async demoLogin() {
+    try {
+      const options = helpers.requestOptionsHandler({ username: "", password: "" }, "POST");
+      const result = await fetch(`${path}/demo-login`, options);
+      const jsonResult = await result.json();
+      jsonResult?.payload?.token && localStorage.setItem("backoffice_manager_auth_token", JSON.stringify(jsonResult?.payload?.token));
+      return jsonResult;
+    } catch (error) {
+      return new Error(error);
+    }
+  }
   static async logout() {
     try {
       const result = await helpers.requestHandle(`${path}/logout`, { method: "POST", auth: false });
