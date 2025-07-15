@@ -27,7 +27,7 @@ export default class SessionsApiCall {
   }
   static async demoLogin() {
     try {
-      const options = helpers.requestOptionsHandler({ username: "", password: "" }, "POST");
+      const options = helpers.requestOptionsHandler({ username: "mockName", password: "mockPass" }, "POST");
       const result = await fetch(`${path}/demo-login`, options);
       const jsonResult = await result.json();
       jsonResult?.payload?.token && localStorage.setItem("backoffice_manager_auth_token", JSON.stringify(jsonResult?.payload?.token));
